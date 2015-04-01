@@ -16,7 +16,7 @@
 <template name="Nav">
   <div class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">TioApp</a>
+      <a class="navbar-brand" href="/">TioApp</a>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -27,8 +27,8 @@
     <div class="navbar-collapse collapse">
       {{#if currentUser}}
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Link1</a></li>
-          <li><a href="#">Link2</a></li>
+          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/import">Integradas</a></li>
         </ul>
       {{/if}}
       <ul class="nav navbar-nav navbar-right">
@@ -38,15 +38,9 @@
   </div>
 </template>
 
-
 <template name="Index">
   <div class="page-header">
     <h1>This is the index</h1>
   </div>
 </template>
 
-<template name="Import">
-  <div class="page-header">
-    <h1>Import Integradas. /!\ It will erase current resources</h1>
-  </div>
-</template>
