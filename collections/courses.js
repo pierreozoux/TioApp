@@ -26,3 +26,23 @@ Schemas.Course = new SimpleSchema({
 
 Courses.attachSchema(Schemas.Course);
 
+if (Meteor.isServer) {
+  Meteor.publish("courses", function () {
+    if (this.userId) {
+      return Courses.find({});
+    }
+  });
+} else {
+  Template.courseSelection.helpers({
+    courses: function() {
+      console.log(this);
+      var schoolName = Session.get('schoolName');
+      var school = Schools.findOne({name: schoolName});
+      if (school) {
+        var schoolId = school._id;
+      }
+      return Courses.find({schoolId: schoolId});
+    },
+  });
+}
+

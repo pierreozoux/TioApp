@@ -1,20 +1,6 @@
-<template name="ApplicationLayout">
-  <head>
-    <title>TioApp</title>
-  </head>
-  <body>
-    {{> Nav}}
-    {{#if currentUser}}
-      {{> yield}}
-    {{else}}
-      <h1>You need to be logged in!</h1>
-    {{/if}}
-
-  </body>
-</template>
-
-<template name="Nav">
-  <div class="navbar navbar-default" role="navigation">
+<template name="nav">
+  <div class="navbar navbar-default">
+    <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/">TioApp</a>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -36,11 +22,6 @@
       </ul>
     </div>
   </div>
-</template>
-
-<template name="Index">
-  <div class="page-header">
-    <h1>This is the index</h1>
   </div>
 </template>
 

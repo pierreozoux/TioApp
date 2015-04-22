@@ -7089,7 +7089,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "f3c04da28306f6a5ab4c403d472e66e3a01350b7"
+                  "value": "1157d818c562fe8bfd66b8aeb19b200792a4b72f"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -7213,7 +7213,7 @@ var packageMetadata = {
             },
             "connections": {
               "type": "constant",
-              "value": 0
+              "value": 1
             },
             "timeout": {
               "type": "constant",
@@ -7875,11 +7875,11 @@ var packageMetadata = {
       "members": {
         "autoupdateVersion": {
           "type": "constant",
-          "value": "6pExuizWhsjzQAMg7"
+          "value": "G5iuMRYSZH5wu8tLK"
         },
         "autoupdateVersionRefreshable": {
           "type": "constant",
-          "value": "d2060106f9bffb1b0742c2cc7ceecd1a1b4abbf7"
+          "value": "20c2ae72a1ffdd27f5f7cde0490dc338bdbbf8cc"
         },
         "autoupdateVersionCordova": {
           "type": "constant",
@@ -10739,7 +10739,127 @@ var packageMetadata = {
       "type": "object",
       "members": {
         "karmaChilds": {
-          "type": "object"
+          "type": "object",
+          "members": {
+            "jasmine-client-unit": {
+              "type": "object",
+              "members": {
+                "taskName": {
+                  "type": "constant",
+                  "value": "jasmine-client-unit"
+                },
+                "appPath": {
+                  "type": "constant",
+                  "value": "/home/pierre/f/TioApp"
+                },
+                "pid": {
+                  "type": "constant",
+                  "value": 16869
+                },
+                "fout": {
+                  "type": "constant",
+                  "value": 29
+                },
+                "child": {
+                  "type": "object",
+                  "members": {
+                    "domain": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "signalCode": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "exitCode": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "pid": {
+                      "type": "constant",
+                      "value": 16869
+                    },
+                    "stdin": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "stdout": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "stderr": {
+                      "type": "null",
+                      "value": null
+                    },
+                    "stdio": {
+                      "type": "array"
+                    },
+                    "spawn": {
+                      "type": "function"
+                    },
+                    "kill": {
+                      "type": "function"
+                    },
+                    "ref": {
+                      "type": "function"
+                    },
+                    "unref": {
+                      "type": "function"
+                    },
+                    "setMaxListeners": {
+                      "type": "function"
+                    },
+                    "emit": {
+                      "type": "function"
+                    },
+                    "addListener": {
+                      "type": "function",
+                      "refID": 17
+                    },
+                    "on": {
+                      "ref": 17
+                    },
+                    "once": {
+                      "type": "function"
+                    },
+                    "removeListener": {
+                      "type": "function"
+                    },
+                    "removeAllListeners": {
+                      "type": "function"
+                    },
+                    "listeners": {
+                      "type": "function"
+                    }
+                  }
+                },
+                "getTaskName": {
+                  "type": "function"
+                },
+                "getChild": {
+                  "type": "function"
+                },
+                "getPid": {
+                  "type": "function"
+                },
+                "isDead": {
+                  "type": "function"
+                },
+                "isRunning": {
+                  "type": "function"
+                },
+                "readPid": {
+                  "type": "function"
+                },
+                "spawn": {
+                  "type": "function"
+                },
+                "kill": {
+                  "type": "function"
+                }
+              }
+            }
+          }
         },
         "getKarmaChild": {
           "type": "function"
@@ -10812,6 +10932,7 @@ var packageMetadata = {
       }
     }
   },
+  "sergeyt:typeahead": {},
   "session": {},
   "livedata": {
     "DDP": {

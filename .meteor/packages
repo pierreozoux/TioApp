@@ -18,3 +18,4 @@ evaisse:csv
 sanjo:jasmine
 velocity:html-reporter
 velocity:console-reporter
+sergeyt:typeahead

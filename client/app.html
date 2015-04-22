@@ -1,0 +1,26 @@
+<template name="applicationLayout">
+ <html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>TioApp</title>
+  </head>
+  <body>
+    <div class="container">
+      {{> nav}}
+      <div class="jumbotron">
+      {{#if currentUser}}
+        {{> yield}}
+      {{else}}
+        <div class="page-header">
+          <h1>You need to be logged in!</h1>
+        </div>
+      {{/if}}
+      </div>
+    </div>
+  </body></html>
+</template>
+
