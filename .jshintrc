@@ -82,6 +82,8 @@
         "Deps": false,
         "process": false,
         "Mongo": false,
+        "Tracker": false,
+        "check": false,
         // Atmosphere packages
         "SimpleSchema": false,
         "AccountsEntry": false,
@@ -109,6 +111,8 @@
         "schoolNames": true,
         "Courses": true,
         "Resources": true,
-        "Schools": true
+        "Schools": true,
+        "Parents": true,
+        "Orders": true
     }
 }

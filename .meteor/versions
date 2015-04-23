@@ -20,6 +20,7 @@ ejson@1.0.6
 email@1.0.6
 evaisse:csv@0.1.4
 fastclick@1.0.3
+fortawesome:fontawesome@4.3.0
 geojson-utils@1.0.3
 harrison:babyparse@1.0.1
 harrison:papa-parse@1.0.10

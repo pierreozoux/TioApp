@@ -98,3 +98,25 @@ Schemas.Resource = new SimpleSchema({
 
 Resources.attachSchema(Schemas.Resource);
 
+if (Meteor.isServer) {
+  Meteor.publish('resources', function (courseName) {
+    if (this.userId) {
+      check(courseName, String);
+      var course = Courses.findOne({name: courseName});
+      if (course) {
+        return Resources.find({_id: {$in: course.resources}});
+      }
+    }
+  });
+} else {
+  Template.resourcesSelection.helpers({
+    resources: function() {
+      if (Session.get('courseName')) {
+        return Resources.find({});
+      }
+    },
+    status: function() {
+      return "";
+    }
+  });
+}

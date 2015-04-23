@@ -8,5 +8,4 @@ Package.describe({
 Package.onUse(function (api) {
 	api.use("coffeescript", ["client", "server"]);
 	api.add_files("tests/jasmine/server/integration/fixtures/database-fixture.js", ["server"]);
-	api.add_files("tests/jasmine/server/integration/collections/resources.js",["server"]);
 });

@@ -7,17 +7,59 @@
     <input id="school-selector" class="form-control typeahead" name="school" type="text" placeholder="School" autocomplete="off" spellcheck="off" data-source="schools"/>
   </div>
   {{> courseSelection}}
+  {{> resourcesSelection}}
 </template>
 
 <template name="courseSelection">
-  {{#if courses.count}}
+  {{#if courses}}
     <div class="form-group">
       <label>Select the course</label>
-      <select class="form-control">
+      <select id="course-selector" class="form-control">
         {{#each courses}}
           <option>{{name}}</option>
         {{/each}}
       </select>
     </div>
+  {{/if}}
+</template>
+
+<template name="resourcesSelection">
+  {{#if resources}}
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Title</th>
+        <th>Editor</th>
+        <th>Availability</th>
+        <th>Action</th>
+        <th>Sell</th>
+      </tr>
+      </thead>
+      <tbody>
+      {{#each resources}}
+        <tr class="{{ class }}">
+          <td>
+            {{ subject }}
+          </td>
+          <td>
+            {{ title }}
+          </td>
+          <td>
+            {{ editor }}
+          </td>
+          <td>
+            {{ quantity }}
+          </td>
+          <td>
+            <i class="fa fa-trash"></i>
+          </td>
+          <td>
+            <input type="checkbox">
+          </td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
   {{/if}}
 </template>

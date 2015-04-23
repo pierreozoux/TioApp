@@ -14,7 +14,7 @@ Schemas.School = new SimpleSchema({
 Schools.attachSchema(Schemas.School);
 
 if (Meteor.isServer) {
-  Meteor.publish("schools", function () {
+  Meteor.publish('schools', function () {
     if (this.userId) {
       return Schools.find({});
     }
