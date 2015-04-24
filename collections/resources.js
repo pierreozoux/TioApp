@@ -1,5 +1,13 @@
 Resources = new Mongo.Collection('resources');
 
+Resources.allow({
+  update: function(userId) {
+    if (userId) {
+      return true;
+    }
+  }
+});
+
 var resource;
 var resourceId;
 var courseName;
@@ -115,8 +123,8 @@ if (Meteor.isServer) {
         return Resources.find({});
       }
     },
-    status: function() {
-      return "";
+    isSellable: function() {
+      return this.quantity>0?true:false;
     }
   });
 }

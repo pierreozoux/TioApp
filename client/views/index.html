@@ -38,7 +38,7 @@
       </thead>
       <tbody>
       {{#each resources}}
-        <tr class="{{ class }}">
+      <tr id="{{_id}}">
           <td>
             {{ subject }}
           </td>
@@ -55,11 +55,12 @@
             <i class="fa fa-trash"></i>
           </td>
           <td>
-            <input type="checkbox">
+            <input type="checkbox" checked="{{isSellable}}">
           </td>
         </tr>
       {{/each}}
       </tbody>
     </table>
+    <button class="btn btn-success" type="submit">Confirm!</button>
   {{/if}}
 </template>

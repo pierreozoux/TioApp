@@ -1,1 +1,7 @@
-.fa { cursor: pointer; }
+.fa {
+  cursor: pointer;
+  color: #000;
+}
+.disabled {
+  color: #ccc;
+}

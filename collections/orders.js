@@ -1,16 +1,29 @@
 Orders = new Mongo.Collection('orders');
 
+Resources.allow({
+  insert: function(userId) {
+    if (userId) {
+      return true;
+    }
+  },
+  update: function(userId) {
+    if (userId) {
+      return true;
+    }
+  }
+});
+
+
 var Schemas = {};
 
-OrderedResource = new SimpleSchema({
+var OrderedResource = new SimpleSchema({
   state: {
     type: String,
     regEx: /(ordered|sold)/,
     optional: true
-
-  }
-  resources: {
-    type: [String]
+  },
+  resourceId: {
+    type: String
   }
 });
 
@@ -21,11 +34,12 @@ Schemas.Order = new SimpleSchema({
   },
   contactDate: {
     type: Date,
-    label: 'Contact Date'
+    label: 'Contact Date',
+    optional: true
   },
   state: {
     type: String,
-    regEx: /(created|completed|contacted|canceled|sold)/
+    regEx: /(draft|created|completed|contacted|canceled|sold)/
   },
   orderedResources: {
     type: [OrderedResource]
