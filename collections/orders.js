@@ -1,6 +1,6 @@
 Orders = new Mongo.Collection('orders');
 
-Resources.allow({
+Orders.allow({
   insert: function(userId) {
     if (userId) {
       return true;
@@ -28,17 +28,21 @@ var OrderedResource = new SimpleSchema({
 });
 
 Schemas.Order = new SimpleSchema({
-  date: {
+  createdAt: {
     type: Date,
-    label: 'Date'
+    label: 'Date',
+    autoValue: function() {
+      return new Date();
+    }
   },
-  contactDate: {
+  contactedAt: {
     type: Date,
     label: 'Contact Date',
     optional: true
   },
   state: {
     type: String,
+    defaultValue: 'draft',
     regEx: /(draft|created|completed|contacted|canceled|sold)/
   },
   orderedResources: {
@@ -51,4 +55,16 @@ Schemas.Order = new SimpleSchema({
 });
 
 Orders.attachSchema(Schemas.Order);
+
+if (Meteor.isServer) {
+  Meteor.publish('orders', function () {
+    if (this.userId) {
+      return Orders.find({});
+    }
+  });
+} else {
+  Template.newOrder.helpers({
+
+  });
+}
 

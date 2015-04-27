@@ -20,3 +20,4 @@ velocity:html-reporter
 velocity:console-reporter
 sergeyt:typeahead
 fortawesome:fontawesome
+aldeed:autoform

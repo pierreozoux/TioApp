@@ -112,7 +112,7 @@
         "Courses": true,
         "Resources": true,
         "Schools": true,
-        "Parents": true,
+        "Contacts": true,
         "Orders": true
     }
 }

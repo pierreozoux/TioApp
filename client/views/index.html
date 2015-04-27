@@ -61,6 +61,16 @@
       {{/each}}
       </tbody>
     </table>
-    <button class="btn btn-success" type="submit">Confirm!</button>
   {{/if}}
+  {{#if needContact}}
+    {{> contactSelection}}
+  {{/if}}
+  <button class="btn btn-success" type="submit">Confirm!</button>
+</template>
+
+<template name="contactSelection">
+  <div class="form-group">
+    <label>Attach contact</label>
+    <input id="contact-selector" class="form-control typeahead" name="contact" type="text" placeholder="Search Phone/Email" autocomplete="off" spellcheck="off" data-source="contacts"/>
+  </div>
 </template>

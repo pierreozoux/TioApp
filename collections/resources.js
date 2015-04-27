@@ -124,7 +124,22 @@ if (Meteor.isServer) {
       }
     },
     isSellable: function() {
+      Template.resourcesSelection.__helpers.get('setNeedContact')();
       return this.quantity>0?true:false;
+    },
+    setNeedContact: function() {
+      var needContact = false;
+      Resources.find().forEach( function(resource) {
+        var inCart = $('#' + resource._id).attr('class') !== 'disabled';
+        var sold = $('#' + resource._id).find(':checkbox').prop('checked');
+        if (inCart && !sold) { 
+          needContact = true;
+        }
+      });
+      Session.set('needContact', needContact);
+    },
+    needContact: function() {
+      return Session.get('needContact');
     }
   });
 }
