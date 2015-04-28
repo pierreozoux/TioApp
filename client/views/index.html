@@ -61,16 +61,48 @@
       {{/each}}
       </tbody>
     </table>
+    {{#if getSession 'needContact'}}
+      {{> contactSelection}}
+      {{#if getSession 'contactId'}}
+        <button id="confirm" class="btn btn-success" type="submit">Confirm!</button>
+      {{/if}}
+    {{else}}
+        <button id="confirm" class="btn btn-success" type="submit">Confirm!</button>
+    {{/if}}
   {{/if}}
-  {{#if needContact}}
-    {{> contactSelection}}
-  {{/if}}
-  <button class="btn btn-success" type="submit">Confirm!</button>
 </template>
 
 <template name="contactSelection">
+  <p>
+    Create a new order, Please attach a contact:
+  </p>
   <div class="form-group">
     <label>Attach contact</label>
     <input id="contact-selector" class="form-control typeahead" name="contact" type="text" placeholder="Search Phone/Email" autocomplete="off" spellcheck="off" data-source="contacts"/>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newContact">
+      Create new Contact
+    </button>
   </div>
+  <div>
+    {{#with contact}}
+      {{> quickForm collection="Contacts" doc=this id="updateContactForm" type="update" autosave=true buttonContent=false}}
+    {{/with}}
+  </div>
+  {{> newContact }}
 </template>
+
+<template name="newContact">
+  <div class="modal fade" id="newContact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Create a new contact</h4>
+        </div>
+        <div class="modal-body">
+          {{> quickForm collection="Contacts" id="insertContactForm" type="insert"}}
+        </div>
+      </div>
+    </div>
+  </div> 
+ </template>

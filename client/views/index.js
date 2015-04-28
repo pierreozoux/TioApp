@@ -1,12 +1,14 @@
 Session.setDefault('courseName', '');
 Session.setDefault('schoolName', '');
 Session.setDefault('needContact', false);
+Session.set('contactIdentifier', '');
 Meteor.subscribe('schools');
 Meteor.subscribe('courses');
 Meteor.subscribe('contacts');
 
 Template.index.onRendered(function() {
-    Meteor.typeahead.inject();
+  Meteor.typeahead.inject();
+  $('#school-selector').focus();
 });
 
 Tracker.autorun(function () {
@@ -21,10 +23,10 @@ Template.index.events({
        Session.set('courseName', '');
      } 
   },
-  'click .btn': function () {
-    var orderId = new Mongo.ObjectID()._str;
+  'click #confirm': function () {
     var state;
     var orderedResources = [];
+    var contactId = Session.get('contactId');
     Resources.find().forEach( function(resource) {
       var inCart = $('#' + resource._id).attr('class') !== 'disabled';
       var sold = $('#' + resource._id).find(':checkbox').prop('checked');
@@ -43,20 +45,16 @@ Template.index.events({
 
       if (orderedResources.length) {
         Orders.insert({
-          _id: orderId,
+          contactId: contactId,
           orderedResources: orderedResources
         });
       }
     });
 
-    if(needParent) {
-      Router.go('/orders/new/' + orderId);
-    } else {
-      Session.set('schoolName', '');
-      $('#school-selector').val('');
-      Session.set('courseName', '');
-      $('#course-selector').val('');
-    }
+    Session.set('schoolName', '');
+    $('#school-selector').val('');
+    Session.set('courseName', '');
+    $('#course-selector').val('');
   }
 });
 
@@ -83,5 +81,34 @@ Template.resourcesSelection.events({
     Template.resourcesSelection.__helpers.get('setNeedContact')();
   }
 
+});
+
+Template.contactSelection.events({
+  'keyup #contact-selector': function (event) {
+     var value = $(event.target).val();
+     var contact;
+     if (/[0-9]{9}/.test(value)) {
+       contact = Contacts.findOne({phone: value});
+     } else {
+       contact = Contacts.findOne({email: value});
+     }
+     if (contact) {
+       Session.set('contactId', contact._id);
+     }
+  },
+})
+
+Template.registerHelper('getSession',function(key){
+  return Session.get(key) || null;
+});
+
+AutoForm.hooks({
+  insertContactForm: {
+    onSuccess: function() {
+      $('#newContact').modal('toggle');
+      Session.set('contactId', this.docId);
+      $('#contact-selector').val(Contacts.findOne(this.docId).phone);
+    }
+  }
 });
 

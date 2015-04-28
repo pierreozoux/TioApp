@@ -137,9 +137,6 @@ if (Meteor.isServer) {
         }
       });
       Session.set('needContact', needContact);
-    },
-    needContact: function() {
-      return Session.get('needContact');
     }
   });
 }

@@ -23,9 +23,9 @@ Schemas.Contact = new SimpleSchema({
     max: 200
   },
   phone: {
-    type: Number,
+    type: String,
     label: 'Phone',
-    regEx: /[0-9]{9}/
+    regEx: /^[0-9]{9}$/
   },
   note: {
     type: String,
@@ -55,9 +55,15 @@ if (Meteor.isServer) {
   });
 } else {
   Template.contactSelection.helpers({
-   contacts: function() {
-     return Contacts.find().fetch().map(function(it){ return it.email; }).concat(Contacts.find().fetch().map(function(it){ return it.phone; }));
-   }
+    contacts: function() {
+      return Contacts.find().fetch().map(function(it){ return it.email; }).concat(Contacts.find().fetch().map(function(it){ return it.phone; }));
+    },
+    contact: function() {
+      var contactId = Session.get('contactId');
+      if (contactId) {
+        return Contacts.findOne(contactId);
+      }
+    }
   });
 
   Template.contactSelection.onRendered(function () {
