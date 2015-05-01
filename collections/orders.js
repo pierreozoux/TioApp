@@ -112,14 +112,14 @@ if (Meteor.isServer) {
             key: 'contactId',
             label: 'note',
             fn: function(value, object) {
-              return object.contact()?.note;
+              return object.contact() && object.contact().note;
             }
           },
           {
             key: 'contactId',
             label: 'name',
             fn: function(value, object) {
-              return object.contact()?.name;
+              return object.contact() && object.contact().name;
             }
           },
           {
