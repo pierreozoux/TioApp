@@ -57,6 +57,15 @@ Schemas.Order = new SimpleSchema({
   contactId: {
     type: String,
     optional: true
+  },
+  phone: {
+    type: String,
+    label: 'Phone',
+    optional: true
+  },
+  humanId: {
+    type: String,
+    label: 'Number'
   }
 });
 
@@ -74,37 +83,43 @@ if (Meteor.isServer) {
       return {
         collection: Orders.find(),
         fields: [
+          {key: 'humanId', label: 'Number'},
           'state',
-          'createdAt',
-          'contactedAt',
           {
-            key: 'contactId',
-            label: 'phone',
-            fn: function(value, object) {
-              if (value) {
-                var contact = Contacts.findOne(value);
-                if (contact) { return Contacts.findOne(value).phone; }
+            key:'createdAt',
+            label: 'Created',
+            fn: function(value) {
+              if (value instanceof Date) {
+                return moment(value).calendar();
+              } else {
+                return 'Never';
               }
             }
           },
           {
+            key:'contactedAt',
+            label: 'Contacted',
+            fn: function(value) {
+              if (value instanceof Date) {
+                return moment(value).calendar();
+              } else {
+                return 'Never';
+              }
+            }
+          },
+          'phone',
+          {
             key: 'contactId',
             label: 'note',
             fn: function(value, object) {
-              if (value) {
-                var contact = Contacts.findOne(value);
-                if (contact) { return Contacts.findOne(value).note; }
-              }
+              return object.contact()?.note;
             }
           },
           {
             key: 'contactId',
             label: 'name',
             fn: function(value, object) {
-              if (value) {
-                var contact = Contacts.findOne(value);
-                if (contact) { return Contacts.findOne(value).name; }
-              }
+              return object.contact()?.name;
             }
           },
           {

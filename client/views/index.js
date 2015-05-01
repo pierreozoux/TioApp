@@ -27,6 +27,14 @@ Template.index.events({
     var state;
     var orderedResources = [];
     var contactId = Session.get('contactId');
+    var phone = contactId && Contacts.findOne(contactId).phone;
+    var humanId = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+    for( var i=0; i < 5; i+=1 ) {
+      humanId += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
     Resources.find().forEach( function(resource) {
       var inCart = $('#' + resource._id).attr('class') !== 'disabled';
       var sold = $('#' + resource._id).find(':checkbox').prop('checked');
@@ -42,14 +50,15 @@ Template.index.events({
           resourceId: resource._id
         });
       }
-
-      if (orderedResources.length) {
-        Orders.insert({
-          contactId: contactId,
-          orderedResources: orderedResources
-        });
-      }
-    });
+   });
+   if (orderedResources.length) {
+     Orders.insert({
+       contactId: contactId,
+       orderedResources: orderedResources,
+       humanId: humanId,
+       phone: phone
+     });
+   }
 
     Session.set('schoolName', '');
     $('#school-selector').val('');
