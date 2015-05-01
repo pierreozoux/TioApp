@@ -2,43 +2,52 @@
   <div class="page-header">
     <h1>Bienvenue</h1>
   </div>
-  <div class="form-group">
-    <label>Enter the school</label>
-    <input id="school-selector" class="form-control typeahead" name="school" type="text" placeholder="School" autocomplete="off" spellcheck="off" data-source="schools"/>
+  <div class="form-horizontal">
+    <div class="form-group">
+      <label for="school-selector" class="col-sm-2 control-label">School</label>
+      <div class="col-sm-10">
+        <input id="school-selector" class="form-control typeahead" name="school" type="text" placeholder="School" autocomplete="off" spellcheck="off" data-source="schools"/>
+      </div>
+    </div>
+    {{> courseSelection}}
+    {{> resourcesSelection}}
   </div>
-  {{> courseSelection}}
-  {{> resourcesSelection}}
+  {{> newContact }}
 </template>
 
 <template name="courseSelection">
   {{#if courses}}
-    <div class="form-group">
-      <label>Select the course</label>
+  <div class="form-group">
+    <label for="course-selector" class="col-sm-2 control-label">Course</label>
+    <div class="col-sm-10">
       <select id="course-selector" class="form-control">
         {{#each courses}}
-          <option>{{name}}</option>
+        <option>{{name}}</option>
         {{/each}}
       </select>
     </div>
+  </div>
   {{/if}}
 </template>
 
 <template name="resourcesSelection">
-  {{#if resources}}
+{{#if resources}}
+  <label class="col-sm-2 control-label">Resource selection</label>
+  <div class="col-sm-10">
     <table class="table table-bordered table-striped">
       <thead>
-      <tr>
-        <th>Subject</th>
-        <th>Title</th>
-        <th>Editor</th>
-        <th>Availability</th>
-        <th>Action</th>
-        <th>Sell</th>
-      </tr>
+        <tr>
+          <th>Subject</th>
+          <th>Title</th>
+          <th>Editor</th>
+          <th>Availability</th>
+          <th>Action</th>
+          <th>Sell</th>
+        </tr>
       </thead>
       <tbody>
-      {{#each resources}}
-      <tr id="{{_id}}">
+        {{#each resources}}
+        <tr id="{{_id}}">
           <td>
             {{ subject }}
           </td>
@@ -58,37 +67,47 @@
             <input type="checkbox" checked="{{isSellable}}">
           </td>
         </tr>
-      {{/each}}
+        {{/each}}
       </tbody>
     </table>
-    {{#if getSession 'needContact'}}
-      {{> contactSelection}}
-      {{#if getSession 'contactId'}}
-        <button id="confirm" class="btn btn-success" type="submit">Confirm!</button>
-      {{/if}}
-    {{else}}
-        <button id="confirm" class="btn btn-success" type="submit">Confirm!</button>
+  </div>
+  {{#if getSession 'needContact'}}
+    {{> contactSelection}}
+    {{#if getSession 'contactId'}}
+      {{> confirmButton}}
     {{/if}}
+  {{else}}
+    {{> confirmButton}}
   {{/if}}
+{{/if}}
+</template>
+
+<template name="confirmButton">
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="confirm" class="btn btn-success">Confirm!</button>
+    </div>
+  </div>
+
 </template>
 
 <template name="contactSelection">
-  <p>
-    Create a new order, Please attach a contact:
-  </p>
   <div class="form-group">
-    <label>Attach contact</label>
-    <input id="contact-selector" class="form-control typeahead" name="contact" type="text" placeholder="Search Phone/Email" autocomplete="off" spellcheck="off" data-source="contacts"/>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newContact">
-      Create new Contact
-    </button>
+    <label for="contact-selector" class="col-sm-2 control-label">Contact</label>
+    <div class="col-sm-5 contact-left">
+      <input id="contact-selector" class="form-control typeahead" name="contact" type="text" placeholder="Search Phone/Email" autocomplete="off" spellcheck="off" data-source="contacts"/>
+    </div>
+    <div class="col-sm-5">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newContact">
+        Create new Contact
+      </button>
+    </div>
   </div>
   <div>
     {{#with contact}}
-      {{> quickForm collection="Contacts" doc=this id="updateContactForm" type="update" autosave=true buttonContent=false}}
+      {{> quickForm template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10" collection="Contacts" doc=this id="updateContactForm" type="update" autosave=true buttonContent=false}}
     {{/with}}
   </div>
-  {{> newContact }}
 </template>
 
 <template name="newContact">
@@ -100,7 +119,7 @@
           <h4 class="modal-title" id="myModalLabel">Create a new contact</h4>
         </div>
         <div class="modal-body">
-          {{> quickForm collection="Contacts" id="insertContactForm" type="insert"}}
+          {{> quickForm template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10" collection="Contacts" id="insertContactForm" type="insert"}}
         </div>
       </div>
     </div>
