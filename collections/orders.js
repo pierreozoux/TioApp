@@ -48,8 +48,8 @@ Schemas.Order = new SimpleSchema({
   },
   state: {
     type: String,
-    defaultValue: 'draft',
-    regEx: /(draft|created|completed|contacted|canceled|sold)/
+    defaultValue: 'created',
+    regEx: /(created|completed|contacted|canceled|sold)/
   },
   orderedResources: {
     type: [OrderedResource]
