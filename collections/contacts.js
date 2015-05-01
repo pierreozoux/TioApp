@@ -25,6 +25,7 @@ Schemas.Contact = new SimpleSchema({
   phone: {
     type: String,
     label: 'Phone',
+    unique: true,
     regEx: /^[0-9]{9}$/
   },
   note: {
