@@ -79,6 +79,9 @@ Template.resourcesSelection.events({
     event.currentTarget.className = 'fa fa-trash';
     $(event.currentTarget).parent().closest('td').next().find(':checkbox').removeAttr('disabled');
     Template.resourcesSelection.__helpers.get('setNeedContact')();
+  },
+  'click input:checkbox': function(event) {
+    Template.resourcesSelection.__helpers.get('setNeedContact')();
   }
 
 });
@@ -108,6 +111,7 @@ AutoForm.hooks({
       $('#newContact').modal('toggle');
       Session.set('contactId', this.docId);
       $('#contact-selector').val(Contacts.findOne(this.docId).phone);
+
     }
   }
 });
