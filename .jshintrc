@@ -83,6 +83,7 @@
         "process": false,
         "Mongo": false,
         "Tracker": false,
+        "Spacebars": false,
         "check": false,
         // Atmosphere packages
         "SimpleSchema": false,
@@ -106,6 +107,7 @@
         "Logger": false,
         "CSV": false,
         "UploadServer": false,
+        "AutoForm": true,
         // App specific
         "log": true,
         "schoolNames": true,

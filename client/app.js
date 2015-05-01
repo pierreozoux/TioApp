@@ -8,4 +8,4 @@ Router.route('/', function () {
 
 Router.route('/orders', function() {
   this.render('orders');
-})
+});

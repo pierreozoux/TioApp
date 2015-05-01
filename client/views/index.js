@@ -80,7 +80,7 @@ Template.resourcesSelection.events({
     $(event.currentTarget).parent().closest('td').next().find(':checkbox').removeAttr('disabled');
     Template.resourcesSelection.__helpers.get('setNeedContact')();
   },
-  'click input:checkbox': function(event) {
+  'click input:checkbox': function() {
     Template.resourcesSelection.__helpers.get('setNeedContact')();
   }
 
@@ -98,8 +98,8 @@ Template.contactSelection.events({
      if (contact) {
        Session.set('contactId', contact._id);
      }
-  },
-})
+  }
+});
 
 Template.registerHelper('getSession',function(key){
   return Session.get(key) || null;
