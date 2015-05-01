@@ -1,5 +1,11 @@
 Orders = new Mongo.Collection('orders');
 
+Orders.helpers({
+  contact: function() {
+    return Contacts.findOne(this.contactId);
+  }
+});
+
 Orders.allow({
   insert: function(userId) {
     if (userId) {

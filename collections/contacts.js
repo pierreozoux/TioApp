@@ -1,5 +1,15 @@
 Contacts = new Mongo.Collection('contacts');
 
+Contacts.helpers({
+  phone: function() {
+    return this.phone;
+  },
+  name: function() {
+    return this.name;
+  }
+});
+
+
 Contacts.allow({
   insert: function(userId) {
     if (userId) {
