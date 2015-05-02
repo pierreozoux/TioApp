@@ -1,8 +1,18 @@
 Orders = new Mongo.Collection('orders');
 
 Orders.helpers({
-  contact: function() {
+  getContact: function() {
     return Contacts.findOne(this.contactId);
+  },
+  action: function() {
+    switch (this.state) {
+      case 'created': return 'Print';
+      case 'completed': return 'Contact';
+    }
+  },
+  contact: function() {
+    Orders.update(this._id, {$set: {state: 'contacted'}});
+  },
   }
 });
 
@@ -112,25 +122,35 @@ if (Meteor.isServer) {
             key: 'contactId',
             label: 'note',
             fn: function(value, object) {
-              return object.contact() && object.contact().note;
+              return object.getContact() && object.getContact().note;
             }
           },
           {
             key: 'contactId',
             label: 'name',
             fn: function(value, object) {
-              return object.contact() && object.contact().name;
+              return object.getContact() && object.getContact().name;
             }
           },
           {
             key: '_id',
             label: 'action',
-            fn: function(value) {
-              return new Spacebars.SafeString('<a class="btn btn-success" href="#" role="button">Call</a>');
-            }
+            tmpl: Template.ordersAction
           }
         ]
       };
+    }
+  });
+
+  Template.orders.events({
+    'click .btn': function (event) {
+      event.preventDefault();
+      if (event.target.className.indexOf('Contact') > 0) {
+        this.contact();
+      }
+    },
+    'click .reactive-table tr': function (event) {
+      Router.go('/order/' + this._id);
     }
   });
 }

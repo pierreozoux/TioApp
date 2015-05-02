@@ -1,3 +1,10 @@
 <template name="orders">
   {{> reactiveTable class="table table-bordered table-hover" settings=settings }}
 </template>
+
+<template name="ordersAction">
+  {{#if action}}
+  <a id="{{_id}}" class="btn btn-success {{action}}" role="button">{{action}}</a>
+  {{/if}}
+</template>
+
