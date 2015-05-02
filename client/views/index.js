@@ -56,7 +56,8 @@ Template.index.events({
        contactId: contactId,
        orderedResources: orderedResources,
        humanId: humanId,
-       phone: phone
+       phone: phone,
+       courseId: Courses.findOne({name: Session.get('courseName')})._id
      });
    }
 

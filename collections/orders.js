@@ -76,6 +76,9 @@ Schemas.Order = new SimpleSchema({
   humanId: {
     type: String,
     label: 'Number'
+  },
+  courseId: {
+    type: String
   }
 });
 
