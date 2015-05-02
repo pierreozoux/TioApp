@@ -1,5 +1,6 @@
 Orders = new Mongo.Collection('orders');
 
+
 Orders.helpers({
   getContact: function() {
     return Contacts.findOne(this.contactId);
@@ -13,6 +14,91 @@ Orders.helpers({
   contact: function() {
     Orders.update(this._id, {$set: {state: 'contacted'}});
   },
+  getCourse: function() {
+    return Courses.findOne(this.courseId);
+  },
+  localResource: function(resource) {
+    return _.findWhere(this.orderedResources, {resourceId: resource._id});
+  },
+  localState: function(resource) {
+    return this.localResource(resource) && this.localResource(resource).state;
+  },
+  isSold: function(resource) {
+    if (this.localResource(resource)) {
+      if (this.localState(resource) === 'sold') {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  },
+  ordered: function(resource) {
+    if (this.localResource(resource)) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  remove: function(resource) {
+    var order = this;
+    Orders.update(
+      order._id,
+      {
+        $pull: {
+          orderedResources: {
+            state: 'ordered',
+            resourceId: resource._id
+          }
+        }
+      }
+    );
+  },
+  add: function(resource) {
+    var order = this;
+    Orders.update(
+      order._id,
+      {
+        $addToSet: {
+          orderedResources: {
+            resourceId: resource._id,
+            state: 'ordered'
+          }
+        }
+      }
+    );
+  },
+  sell: function(resource) {
+    var order = this;
+    var newState;
+    if (order.isSold(resource)) {
+      newState = 'ordered';
+      Resources.update(resource._id, {$inc: {quantity: 1}});
+
+    } else {
+      newState = 'sold';
+      Resources.update(resource._id, {$inc: {quantity: -1}});
+    }
+    Meteor.call('updateOrderedResourceState', order, resource, newState);
+ },
+  cssClass: function(resource) {
+    if (!this.ordered(resource)) {
+      return 'disabled';
+    }
+  }
+});
+
+Meteor.methods({
+  updateOrderedResourceState: function(order, resource, state) {
+    Orders.update({
+      _id: order._id,
+      'orderedResources.resourceId': resource._id
+    }, {
+      $set : {
+        'orderedResources.$.state': state
+      }
+    });
   }
 });
 
@@ -91,6 +177,7 @@ if (Meteor.isServer) {
     }
   });
 } else {
+  Meteor.subscribe('orders');
   Template.orders.helpers({
     settings: function () {
       return {
