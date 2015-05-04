@@ -1,10 +1,18 @@
-Session.setDefault('courseName', '');
-Session.setDefault('schoolName', '');
-Session.setDefault('needContact', false);
-Session.set('contactIdentifier', '');
 Meteor.subscribe('schools');
 Meteor.subscribe('courses');
 Meteor.subscribe('contacts');
+
+var clean = function () {
+  Session.set('schoolName', '');
+  Session.set('courseName', '');
+  Session.set('contactId', '');
+  Session.set('needContact', false);
+
+  $('#school-selector').val('');
+  $('#course-selector').val('');
+}
+
+clean();
 
 Template.index.onRendered(function() {
   Meteor.typeahead.inject();
@@ -51,6 +59,7 @@ Template.index.events({
         });
       }
    });
+
    if (orderedResources.length) {
      var orderId = Orders.insert({
        contactId: contactId,
@@ -59,13 +68,11 @@ Template.index.events({
        phone: phone,
        courseId: Courses.findOne({name: Session.get('courseName')})._id
      });
+     clean();
      Router.go('/order/' + orderId);
    }
+   clean();
 
-    Session.set('schoolName', '');
-    $('#school-selector').val('');
-    Session.set('courseName', '');
-    $('#course-selector').val('');
   }
 });
 
