@@ -236,7 +236,7 @@ if (Meteor.isServer) {
     'click .btn': function (event) {
       event.stopPropagation();
       event.preventDefault();
-      if (event.target.className.indexOf('Contact') > 0) {
+      if (event.target.className.contains('Contact')) {
         this.contact();
       }
     },
