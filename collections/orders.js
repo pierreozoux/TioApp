@@ -225,7 +225,7 @@ if (Meteor.isServer) {
           {
             key: '_id',
             label: 'action',
-            tmpl: Template.ordersAction
+            tmpl: Template.orderAction
           }
         ]
       };
@@ -233,16 +233,19 @@ if (Meteor.isServer) {
   });
 
   Template.orders.events({
-    'click .btn': function (event) {
+    'click .reactive-table tr': function (event) {
+      Router.go('/order/' + this._id);
+    }
+  });
+
+  Template.orderAction.events({
+     'click .btn': function (event) {
       event.stopPropagation();
       event.preventDefault();
       if (event.target.className.contains('Contact')) {
         this.contact();
       }
     },
-    'click .reactive-table tr': function (event) {
-      Router.go('/order/' + this._id);
-    }
   });
 }
 

@@ -3,12 +3,6 @@
   {{> reactiveTable class="orders-table table table-striped table-bordered table-hover" settings=settings }}
 </template>
 
-<template name="ordersAction">
-  {{#if action}}
-  <a id="{{_id}}" class="btn btn-success {{action}}" role="button">{{action}}</a>
-  {{/if}}
-</template>
-
 <template name="ordersActionBar">
   <div class="row action-bar">
     <div class="col-sm-offset-10 col-sm-2">
