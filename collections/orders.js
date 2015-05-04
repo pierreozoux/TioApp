@@ -234,6 +234,7 @@ if (Meteor.isServer) {
 
   Template.orders.events({
     'click .btn': function (event) {
+      event.stopPropagation();
       event.preventDefault();
       if (event.target.className.indexOf('Contact') > 0) {
         this.contact();
