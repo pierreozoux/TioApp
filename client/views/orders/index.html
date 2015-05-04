@@ -1,4 +1,5 @@
 <template name="orders">
+  {{> ordersActionBar}}
   {{> reactiveTable class="table table-bordered table-hover" settings=settings }}
 </template>
 
@@ -6,5 +7,13 @@
   {{#if action}}
   <a id="{{_id}}" class="btn btn-success {{action}}" role="button">{{action}}</a>
   {{/if}}
+</template>
+
+<template name="ordersActionBar">
+  <div class="row action-bar">
+    <div class="col-sm-offset-10 col-sm-2">
+      <button id="contactAndPrint" class="btn btn-success">Contact and Print</button>
+    </div>
+  </div>
 </template>
 
