@@ -86,17 +86,35 @@ Orders.helpers({
     if (!this.ordered(resource)) {
       return 'disabled';
     }
+  },
+  containsOrdered: function() {
+    var order = this;
+
+    return _.reduce(
+      order.orderedResources,
+      function(memo, orderedResource) {
+        return memo || (orderedResource.state === 'ordered');
+      },
+      false
+    );
   }
 });
 
 Meteor.methods({
   updateOrderedResourceState: function(order, resource, state) {
+    var order = Orders.findOne(order._id);
+    var orderState = order.state;
+    if (!order.containsOrdered()) {
+      orderState = 'sold';
+    }
+
     Orders.update({
       _id: order._id,
       'orderedResources.resourceId': resource._id
     }, {
       $set : {
-        'orderedResources.$.state': state
+        'orderedResources.$.state': state,
+        state: orderState
       }
     });
   }
