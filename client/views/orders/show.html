@@ -1,4 +1,5 @@
 <template name="Order">
+  {{> orderActionBar}}
   <h2>Order</h2>
   <div class="row">
   {{#autoForm class="form-horizontal" collection="Orders" doc=this id="updateOrderForm" type="readonly"}}
@@ -18,6 +19,17 @@
   {{/if}}
 </template>
 
+<template name="orderActionBar">
+  <div class="row action-bar">
+    <div class="col-sm-offset-8 col-sm-2">
+      {{> orderAction}}
+    </div>
+    <div class="">
+      <a id="cancel" class="btn btn-danger cancel" role="button">Cancel Order</a>
+    </div>
+  </div>
+</template>
+
 <template name="orderAction">
   {{#if action}}
   <a id="{{_id}}" class="btn btn-success {{action}}" role="button">{{action}}</a>
@@ -31,3 +43,4 @@
 <template name="orderResourceSold">
   <input checked={{isSold}} {{disabled}} class="checkbox" type="checkbox" />
 </template>
+
