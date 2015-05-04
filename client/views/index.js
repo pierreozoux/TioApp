@@ -24,10 +24,10 @@ Tracker.autorun(function () {
 });
 
 Template.index.events({
-  'keyup #school-selector': function (event) {
-     var value = $(event.target).val();
-     Session.set('schoolName', value);
-     if (!value) {
+  'keyup #school-selector, click': function (event) {
+     var schoolName= $('#school-selector').val();
+     Session.set('schoolName', schoolName);
+     if (!Schools.findOne({name: schoolName})) {
        Session.set('courseName', '');
      } 
   },
