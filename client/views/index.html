@@ -74,21 +74,23 @@
   {{#if getSession 'needContact'}}
     {{> contactSelection}}
     {{#if getSession 'contactId'}}
-      {{> confirmButton}}
+      {{> confirmation}}
     {{/if}}
   {{else}}
-    {{> confirmButton}}
+    {{> confirmation}}
   {{/if}}
 {{/if}}
 </template>
 
-<template name="confirmButton">
+<template name="confirmation">
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-2 col-sm-2">
       <button id="confirm" class="btn btn-success">Confirm!</button>
     </div>
+    <div class="col-sm-2">
+      <button id="cancel" class="btn btn-default">Cancel</button>
+    </div>
   </div>
-
 </template>
 
 <template name="contactSelection">
