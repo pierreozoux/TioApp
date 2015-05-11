@@ -48,6 +48,7 @@ Schemas.Contact = new SimpleSchema({
     label: 'Email',
     unique: true,
     max: 200,
+    optional: true,
     regEx: SimpleSchema.RegEx.Email
   },
   stateSupport: {
