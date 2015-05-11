@@ -64,6 +64,14 @@ Template.Order.onRendered(function(){
   });
 });
 
+Template.orderResourceSold.onRendered(function() {
+  if (!this.rendered){
+    // Disable the already sold resources
+    $('input:checked').attr('disabled', true);
+    this.rendered = true;
+  }
+});
+
 Template.orderResourceAction.helpers({
   icon: function () {
     var resource = this;
