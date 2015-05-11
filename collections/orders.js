@@ -41,8 +41,10 @@ Orders.attachSchema(new SimpleSchema({
     optional: true,
     label: 'Phone',
     autoValue: function() {
-      var contact = Contacts.findOne(this.field('contactId').value);
-      return contact && contact.phone;
+      if (this.isInsert) {
+        var contact = Contacts.findOne(this.field('contactId').value);
+        return contact && contact.phone;
+      }
     }
   },
   name: {
@@ -50,8 +52,10 @@ Orders.attachSchema(new SimpleSchema({
     optional: true,
     label: 'Name',
     autoValue: function() {
-      var contact = Contacts.findOne(this.field('contactId').value);
-      return contact && contact.name;
+      if (this.isInsert) {
+        var contact = Contacts.findOne(this.field('contactId').value);
+        return contact && contact.name;
+      }
     }
   },
   humanId: {
@@ -65,12 +69,13 @@ Orders.attachSchema(new SimpleSchema({
     type: String,
     label: 'Course Name',
     autoValue: function() {
-      var course = Courses.findOne(this.field('courseId').value);
-      return course.name;
+      if (this.isInsert) {
+        var course = Courses.findOne(this.field('courseId').value);
+        return course.name;
+      }
     }
   }
 }));
-
 
 Orders.allow({
   insert: function(userId) {
