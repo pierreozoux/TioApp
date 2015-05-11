@@ -35,7 +35,6 @@ Resources.attachSchema(new SimpleSchema({
   }
 }));
 
-
 Resources.allow({
   update: function(userId) {
     if (userId) {

@@ -4,7 +4,7 @@ Meteor.subscribe('courses');
 Meteor.subscribe('contacts');
 
 Tracker.autorun(function () {
-  Meteor.subscribe('resources', Session.get('courseName'));
+  Meteor.subscribe('resources', Session.get('courseId'));
 });
 
 

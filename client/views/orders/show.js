@@ -59,7 +59,7 @@ Template.Order.onRendered(function(){
   self.autorun(function () {
     var data = Template.currentData(self.view);
     if (data) {
-      Meteor.subscribe('resources', data.getCourse().name);
+      Meteor.subscribe('resources', data.getCourse()._id);
     }
   });
 });

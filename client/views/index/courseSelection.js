@@ -1,21 +1,16 @@
 Template.courseSelection.helpers({
   courses: function() {
-    var schoolId;
-    var schoolName = Session.get('schoolName');
-    var school = Schools.findOne({name: schoolName});
+    var school = Schools.findOne(Session.get('schoolId'));
     if (school) {
-      schoolId = school._id;
-      return Courses.find({schoolId: schoolId});
+      return Courses.find({schoolId: school._id});
     }
   }
 });
 
 Template.courseSelection.events({
   'change #course-selector': function(event) {
-    if (Session.get('schoolName')) {
-      var value = $(event.target).val();
-      Session.set('courseName', value);
-    }
+    var value = $(event.target).val();
+    Session.set('courseId', value);
   }
 });
 

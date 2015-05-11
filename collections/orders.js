@@ -38,18 +38,20 @@ Orders.attachSchema(new SimpleSchema({
   },
   phone: {
     type: String,
+    optional: true,
     label: 'Phone',
     autoValue: function() {
-      var contact = Contacts.findOne(this.field('contactId'));
-      return contact.phone;
+      var contact = Contacts.findOne(this.field('contactId').value);
+      return contact && contact.phone;
     }
   },
   name: {
     type: String,
+    optional: true,
     label: 'Name',
     autoValue: function() {
-      var contact = Contacts.findOne(this.field('contactId'));
-      return contact.name;
+      var contact = Contacts.findOne(this.field('contactId').value);
+      return contact && contact.name;
     }
   },
   humanId: {
@@ -62,7 +64,7 @@ Orders.attachSchema(new SimpleSchema({
   courseName: {
     type: String,
     autoValue: function() {
-      var course = Courses.findOne(this.field('courseId'));
+      var course = Courses.findOne(this.field('courseId').value);
       return course.name;
     }
   }

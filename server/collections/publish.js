@@ -16,10 +16,10 @@ Meteor.publish('orders', function () {
   }
 });
 
-Meteor.publish('resources', function (courseName) {
+Meteor.publish('resources', function (courseId) {
   if (this.userId) {
-    check(courseName, String);
-    var course = Courses.findOne({name: courseName});
+    check(courseId, String);
+    var course = Courses.findOne(courseId);
     if (course) {
       return Resources.find({_id: {$in: course.resources}});
     }
