@@ -27,6 +27,7 @@ Template.orders.helpers({
             }
           }
         },
+        'courseName',
         'phone',
         {
           key: 'contactId',

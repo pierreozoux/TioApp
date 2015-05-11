@@ -63,6 +63,7 @@ Orders.attachSchema(new SimpleSchema({
   },
   courseName: {
     type: String,
+    label: 'Course Name',
     autoValue: function() {
       var course = Courses.findOne(this.field('courseId').value);
       return course.name;
