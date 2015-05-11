@@ -79,7 +79,6 @@ Schemas.Resource = new SimpleSchema({
     type: String,
     label: 'Reference',
     max: 200,
-    optional: true,
     unique: true
   },
   editor: {
