@@ -175,7 +175,18 @@ Schemas.Order = new SimpleSchema({
   phone: {
     type: String,
     label: 'Phone',
-    optional: true
+    autoValue: function() {
+      var contact = Contacts.findOne(this.field('contactId'));
+      return contact.phone;
+    }
+  },
+  name: {
+    type: String,
+    label: 'Name',
+    autoValue: function() {
+      var contact = Contacts.findOne(this.field('contactId'));
+      return contact.name;
+    }
   },
   humanId: {
     type: String,

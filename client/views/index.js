@@ -35,7 +35,6 @@ Template.index.events({
     var state;
     var orderedResources = [];
     var contactId = Session.get('contactId');
-    var phone = contactId && Contacts.findOne(contactId).phone;
     var humanId = '';
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
@@ -65,7 +64,6 @@ Template.index.events({
        contactId: contactId,
        orderedResources: orderedResources,
        humanId: humanId,
-       phone: phone,
        courseId: Courses.findOne({name: Session.get('courseName')})._id
      });
      clean();
