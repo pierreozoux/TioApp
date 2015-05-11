@@ -57,6 +57,12 @@ Schemas.Contact = new SimpleSchema({
   }
 });
 
+SimpleSchema.messages({
+  regEx: [
+    {exp: /^[0-9]{9}$/, msg: "[label] must be 9 digits, without any other chars."}
+  ]
+});
+
 Contacts.attachSchema(Schemas.Contact);
 
 if (Meteor.isServer) {
