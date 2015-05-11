@@ -92,3 +92,14 @@ Template.orderResourceSold.helpers({
     return order.cssClass(resource); 
   }
 });
+
+Template.orderAction.events({
+  'click .btn': function (event) {
+    event.stopPropagation();
+    event.preventDefault();
+    if (event.target.className.contains('Contact')) {
+      this.contact();
+    }
+  }
+});
+

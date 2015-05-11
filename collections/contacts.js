@@ -1,32 +1,6 @@
 Contacts = new Mongo.Collection('contacts');
 
-Contacts.helpers({
-  phone: function() {
-    return this.phone;
-  },
-  name: function() {
-    return this.name;
-  }
-});
-
-
-Contacts.allow({
-  insert: function(userId) {
-    if (userId) {
-      return true;
-    }
-  },
-  update: function(userId) {
-    if (userId) {
-      return true;
-    }
-  }
-});
-
-
-var Schemas = {};
-
-Schemas.Contact = new SimpleSchema({
+Contacts.attachSchema(new SimpleSchema({
   name: {
     type: String,
     label: 'Name',
@@ -55,7 +29,7 @@ Schemas.Contact = new SimpleSchema({
     type: Boolean,
     label: 'State Support'
   }
-});
+}));
 
 SimpleSchema.messages({
   regEx: [
@@ -63,29 +37,17 @@ SimpleSchema.messages({
   ]
 });
 
-Contacts.attachSchema(Schemas.Contact);
-
-if (Meteor.isServer) {
-  Meteor.publish('contacts', function () {
-    if (this.userId) {
-      return Contacts.find({});
+Contacts.allow({
+  insert: function(userId) {
+    if (userId) {
+      return true;
     }
-  });
-} else {
-  Template.contactSelection.helpers({
-    contacts: function() {
-      return Contacts.find().fetch().map(function(it){ return it.email; }).concat(Contacts.find().fetch().map(function(it){ return it.phone; }));
-    },
-    contact: function() {
-      var contactId = Session.get('contactId');
-      if (contactId) {
-        return Contacts.findOne(contactId);
-      }
+  },
+  update: function(userId) {
+    if (userId) {
+      return true;
     }
-  });
+  }
+});
 
-  Template.contactSelection.onRendered(function () {
-    Meteor.typeahead.inject();
-  });
-}
 

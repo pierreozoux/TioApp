@@ -12,6 +12,6 @@ Meteor.startup(function () {
       log.info('Finished processing CSV.');
     }
   });
-
 });
+
 

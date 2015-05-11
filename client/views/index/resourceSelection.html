@@ -1,0 +1,64 @@
+<template name="resourcesSelection">
+{{#if resources}}
+  <label class="col-sm-2 control-label">Resource selection</label>
+  <div class="col-sm-10">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Title</th>
+          <th>Editor</th>
+          <th>Availability</th>
+          <th>Action</th>
+          <th>Sell</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each resources}}
+        <tr id="{{_id}}">
+          <td>
+            {{ subject }}
+          </td>
+          <td>
+            {{ title }}
+          </td>
+          <td>
+            {{ editor }}
+          </td>
+          <td>
+            {{ quantity }}
+          </td>
+          <td>
+            <i class="fa fa-trash"></i>
+          </td>
+          <td>
+            <input type="checkbox" checked="{{isSellable}}">
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{#if getSession 'needContact'}}
+    {{> contactSelection}}
+    {{#if getSession 'contactId'}}
+      {{> confirmation}}
+    {{/if}}
+  {{else}}
+    {{> confirmation}}
+  {{/if}}
+{{/if}}
+</template>
+
+<template name="confirmation">
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-2">
+      <button id="confirm" class="btn btn-success">Confirm!</button>
+    </div>
+    <div class="col-sm-2">
+      <button id="cancel" class="btn btn-default">Cancel</button>
+    </div>
+  </div>
+</template>
+
+
