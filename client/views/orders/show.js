@@ -35,7 +35,7 @@ Template.Order.helpers({
     }; 
   },
   resources: function () {
-    return Resources.find().count();
+    return Resources.find();
   }
 });
 
