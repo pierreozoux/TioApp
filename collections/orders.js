@@ -102,7 +102,6 @@ Orders.helpers({
 
 Meteor.methods({
   updateOrderedResourceState: function(order, resource, state) {
-    var order = Orders.findOne(order._id);
     var orderState = order.state;
     if (!order.containsOrdered()) {
       orderState = 'sold';
@@ -282,7 +281,7 @@ if (Meteor.isServer) {
       if (event.target.className.contains('Contact')) {
         this.contact();
       }
-    },
+    }
   });
 }
 

@@ -8,12 +8,13 @@ Resources.allow({
   }
 });
 
-var resource;
-var resourceId;
-var courseName;
 
 Resources.importFromCsv = function(csvFile) {
+  var resource;
+  var resourceId;
+  var courseName;
   var lines = [];
+
   CSV.readCsvFileLineByLine(csvFile, {
     headers: true
   }, function(line) {
