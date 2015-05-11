@@ -194,7 +194,15 @@ Schemas.Order = new SimpleSchema({
   },
   courseId: {
     type: String
+  },
+  courseName: {
+    type: String,
+    autoValue: function() {
+      var course = Courses.findOne(this.field('courseId'));
+      return course.name;
+    }
   }
+
 });
 
 Orders.attachSchema(Schemas.Order);
