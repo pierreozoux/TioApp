@@ -12,14 +12,14 @@ Resources.attachSchema(new SimpleSchema({
     max: 200,
     unique: true
   },
-  editor: {
+  group: {
     type: String,
     label: 'Editor',
     max: 200
   },
-  supplier: {
+  editor: {
     type: String,
-    label: 'Supplier',
+    label: 'Editor',
     max: 200
   },
   quantity: {
@@ -71,7 +71,7 @@ Resources.importFromCsv = function(csvFile) {
         reference: line.Reference,
         editor:    line.Editor,
         subject:   line.Subject,
-        supplier:  'any'
+        group:     line.group
       });
     } else {
       resourceId = resource._id;

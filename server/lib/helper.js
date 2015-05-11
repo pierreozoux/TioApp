@@ -12,6 +12,8 @@ schoolNames = function (csvLine) {
   keys.splice(index, 1);
   index = keys.indexOf('Year');
   keys.splice(index, 1);
+  index = keys.indexOf('Group');
+  keys.splice(index, 1);
 
   return keys;
 };
