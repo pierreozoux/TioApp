@@ -53,4 +53,3 @@ Template.orders.events({
   }
 });
 
-
