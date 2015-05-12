@@ -76,7 +76,7 @@ Template.orderResourceAction.helpers({
     var resource = this;
     var order = Template.parentData(5);
     if(order.ordered(resource)) {
-      if (order.isSold(resource)) {
+      if (order.isSold(resource) || order.definitiveState()) {
         return '';
       } else {
         return 'fa-trash';
@@ -96,7 +96,7 @@ Template.orderResourceSold.helpers({
   disabled: function () {
     var resource = this;
     var order = Template.parentData(5);
-    return order.cssClass(resource); 
+    return order.cssClass(resource);
   }
 });
 
@@ -110,3 +110,39 @@ Template.orderAction.events({
   }
 });
 
+Template.orderActionBar.events({
+  'click #cancel': function() {
+    Session.set('intent', 'cancel');
+    $('#confirmAction').modal();
+  }
+});
+
+Template.confirmAction.events({
+  'click #confirm': function () {
+    var intent = Session.get('intent');
+    var order = this;
+    if (intent === 'cancel') {
+      Orders.update(order._id, {
+        $set: {
+          state: 'canceled'
+        }
+      });
+    } else if (intent === 'sellLastResource') {
+      order.sell(Resources.findOne(Session.get('lastResourceId')), true);
+    } else {
+      order.remove(Resources.findOne(Session.get('lastResourceId')), true);
+    }
+    $('#confirmAction').modal('hide')
+  }
+});
+
+Template.confirmAction.helpers({
+  content: function() {
+    var intent = Session.get('intent');
+    if (intent === 'cancel') {
+      return 'You are about to cancel this order.'
+    } else {
+      return 'You are about to finalize this order.'
+    }
+  }
+})

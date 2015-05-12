@@ -130,19 +130,33 @@ Orders.helpers({
       return false;
     }
   },
-  remove: function(resource) {
+  remove: function(resource, force) {
     var order = this;
-    Orders.update(
-      order._id,
-      {
-        $pull: {
-          orderedResources: {
-            state: 'ordered',
-            resourceId: resource._id
+    var newState = order.state
+    if (force || order.containsOrdered() > 1) {
+      if (force) {
+        newState = 'sold';
+      }
+      Orders.update(
+        order._id,
+        {
+          $pull: {
+            orderedResources: {
+              state: 'ordered',
+              resourceId: resource._id
+            }
+          }
+        }, {
+          $et: {
+            state: newState
           }
         }
-      }
-    );
+      );
+    } else {
+      Session.set('intent', 'removeLastResource');
+      Session.set('lastResourceId', resource._id);
+      $('#confirmAction').modal();
+    }
   },
   add: function(resource) {
     var order = this;
@@ -158,21 +172,19 @@ Orders.helpers({
       }
     );
   },
-  sell: function(resource) {
+  sell: function(resource, force) {
     var order = this;
-    var newState;
-    if (order.isSold(resource)) {
-      newState = 'ordered';
-      Resources.update(resource._id, {$inc: {quantity: 1}});
-
+    if (force || order.containsOrdered() > 1) {
+      Meteor.call('updateOrderedResourceState', order, resource, force);
     } else {
-      newState = 'sold';
-      Resources.update(resource._id, {$inc: {quantity: -1}});
+      Session.set('intent', 'sellLastResource');
+      Session.set('lastResourceId', resource._id);
+      $('#confirmAction').modal();
     }
-    Meteor.call('updateOrderedResourceState', order, resource, newState);
- },
+  },
   cssClass: function(resource) {
-    if (!this.ordered(resource)) {
+    var order = this;
+    if (!order.ordered(resource) || order.definitiveState()) {
       return 'disabled';
     }
   },
@@ -182,10 +194,22 @@ Orders.helpers({
     return _.reduce(
       order.orderedResources,
       function(memo, orderedResource) {
-        return memo || (orderedResource.state === 'ordered');
+        if (orderedResource.state === 'ordered') {
+          return memo + 1;
+        } else {
+          return memo;
+        }
       },
-      false
+      0
     );
+  },
+  definitiveState: function() {
+    var order = this;
+    if (order.state === 'sold' || order.state === 'canceled') {
+      return true;
+    } else {
+      return false;
+    }
   }
 });
 
@@ -201,20 +225,29 @@ Orders.after.insert(function() {
 });
 
 Meteor.methods({
-  updateOrderedResourceState: function(order, resource, state) {
+  updateOrderedResourceState: function(order, resource, force) {
     var order = Orders.findOne(order._id);
-    var orderState = order.state;
-    if (!order.containsOrdered()) {
-      orderState = 'sold';
+    var newState = order.state;
+    if (force) {
+      newState = 'sold'
     }
-
+    if (order.isSold(resource)) {
+      resourceState = 'ordered';
+      quantityDirection = 1;
+    } else {
+      resourceState = 'sold';
+      quantityDirection = -1;
+    }
+    Resources.update(resource._id, {
+      $inc: {quantity: quantityDirection}
+    });
     Orders.update({
       _id: order._id,
       'orderedResources.resourceId': resource._id
     }, {
       $set : {
-        'orderedResources.$.state': state,
-        state: orderState
+        'orderedResources.$.state': resourceState,
+        state: newState
       }
     });
   }
