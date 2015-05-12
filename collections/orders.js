@@ -189,6 +189,17 @@ Orders.helpers({
   }
 });
 
+Orders.after.insert(function() {
+  var orderId = this._id;
+  if (!Orders.findOne(orderId).containsOrdered()) {
+    Orders.update(orderId, {
+      $set: {
+        state: 'sold'
+      }
+    });
+  }
+});
+
 Meteor.methods({
   updateOrderedResourceState: function(order, resource, state) {
     var order = Orders.findOne(order._id);
