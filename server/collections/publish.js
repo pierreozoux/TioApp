@@ -1,18 +1,18 @@
 Meteor.publish('contacts', function () {
   if (this.userId) {
-    return Contacts.find({});
+    return Contacts.find();
   }
 });
 
 Meteor.publish('courses', function () {
   if (this.userId) {
-    return Courses.find({});
+    return Courses.find();
   }
 });
 
 Meteor.publish('orders', function () {
   if (this.userId) {
-    return Orders.find({});
+    return Orders.find();
   }
 });
 
@@ -32,7 +32,7 @@ Meteor.publish('resources', function (courseId) {
 
 Meteor.publish('schools', function () {
   if (this.userId) {
-    return Schools.find({});
+    return Schools.find();
   }
 });
 
