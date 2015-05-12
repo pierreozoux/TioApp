@@ -71,7 +71,7 @@ Resources.importFromCsv = function(csvFile) {
         reference: line.Reference,
         editor:    line.Editor,
         subject:   line.Subject,
-        group:     line.group
+        group:     line.Group
       });
     } else {
       resourceId = resource._id;
