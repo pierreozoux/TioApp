@@ -53,7 +53,6 @@ Template.Order.events({
   }
 });
 
-
 Template.Order.onRendered(function(){
   var self = this;
   self.autorun(function () {
