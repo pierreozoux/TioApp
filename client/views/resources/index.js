@@ -13,11 +13,22 @@ Template.resources.helpers({
         {
           key: 'order',
           label: 'Order',
+          fn: function(value, object) {
+            if (_.contains(groupOrders.array(), object._id)) {
+              return true;
+            } else {
+              return false;
+            }
+          },
           tmpl: Template.orderResource
+        },
+        {
+          key: 'reference',
+          label: 'Reference',
+          sort: true
         },
         'subject',
         'title',
-        'reference',
         'quantity',
         {
           key: 'order',
