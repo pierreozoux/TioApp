@@ -10,6 +10,12 @@ Meteor.publish('courses', function () {
   }
 });
 
+Meteor.publish('groupOrders', function () {
+  if (this.userId) {
+    return GroupOrders.find();
+  }
+});
+
 Meteor.publish('orders', function () {
   if (this.userId) {
     return Orders.find();
