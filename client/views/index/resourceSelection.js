@@ -16,6 +16,13 @@ Template.resourcesSelection.helpers({
       }
     });
     Session.set('needContact', needContact);
+  },
+  printResources: function() {
+    if (Session.get('courseId')) {
+      return true;
+    } else {
+      return false;
+    }
   }
 });
 
