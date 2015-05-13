@@ -3,7 +3,7 @@ Orders = new Mongo.Collection('orders');
 var OrderedResource = new SimpleSchema({
   state: {
     type: String,
-    regEx: /(ordered|sold)/,
+    regEx: /(ordered|sold)/
   },
   resourceId: {
     type: String
@@ -131,7 +131,7 @@ Orders.helpers({
   },
   remove: function(resource, force) {
     var order = this;
-    var newState = order.state
+    var newState = order.state;
     if (force || order.containsOrdered() > 1) {
       if (force) {
         newState = 'sold';
@@ -224,11 +224,13 @@ Orders.after.insert(function() {
 });
 
 Meteor.methods({
-  updateOrderedResourceState: function(order, resource, force) {
-    var order = Orders.findOne(order._id);
+  updateOrderedResourceState: function(tempOrder, resource, force) {
+    var resourceState;
+    var quantityDirection;
+    var order = Orders.findOne(tempOrder._id);
     var newState = order.state;
     if (force) {
-      newState = 'sold'
+      newState = 'sold';
     }
     if (order.isSold(resource)) {
       resourceState = 'ordered';

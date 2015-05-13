@@ -96,7 +96,7 @@ Resources.importFromCsv = function(csvFile) {
         });
       } else {
         Courses.update({
-          name: courseName,
+          name: courseName
         }, {
           $pull: {
             resources: resourceId
