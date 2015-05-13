@@ -35,3 +35,16 @@ GroupOrderedResources.allow({
   }
 });
 
+if (Meteor.isClient) {
+  GroupOrderedResources.after.update(function (userId, doc, fieldNames, modifier, options) {
+    var quantityReceived = doc.received - this.previous.received;
+    console.log('quantityReceived: ' + quantityReceived);
+    Resources.update(
+      doc.resourceId,
+      {
+        $inc: {quantity: quantityReceived}
+      }
+    );
+  });
+}
+
