@@ -97,3 +97,23 @@ Template.orderResource.helpers({
     }
   }
 });
+
+Template.confirmGroupOrder.events({
+  'click #confirm': function(event) {
+    event.preventDefault();
+    var group = Resources.findOne(groupOrders.array()[0]).group;
+    var groupOrderId = GroupOrders.insert({
+      group: group
+    });
+
+    var groupOrderedResources = [];
+    _.each(groupOrders.array(), function(resourceId) {
+      GroupOrderedResources.insert({
+        groupOrderId: groupOrderId,
+        resourceId: resourceId
+      });
+    });
+    
+    Router.go('/grouporder/' + groupOrderId);
+  }
+});

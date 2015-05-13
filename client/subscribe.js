@@ -6,6 +6,7 @@ Meteor.subscribe('groupOrders');
 
 Tracker.autorun(function () {
   Meteor.subscribe('resources', Session.get('courseId'));
+  Meteor.subscribe('groupOrderedResources', Session.get('groupOrderId'));
 });
 
 

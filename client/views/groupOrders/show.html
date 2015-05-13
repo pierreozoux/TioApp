@@ -1,0 +1,23 @@
+<template name="GroupOrder">
+  <h2>Group Order</h2>
+  <div class="row">
+  {{#autoForm class="form-horizontal" collection="GroupOrders" doc=this id="updateGroupOrderForm" type="readonly"}}
+    {{> afQuickField template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10" name='group'}}
+    {{> afQuickField template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10" name='state'}}
+  {{/autoForm}}
+  </div>
+  {{> reactiveTable class="table table-striped table-bordered table-hover" settings=settings }}
+</template>
+
+<template name="quantity">
+{{#autoForm collection="GroupOrderedResources" doc=this id=idGenerated type="update" autosave="true"}}
+  {{> afQuickField label=false name='quantity'}}
+{{/autoForm}}
+</template>
+
+<template name="received">
+{{#autoForm collection="GroupOrderedResources" doc=this id=idGenerated type="update" autosave="true"}}
+  {{> afQuickField label=false name='received'}}
+{{/autoForm}}
+</template>
+
