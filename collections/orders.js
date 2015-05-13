@@ -4,7 +4,6 @@ var OrderedResource = new SimpleSchema({
   state: {
     type: String,
     regEx: /(ordered|sold)/,
-    optional: true
   },
   resourceId: {
     type: String
