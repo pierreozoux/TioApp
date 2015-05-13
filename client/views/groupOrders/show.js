@@ -68,3 +68,4 @@ Template.received.helpers({
     return "updateQuantity" + this._id;
   }
 });
+
