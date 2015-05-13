@@ -84,7 +84,7 @@ Template.resources.events({
       }
     }
   }
-})
+});
 
 Template.orderResource.helpers({
   isSelected: function() {
@@ -96,4 +96,4 @@ Template.orderResource.helpers({
       return false;
     }
   }
-})
+});
