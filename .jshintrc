@@ -115,6 +115,8 @@
         "Resources": true,
         "Schools": true,
         "Contacts": true,
-        "Orders": true
+        "Orders": true,
+        "GroupOrders": true,
+        "GroupOrderedResources": true
     }
 }
