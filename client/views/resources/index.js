@@ -122,8 +122,9 @@ Template.confirmGroupOrder.events({
 });
 
 Template.resources.events({
-  'input input': function(event) {
-    $(event.target).submit();
+  'click #update': function(event) {
+    // if valid
+    $('input.form-control').submit();
   }
 })
 

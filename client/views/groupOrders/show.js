@@ -58,8 +58,9 @@ Template.quantity.helpers({
 });
 
 Template.GroupOrder.events({
-  'input input': function(event) {
-    $(event.target).submit();
+  'click #update': function(event) {
+    // if valid
+    $('input').submit();
   }
 })
 

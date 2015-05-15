@@ -5,6 +5,8 @@
   </div>
   {{#if isConfirm}}
     {{> confirmGroupOrder}}
+  {{else}}
+    {{> updateResources}}
   {{/if}}
 </template>
 
@@ -15,7 +17,15 @@
 <template name="confirmGroupOrder">
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-2">
-      <button id="confirm" class="btn btn-success">Confirm Group Order</button>
+      <button id="confirm" class="btn btn-primary">Confirm Group Order</button>
+    </div>
+  </div>
+</template>
+
+<template name="updateResources">
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-2">
+      <button id="update" class="btn btn-success">Update</button>
     </div>
   </div>
 </template>

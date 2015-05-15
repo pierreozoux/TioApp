@@ -7,16 +7,21 @@
   {{/autoForm}}
   </div>
   {{> reactiveTable class="table table-striped table-bordered table-hover" settings=settings }}
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-2">
+      <button id="update" class="btn btn-success">Update</button>
+    </div>
+  </div>
 </template>
 
 <template name="quantity">
-{{#autoForm collection="GroupOrderedResources" doc=this id=idGenerated type="update" autosave="true"}}
+{{#autoForm collection="GroupOrderedResources" doc=this id=idGenerated type="update"}}
   {{> afQuickField label=false name='quantity'}}
 {{/autoForm}}
 </template>
 
 <template name="received">
-{{#autoForm collection="GroupOrderedResources" doc=this id=idGenerated type="update" autosave="true"}}
+{{#autoForm collection="GroupOrderedResources" doc=this id=idGenerated type="update"}}
   {{> afQuickField label=false name='received'}}
 {{/autoForm}}
 </template>
