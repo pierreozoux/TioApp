@@ -20,5 +20,9 @@
   </div>
 </template>
 
-
+<template name="resourceQuantity">
+{{#autoForm collection="Resources" doc=this id=this._id type="update" autosave="true"}}
+  {{> afQuickField label=false name='quantity'}}
+{{/autoForm}}
+</template>
 

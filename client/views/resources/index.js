@@ -28,9 +28,12 @@ Template.resources.helpers({
           sort: true
         },
         'subject',
-        'title',
-        'quantity',
-        {
+        'title', {
+          key: 'quantity',
+          label: 'Quantity',
+          sortByValue: true,
+          tmpl: Template.resourceQuantity
+        }, {
           key: 'order',
           label: 'Orders',
           fn: function(value, object) {
@@ -117,3 +120,10 @@ Template.confirmGroupOrder.events({
     Router.go('/grouporder/' + groupOrderId);
   }
 });
+
+Template.resources.events({
+  'input input': function(event) {
+    $(event.target).submit();
+  }
+})
+
