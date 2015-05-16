@@ -33,7 +33,7 @@ Template.resources.helpers({
           label: 'Orders',
           fn: function(value, object) {
             return Orders.find({
-              state: 'created',
+              state: {$in: ['created','completed']},
               orderedResources: {
                 $elemMatch: {
                   state: 'ordered',
