@@ -15,17 +15,6 @@ Template.grouporders.helpers({
             }
           }
         },
-        {
-          key:'receivedAt',
-          label: 'Received',
-          fn: function(value) {
-            if (value instanceof Date) {
-              return moment(value).calendar();
-            } else {
-              return 'Never';
-            }
-          }
-        },
         'state'
       ]
     };

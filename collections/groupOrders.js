@@ -8,11 +8,6 @@ GroupOrders.attachSchema(new SimpleSchema({
       return new Date();
     }
   },
-  receivedAt: {
-    type: Date,
-    label: 'Received Date',
-    optional: true
-  },
   state: {
     type: String,
     defaultValue: 'created',
