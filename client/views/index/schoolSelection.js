@@ -1,17 +1,7 @@
-var clean = function () {
-  Session.set('courseId', '');
-  Session.set('contactId', '');
-  Session.set('needContact', false);
-
-  $('#school-selector').val('');
-  $('#course-selector').val('');
-};
-
-Session.set('schoolId', '');
-
 Tracker.autorun(function () {
   if (Session.get('schoolId') === '') {
-    clean();
+    $('#school-selector').val('');
+    $('#course-selector').val('');
   }
 });
 

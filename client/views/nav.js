@@ -6,3 +6,14 @@ Template.nav.helpers({
   }
 });
 
+Template.nav.events({
+  'click .nav': function() {
+    Session.set('schoolId', '');
+    Session.set('courseId', '');
+    Session.set('contactId', '');
+    Session.set('needContact', false);
+    Session.set('groupOrderId', '');
+    Session.set('intent', '');
+  }
+})
+
