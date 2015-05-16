@@ -37,6 +37,9 @@ Template.GroupOrder.helpers({
         tmpl: Template.received
       }]
     };
+  },
+  received: function() {
+    return (this.state === 'received')?true:false;
   }
 });
 

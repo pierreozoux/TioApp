@@ -7,22 +7,32 @@
   {{/autoForm}}
   </div>
   {{> reactiveTable class="table table-striped table-bordered table-hover" settings=settings }}
+  {{#unless received}}
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-2">
       <button id="update" class="btn btn-success">Update</button>
     </div>
   </div>
+  {{/unless}}
 </template>
 
 <template name="quantity">
-{{#autoForm collection="GroupOrderedResources" doc=this id=idGenerated type="update"}}
-  {{> afQuickField label=false name='quantity'}}
-{{/autoForm}}
+{{#if isReceived}}
+  {{quantity}}
+{{else}}
+  {{#autoForm collection="GroupOrderedResources" doc=this id=idGenerated type="update"}}
+    {{> afQuickField label=false name='quantity'}}
+  {{/autoForm}}
+{{/if}}
 </template>
 
 <template name="received">
-{{#autoForm collection="GroupOrderedResources" doc=this id=idGenerated type="update"}}
-  {{> afQuickField label=false name='received'}}
-{{/autoForm}}
+{{#if isReceived}}
+  {{quantity}}
+{{else}}
+  {{#autoForm collection="GroupOrderedResources" doc=this id=idGenerated type="update"}}
+    {{> afQuickField label=false name='received'}}
+  {{/autoForm}}
+{{/if}}
 </template>
 

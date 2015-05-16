@@ -22,6 +22,12 @@ GroupOrderedResources.attachSchema(new SimpleSchema({
   }
 }));
 
+GroupOrderedResources.helpers({
+  isReceived: function() {
+    return this.state === 'received' ? true : false;
+  }
+});
+
 GroupOrderedResources.allow({
   insert: function(userId) {
     return userId?true:false;
