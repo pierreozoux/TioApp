@@ -94,6 +94,7 @@
         "Accounts": false,
         "Router": false,
         "Toast": false,
+        "ReactiveArray": false,
         // Jasmine testing
         "Jasmine": false,
         "describe": false,
