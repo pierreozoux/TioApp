@@ -5,7 +5,7 @@ var clean = function () {
 
   $('#school-selector').val('');
   $('#course-selector').val('');
-}
+};
 
 Session.set('schoolId', '');
 
@@ -16,10 +16,10 @@ Tracker.autorun(function () {
 });
 
 Template.schoolSelection.helpers({
-  schools_name: function() {
+  schoolsName: function() {
     return Schools.find().fetch().map(function(school){ return {id: school._id, value: school.name}; });
   },
-  selected: function(event, suggestion, datasetName) {
+  selected: function(event, suggestion) {
     Session.set('schoolId', suggestion.id);
   }
 });

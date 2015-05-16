@@ -58,7 +58,7 @@ Template.Order.onRendered(function(){
   self.autorun(function () {
     var data = Template.currentData(self.view);
     if (data) {
-      Session.set('courseId', data.getCourse()._id)
+      Session.set('courseId', data.getCourse()._id);
     }
   });
 });
@@ -132,7 +132,7 @@ Template.confirmAction.events({
     } else {
       order.remove(Resources.findOne(Session.get('lastResourceId')), true);
     }
-    $('#confirmAction').modal('hide')
+    $('#confirmAction').modal('hide');
   }
 });
 
@@ -140,9 +140,9 @@ Template.confirmAction.helpers({
   content: function() {
     var intent = Session.get('intent');
     if (intent === 'cancel') {
-      return 'You are about to cancel this order.'
+      return 'You are about to cancel this order.';
     } else {
-      return 'You are about to finalize this order.'
+      return 'You are about to finalize this order.';
     }
   }
-})
+});

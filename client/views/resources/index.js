@@ -2,11 +2,10 @@ Router.route('/resources', function() {
   this.render('resources');
 });
 
-groupOrders = new ReactiveArray();
+var groupOrders = new ReactiveArray();
 
 Template.resources.helpers({
   settings: function() {
-    var order = this;
     return {
       collection: Resources.find(),
       fields: [
@@ -37,7 +36,7 @@ Template.resources.helpers({
               state: 'created',
               orderedResources: {
                 $elemMatch: {
-                  state: "ordered",
+                  state: 'ordered',
                   resourceId: object._id
                 }
               }
@@ -73,9 +72,9 @@ Template.resources.events({
       }
 
       if (groupOrders.length > 0) {
-        $(".reactive-table-input").val(resource.group).keyup();
+        $('.reactive-table-input').val(resource.group).keyup();
       } else {
-        $(".reactive-table-input").val('').keyup();
+        $('.reactive-table-input').val('').keyup();
       }
     }
   }
@@ -85,7 +84,7 @@ Template.orderResource.helpers({
   isSelected: function() {
     var resource = this;
     groupOrders.depend();
-    retunr (_.contains(groupOrders.array(), resource._id))?true:false;
+    return (_.contains(groupOrders.array(), resource._id))?true:false;
   }
 });
 
@@ -97,7 +96,6 @@ Template.confirmGroupOrder.events({
       group: group
     });
 
-    var groupOrderedResources = [];
     _.each(groupOrders.array(), function(resourceId) {
       GroupOrderedResources.insert({
         groupOrderId: groupOrderId,
@@ -110,9 +108,9 @@ Template.confirmGroupOrder.events({
 });
 
 Template.resources.events({
-  'click #update': function(event) {
+  'click #update': function() {
     // if valid
     $('input.form-control').submit();
   }
-})
+});
 

@@ -8,7 +8,6 @@ Router.route('/grouporder/:_id', function () {
 
 Template.GroupOrder.helpers({
   settings: function () {
-    var groupOrder = this;
     return {
       collection: GroupOrderedResources.find(),
       showFilter: false,
@@ -53,20 +52,20 @@ Template.GroupOrder.onRendered(function(){
 
 Template.quantity.helpers({
   idGenerated: function() {
-    return "updateQuantity" + this._id;
+    return 'updateQuantity' + this._id;
   }
 });
 
 Template.GroupOrder.events({
-  'click #update': function(event) {
+  'click #update': function() {
     // if valid
     $('input').submit();
   }
-})
+});
 
 Template.received.helpers({
   idGenerated: function() {
-    return "updateQuantity" + this._id;
+    return 'updateQuantity' + this._id;
   }
 });
 

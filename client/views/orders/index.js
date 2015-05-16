@@ -48,7 +48,7 @@ Template.orders.helpers({
 });
 
 Template.orders.events({
-  'click .reactive-table tr': function (event) {
+  'click .reactive-table tr': function () {
     Router.go('/order/' + this._id);
   }
 });

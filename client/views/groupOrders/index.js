@@ -22,7 +22,7 @@ Template.grouporders.helpers({
 });
 
 Template.grouporders.events({
-  'click .reactive-table tr': function (event) {
+  'click .reactive-table tr': function () {
     Router.go('/grouporder/' + this._id);
   }
 });

@@ -32,7 +32,7 @@ GroupOrderedResources.allow({
 });
 
 if (Meteor.isClient) {
-  GroupOrderedResources.after.update(function (userId, doc, fieldNames, modifier, options) {
+  GroupOrderedResources.after.update(function (userId, doc) {
     var quantityReceived = doc.received - this.previous.received;
     console.log('quantityReceived: ' + quantityReceived);
     Resources.update(
