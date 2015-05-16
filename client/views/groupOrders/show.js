@@ -63,6 +63,7 @@ Template.GroupOrder.events({
   'click #update': function() {
     // if valid
     $('input').submit();
+    Meteor.call('markCompleted');
   }
 });
 

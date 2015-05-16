@@ -111,6 +111,7 @@ Template.resources.events({
   'click #update': function() {
     // if valid
     $('input.form-control').submit();
+    Meteor.call('markCompleted');
   }
 });
 

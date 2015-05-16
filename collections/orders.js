@@ -234,6 +234,27 @@ Meteor.methods({
         state: newState
       }
     });
+  },
+  markCompleted: function() {
+    var completedOrdersIds = [];
+    var onlyOrdered;
+
+    Orders.find({state: 'created'}).forEach(function(order) {
+      onlyOrdered = _.filter(order.orderedResources, function(resource){
+        return resource.state === 'ordered';
+      });
+      if(onlyOrdered.length > 0) {
+        if(_.every(onlyOrdered, Resources.find(_.resourceId).availabilty > 0)) {
+          completedOrdersIds.push(order._id);
+        }
+      }
+    });
+
+    Orders.update({
+      _id: {$in: completedOrdersIds}
+    }, {
+      $set: {state: 'completed'}
+    });
   }
 });
 
