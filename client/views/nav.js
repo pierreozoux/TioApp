@@ -15,5 +15,5 @@ Template.nav.events({
     Session.set('groupOrderId', '');
     Session.set('intent', '');
   }
-})
+});
 
