@@ -35,6 +35,14 @@ Resources.attachSchema(new SimpleSchema({
   }
 }));
 
+Resources.helpers({
+  // quantity - completed orders
+  availability: function() {
+    var resource = this;
+    return resource.quantity - Orders.find({state: {$in: ['completed', 'created']},orderedResources: {$elemMatch: {resourceId: resource._id, state: 'ordered'}}}).count();
+  }
+});
+
 Resources.allow({
   update: function(userId) {
     return userId?true:false;
