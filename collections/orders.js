@@ -96,7 +96,7 @@ Orders.helpers({
     }
   },
   contact: function() {
-    Orders.update(this._id, {$set: {state: 'contacted'}});
+    Orders.update(this._id, {$set: {state: 'contacted', contactedAt: Date.now()}});
   },
   getCourse: function() {
     return Courses.findOne(this.courseId);
