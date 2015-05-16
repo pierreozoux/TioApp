@@ -114,3 +114,10 @@ Template.resources.events({
   }
 });
 
+Template.resourceQuantity.helpers({
+  isConfirm: function() {
+    groupOrders.depend();
+    return (groupOrders.length > 0)?true:false;
+  }
+});
+

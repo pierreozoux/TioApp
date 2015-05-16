@@ -31,8 +31,12 @@
 </template>
 
 <template name="resourceQuantity">
-{{#autoForm collection="Resources" doc=this id=this._id type="update" autosave="true"}}
-  {{> afQuickField label=false name='quantity'}}
-{{/autoForm}}
+{{#if isConfirm}}
+  {{quantity}}
+{{else}}
+  {{#autoForm collection="Resources" doc=this id=this._id type="update" autosave="true"}}
+    {{> afQuickField label=false name='quantity'}}
+  {{/autoForm}}
+{{/if}}
 </template>
 
