@@ -78,14 +78,10 @@ Orders.attachSchema(new SimpleSchema({
 
 Orders.allow({
   insert: function(userId) {
-    if (userId) {
-      return true;
-    }
+    return userId?true:false;
   },
   update: function(userId) {
-    if (userId) {
-      return true;
-    }
+    return userId?true:false;
   }
 });
 
@@ -113,21 +109,13 @@ Orders.helpers({
   },
   isSold: function(resource) {
     if (this.localResource(resource)) {
-      if (this.localState(resource) === 'sold') {
-        return true;
-      } else {
-        return false;
-      }
+      return (this.localState(resource) === 'sold')?true:false;
     } else {
       return false;
     }
   },
   ordered: function(resource) {
-    if (this.localResource(resource)) {
-      return true;
-    } else {
-      return false;
-    }
+    return (this.localResource(resource))?true:false;
   },
   remove: function(resource, force) {
     var order = this;
@@ -203,12 +191,7 @@ Orders.helpers({
     );
   },
   definitiveState: function() {
-    var order = this;
-    if (order.state === 'sold' || order.state === 'canceled') {
-      return true;
-    } else {
-      return false;
-    }
+    return (this.state === 'sold' || this.state === 'canceled')?true:false;
   }
 });
 

@@ -14,11 +14,7 @@ Template.resources.helpers({
           key: 'order',
           label: 'Order',
           fn: function(value, object) {
-            if (_.contains(groupOrders.array(), object._id)) {
-              return true;
-            } else {
-              return false;
-            }
+            return (_.contains(groupOrders.array(), object._id))?true:false;
           },
           tmpl: Template.orderResource
         },
@@ -61,11 +57,7 @@ Template.resources.helpers({
   },
   isConfirm: function() {
     groupOrders.depend();
-    if (groupOrders.length > 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return (groupOrders.length > 0)?true:false;
   }
 });
 
@@ -93,11 +85,7 @@ Template.orderResource.helpers({
   isSelected: function() {
     var resource = this;
     groupOrders.depend();
-    if (_.contains(groupOrders.array(), resource._id)) {
-      return true;
-    } else {
-      return false;
-    }
+    retunr (_.contains(groupOrders.array(), resource._id))?true:false;
   }
 });
 

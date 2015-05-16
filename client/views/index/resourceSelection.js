@@ -4,7 +4,7 @@ Template.resourcesSelection.helpers({
   },
   isSellable: function() {
     Template.resourcesSelection.__helpers.get('setNeedContact')();
-    return this.quantity>0?true:false;
+    return this.availability>0?true:false;
   },
   setNeedContact: function() {
     var needContact = false;
@@ -18,11 +18,7 @@ Template.resourcesSelection.helpers({
     Session.set('needContact', needContact);
   },
   printResources: function() {
-    if (Session.get('courseId')) {
-      return true;
-    } else {
-      return false;
-    }
+    return (Session.get('courseId'))?true:false;
   }
 });
 

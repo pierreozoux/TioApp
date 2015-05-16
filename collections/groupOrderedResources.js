@@ -24,14 +24,10 @@ GroupOrderedResources.attachSchema(new SimpleSchema({
 
 GroupOrderedResources.allow({
   insert: function(userId) {
-    if (userId) {
-      return true;
-    }
+    return userId?true:false;
   },
   update: function(userId) {
-    if (userId) {
-      return true;
-    }
+    return userId?true:false;
   }
 });
 

@@ -20,14 +20,10 @@ GroupOrders.attachSchema(new SimpleSchema({
 
 GroupOrders.allow({
   insert: function(userId) {
-    if (userId) {
-      return true;
-    }
+    return userId?true:false;
   },
   update: function(userId) {
-    if (userId) {
-      return true;
-    }
+    return userId?true:false;
   }
 });
 
