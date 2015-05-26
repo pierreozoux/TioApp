@@ -16,12 +16,9 @@ Meteor.publish('groupOrders', function () {
   }
 });
 
-Meteor.publish('groupOrderedResources', function (groupOrderId) {
+Meteor.publish('groupOrderedResources', function () {
   if (this.userId) {
-    if (groupOrderId) {
-      check(groupOrderId, String);
-      return GroupOrderedResources.find({groupOrderId: groupOrderId});
-    }
+    return GroupOrderedResources.find();
   }
 });
 

@@ -8,8 +8,9 @@ Router.route('/grouporder/:_id', function () {
 
 Template.GroupOrder.helpers({
   settings: function () {
+    var groupOrder = this;
     return {
-      collection: GroupOrderedResources.find(),
+      collection: GroupOrderedResources.find({groupOrderId: groupOrder._id}),
       showFilter: false,
       showNavigation: 'never',
       rowsPerPage: 100,
