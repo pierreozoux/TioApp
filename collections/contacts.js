@@ -31,12 +31,6 @@ Contacts.attachSchema(new SimpleSchema({
   }
 }));
 
-SimpleSchema.messages({
-  regEx: [
-    {exp: /^[0-9]{9}$/, msg: '[label] must be 9 digits, without any other chars.'}
-  ]
-});
-
 Contacts.allow({
   insert: function(userId) {
     return userId?true:false;

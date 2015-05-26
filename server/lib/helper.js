@@ -18,3 +18,9 @@ schoolNames = function (csvLine) {
   return keys;
 };
 
+SimpleSchema.messages({
+  regEx: [
+    {exp: /^[0-9]{9}$/, msg: '[label] must be 9 digits, without any other chars.'}
+  ]
+});
+
