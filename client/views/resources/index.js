@@ -31,13 +31,13 @@ Template.resources.helpers({
         }, {
           key: 'order',
           label: 'Orders',
-          fn: function(value, object) {
+          fn: function(value, resource) {
             return Orders.find({
               state: {$in: ['created','completed']},
               orderedResources: {
                 $elemMatch: {
                   state: 'ordered',
-                  resourceId: object._id
+                  resourceId: resource._id
                 }
               }
             }).count();
