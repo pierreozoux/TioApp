@@ -95,6 +95,7 @@
         "Router": false,
         "Toast": false,
         "ReactiveArray": false,
+        "Uploader": false,
         // Jasmine testing
         "Jasmine": false,
         "describe": false,

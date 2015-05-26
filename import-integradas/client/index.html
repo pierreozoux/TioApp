@@ -2,8 +2,20 @@
   <div class="page-header">
     <h1>Import Integradas</h1>
   </div>
-  <div class="col-sm-6">
-    {{> upload_bootstrap }}
+  <div class="row">
+    <div class="col-sm-6">
+      {{> upload_bootstrap }}
+    </div>
+  </div>
+  <div class="row collapse" id="processing">
+    <h2>Processing...</h2>
+    <img src="/img/waiting.gif">
+  </div>
+  <div class="row collapse" id="errorResult">
+    <p class="bg-danger">{{ errorResult }}</p>
+  </div>
+  <div class="row collapse" id="successResult">
+    <p class="bg-success">Success importing Integradas!</p>
   </div>
 </template>
 
