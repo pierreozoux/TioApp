@@ -46,8 +46,13 @@ Template.resources.helpers({
         {
           key: 'order',
           label: 'Group Orders',
-          fn: function() {
-            return 5;
+          fn: function(value, resource) {
+            return _.reduce(GroupOrderedResources.find({
+              state: 'ordered',
+              resourceId: resource._id
+            }).fetch(), function(memo, groupOrderedResource){
+              return memo + groupOrderedResource.quantity - groupOrderedResource.received;
+            }, 0);
           }
         },
         'group'
