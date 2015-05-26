@@ -4,23 +4,27 @@ Resources.attachSchema(new SimpleSchema({
   title: {
     type: String,
     label: 'Title',
-    max: 200
+    max: 200,
+    regEx: /^[a-zA-Z0-9- ]+$/
   },
   reference: {
     type: String,
     label: 'Reference',
     max: 200,
-    unique: true
+    unique: true,
+    regEx: /^[a-zA-Z0-9- ]+$/
   },
   group: {
     type: String,
     label: 'Editor',
-    max: 200
+    max: 200,
+    regEx: /^[a-zA-Z0-9- ]+$/
   },
   editor: {
     type: String,
     label: 'Editor',
-    max: 200
+    max: 200,
+    regEx: /^[a-zA-Z0-9- ]+$/
   },
   quantity: {
     type: Number,
@@ -31,7 +35,8 @@ Resources.attachSchema(new SimpleSchema({
   subject: {
     type: String,
     label: 'Subject',
-    max: 200
+    max: 200,
+    regEx: /^[a-zA-Z0-9- ]+$/
   }
 }));
 

@@ -5,7 +5,8 @@ Courses.attachSchema(new SimpleSchema({
     type: String,
     label: 'Name',
     unique: true,
-    max: 200
+    max: 200,
+    regEx: /^[a-zA-Z0-9- ]+$/
   },
   year: {
     type: String,
