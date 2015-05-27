@@ -15,7 +15,16 @@ GroupOrderedResources.attachSchema(new SimpleSchema({
   },
   received: {
     type: Number,
-    defaultValue: 0
+    defaultValue: 0,
+    custom: function() {
+      var received = this.value;
+      var quantity = this.field('quantity').value;
+      if (quantity >= received) {
+        return true;
+      } else {
+        return 'Quantity must be superior or equal to Received.';
+      }
+    }
   },
   resourceId: {
     type: String

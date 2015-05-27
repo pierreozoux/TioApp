@@ -12,6 +12,9 @@
     <div class="col-sm-offset-2 col-sm-2">
       <button id="update" class="btn btn-success">Update</button>
     </div>
+    <div class="col-sm-6">
+      <p class="bg-danger">{{ getSession 'errorResult' }}</p>
+    </div>
   </div>
   {{/unless}}
 </template>
@@ -20,9 +23,7 @@
 {{#if isReceived}}
   {{quantity}}
 {{else}}
-  {{#autoForm collection="GroupOrderedResources" doc=this id=idGenerated type="update"}}
-    {{> afQuickField label=false name='quantity'}}
-  {{/autoForm}}
+  <input id="quantity{{resourceId}}" class="form-control" type="number" value="{{quantity}}">
 {{/if}}
 </template>
 
@@ -30,9 +31,7 @@
 {{#if isReceived}}
   {{received}}
 {{else}}
-  {{#autoForm collection="GroupOrderedResources" doc=this id=idGenerated type="update"}}
-    {{> afQuickField label=false name='received'}}
-  {{/autoForm}}
+  <input id="received{{resourceId}}" class="form-control" type="number" value="{{received}}">
 {{/if}}
 </template>
 

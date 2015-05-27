@@ -54,23 +54,61 @@ Template.GroupOrder.onRendered(function(){
   });
 });
 
-Template.quantity.helpers({
-  idGenerated: function() {
-    return 'updateQuantity' + this._id;
-  }
-});
-
 Template.GroupOrder.events({
   'click #update': function() {
-    // if valid
-    $('input').submit();
-    Meteor.call('markCompleted');
-  }
-});
+    Session.set('errorResult', '');
+    var groupOrder = this;
+    var valid = true;
+    // valid?
+    GroupOrderedResources.find({groupOrderId: groupOrder._id}).forEach(function(groupOrderedResource){
+      if(groupOrderedResource.state === 'ordered') {
+        var quantity = parseInt($('#quantity' + groupOrderedResource.resourceId).val(), 10);
+        var received = parseInt($('#received' + groupOrderedResource.resourceId).val(), 10);
+        if (quantity < received) {
+          valid = false;
+        }
+      }
+    });
 
-Template.received.helpers({
-  idGenerated: function() {
-    return 'updateQuantity' + this._id;
+    if (valid) {
+      var isReceived = true;
+      GroupOrderedResources.find({groupOrderId: groupOrder._id}).forEach(function(groupOrderedResource){
+        var state = groupOrderedResource.state;
+        if (state === 'ordered') {
+          var quantity = parseInt($('#quantity' + groupOrderedResource.resourceId).val(), 10);
+          var received = parseInt($('#received' + groupOrderedResource.resourceId).val(), 10);
+          if (quantity === received) {
+            state = 'received';
+          } else {
+            isReceived = false;
+          }
+          GroupOrderedResources.update(groupOrderedResource._id, {$set: {
+            state: state,
+            quantity: quantity,
+            received: received
+          }}, function(error){
+            if (error) {
+              isReceived = false;
+              console.log(error);
+              Session.set('errorResult', error.message);
+            }
+          });
+        }
+      });
+      if (isReceived) {
+        GroupOrders.update(groupOrder._id, {$set: {
+          state: 'received'
+        }}, function(error){
+            if(error) {
+              console.log(error);
+              Session.set('errorResult', error.message);
+            }
+        });
+      }
+      Meteor.call('markCompleted');
+    } else {
+      Session.set('errorResult', 'Quantity must be superior or equal to Received.');
+    }
   }
 });
 
