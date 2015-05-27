@@ -44,7 +44,13 @@ Resources.helpers({
   // quantity - completed orders
   availability: function() {
     var resource = this;
-    return resource.quantity - Orders.find({state: {$in: ['completed', 'created']},orderedResources: {$elemMatch: {resourceId: resource._id, state: 'ordered'}}}).count();
+    return resource.quantity - Orders.find({
+      state: {$in: ['completed', 'created']},
+      orderedResources: {$elemMatch: {
+        resourceId: resource._id,
+        state: 'ordered'
+      }}
+    }).count();
   }
 });
 
