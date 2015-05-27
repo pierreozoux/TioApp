@@ -28,7 +28,7 @@
 
 <template name="received">
 {{#if isReceived}}
-  {{quantity}}
+  {{received}}
 {{else}}
   {{#autoForm collection="GroupOrderedResources" doc=this id=idGenerated type="update"}}
     {{> afQuickField label=false name='received'}}
