@@ -5,7 +5,9 @@ GroupOrders.attachSchema(new SimpleSchema({
     type: Date,
     label: 'Date',
     autoValue: function() {
-      return new Date();
+      if (this.isInsert) {
+        return new Date();
+      }
     }
   },
   state: {
