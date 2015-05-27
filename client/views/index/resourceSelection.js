@@ -4,7 +4,7 @@ Template.resourcesSelection.helpers({
   },
   isSellable: function() {
     Template.resourcesSelection.__helpers.get('setNeedContact')();
-    return this.availability>0?true:false;
+    return this.availability()>0?true:false;
   },
   setNeedContact: function() {
     var needContact = false;
