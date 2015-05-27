@@ -54,7 +54,7 @@ Template.Order.events({
     switch (event.target.className) {
       case 'fa fa-trash': order.remove(resource); break;
       case 'fa fa-cart-plus': order.add(resource); break;
-      case 'checkbox': order.sell(resource); break;
+      case 'sold checkbox': order.sell(resource); break;
     }
   }
 });
@@ -72,7 +72,7 @@ Template.Order.onRendered(function(){
 Template.orderResourceSold.onRendered(function() {
   if (!this.rendered){
     // Disable the already sold resources
-    $('input:checked').attr('disabled', true);
+    $('input.sold:checked').attr('disabled', true);
     this.rendered = true;
   }
 });
