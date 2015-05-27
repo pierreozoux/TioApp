@@ -28,9 +28,3 @@ Uploader.finished = function(index, fileInfo) {
   });
 };
 
-Template.import.helpers({
-  errorResult: function() {
-    return Session.get('errorResult');
-  }
-})
-
