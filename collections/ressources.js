@@ -45,7 +45,7 @@ Resources.helpers({
   availability: function() {
     var resource = this;
     return resource.quantity - Orders.find({
-      state: 'completed',
+      state: {$in: ['completed', 'contacted']},
       orderedResources: {$elemMatch: {
         resourceId: resource._id,
         state: 'ordered'
