@@ -7,26 +7,22 @@ Template.contactSelection.helpers({
     if (contactId) {
       return Contacts.findOne(contactId);
     }
+  },
+  selected: function(event, suggestion) {
+    var contact;
+    if (/[0-9]{9}/.test(suggestion.value)) {
+      contact = Contacts.findOne({phone: suggestion.value});
+    } else {
+      contact = Contacts.findOne({email: suggestion.value});
+    }
+    if (contact) {
+      Session.set('contactId', contact._id);
+    }
   }
 });
 
 Template.contactSelection.onRendered(function () {
   Meteor.typeahead.inject();
-});
-
-Template.contactSelection.events({
-  'keyup #contact-selector': function (event) {
-     var value = $(event.target).val();
-     var contact;
-     if (/[0-9]{9}/.test(value)) {
-       contact = Contacts.findOne({phone: value});
-     } else {
-       contact = Contacts.findOne({email: value});
-     }
-     if (contact) {
-       Session.set('contactId', contact._id);
-     }
-  }
 });
 
 AutoForm.hooks({
