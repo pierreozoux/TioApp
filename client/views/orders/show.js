@@ -20,7 +20,13 @@ Template.Order.helpers({
       fields: [
         'subject',
         'title',
-        'quantity',
+        {
+          key: 'quantity',
+          label: 'Quantity',
+          fn: function(value, resource) {
+            return resource.availability() + ' (' + resource.quantity + ' in stock)';
+          }
+        },
         {
           key: 'action',
           label: 'Action',
