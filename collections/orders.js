@@ -206,55 +206,65 @@ Orders.after.insert(function() {
   }
 });
 
-Meteor.methods({
-  updateOrderedResourceState: function(tempOrder, resource, force) {
-    var resourceState;
-    var quantityDirection;
-    var order = Orders.findOne(tempOrder._id);
-    var newState = order.state;
-    if (force) {
-      newState = 'sold';
-    }
-    if (order.isSold(resource)) {
-      resourceState = 'ordered';
-      quantityDirection = 1;
-    } else {
-      resourceState = 'sold';
-      quantityDirection = -1;
-    }
-    Resources.update(resource._id, {
-      $inc: {quantity: quantityDirection}
-    });
-    Orders.update({
-      _id: order._id,
-      'orderedResources.resourceId': resource._id
-    }, {
-      $set : {
-        'orderedResources.$.state': resourceState,
-        state: newState
+if (Meteor.isServer) {
+  Meteor.methods({
+    updateOrderedResourceState: function(tempOrder, resource, force) {
+      var resourceState;
+      var quantityDirection;
+      var order = Orders.findOne(tempOrder._id);
+      var newState = order.state;
+      if (force) {
+        newState = 'sold';
       }
-    });
-  },
-  markCompleted: function() {
-    var completedOrdersIds = [];
-    var onlyOrdered;
-
-    Orders.find({state: 'created'}).forEach(function(order) {
-      onlyOrdered = _.filter(order.orderedResources, function(resource){
-        return resource.state === 'ordered';
+      if (order.isSold(resource)) {
+        resourceState = 'ordered';
+        quantityDirection = 1;
+      } else {
+        resourceState = 'sold';
+        quantityDirection = -1;
+      }
+      Resources.update(resource._id, {
+        $inc: {quantity: quantityDirection}
       });
-      if(onlyOrdered.length > 0) {
-        if(_.every(onlyOrdered, Resources.find(_.resourceId).availabilty > 0)) {
-          completedOrdersIds.push(order._id);
+      Orders.update({
+        _id: order._id,
+        'orderedResources.resourceId': resource._id
+      }, {
+        $set : {
+          'orderedResources.$.state': resourceState,
+          state: newState
         }
-      }
-    });
+      });
+    },
+    markCompleted: function() {
+      var completedOrdersIds = [];
+      var onlyOrdered;
 
-    Orders.update({
-      _id: {$in: completedOrdersIds}
-    }, {
-      $set: {state: 'completed'}
-    });
-  }
-});
+      Orders.find({state: 'created'}).forEach(function(order) {
+        onlyOrdered = _.filter(order.orderedResources, function(resource){
+          return resource.state === 'ordered';
+        });
+        if(onlyOrdered.length > 0) {
+          var completedOrdered = _.every(onlyOrdered, function(ordered) {
+            var resource = Resources.findOne(ordered.resourceId);
+            console.log(resource);
+            if (resource) {
+              return resource.availability() > 0;
+            } else {
+              return false;
+            }
+          });
+          if (completedOrdered){
+            completedOrdersIds.push(order._id);
+          }
+        }
+      });
 
+      Orders.update({
+        _id: {$in: completedOrdersIds}
+      }, {
+        $set: {state: 'completed'}
+      });
+    }
+  });
+}
