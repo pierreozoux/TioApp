@@ -4,6 +4,13 @@ Router.route('/resources', function() {
 
 var groupOrders = new ReactiveArray();
 
+Tracker.autorun(function() {
+  if (Session.get('clean') === 'true') {
+    groupOrders.clear();
+    Session.set('clean', '');
+  }
+});
+
 Template.resources.helpers({
   settings: function() {
     return {

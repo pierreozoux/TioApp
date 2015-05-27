@@ -14,6 +14,7 @@ Template.nav.events({
     Session.set('needContact', false);
     Session.set('groupOrderId', '');
     Session.set('intent', '');
+    Session.set('clean', 'true');
   }
 });
 
