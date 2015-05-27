@@ -1,4 +1,4 @@
-Template.grouporders.helpers({
+Template.Grouporders.helpers({
   settings: function () {
     return {
       collection: GroupOrders.find(),
@@ -21,7 +21,7 @@ Template.grouporders.helpers({
   }
 });
 
-Template.grouporders.events({
+Template.Grouporders.events({
   'click .reactive-table tr': function () {
     Router.go('/grouporder/' + this._id);
   }

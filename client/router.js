@@ -11,6 +11,6 @@ Router.route('/orders', function() {
 });
 
 Router.route('/grouporders', function() {
-  this.render('grouporders');
+  this.render('Grouporders');
 });
 
