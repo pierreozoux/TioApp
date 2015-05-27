@@ -20,10 +20,16 @@ Contacts.attachSchema(new SimpleSchema({
   email: {
     type: String,
     label: 'Email',
-    unique: true,
     max: 200,
     optional: true,
-    regEx: SimpleSchema.RegEx.Email
+    regEx: SimpleSchema.RegEx.Email,
+    custom: function() {
+      if(_.isString(this.value) && Contacts.find({email: this.value}).count() > 0) {
+        return 'uniqueEmail';
+      } else {
+        return true;
+      }
+    }
   },
   stateSupport: {
     type: Boolean,
