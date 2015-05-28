@@ -194,6 +194,12 @@ Orders.helpers({
   },
   definitiveState: function() {
     return (this.state === 'sold' || this.state === 'canceled')?true:false;
+  },
+  resources: function () {
+    var course = this.getCourse();
+    if (course) {
+      return Resources.find({_id: {$in: course.resources}});
+    }
   }
 });
 
