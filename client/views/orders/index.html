@@ -1,12 +1,32 @@
 <template name="orders">
   {{> ordersActionBar}}
   {{> reactiveTable class="index-table table table-striped table-bordered table-hover" settings=settings }}
+  {{> contactAndPrintModal}}
 </template>
 
 <template name="ordersActionBar">
   <div class="row action-bar">
     <div class="col-sm-offset-10 col-sm-2">
       <button id="contactAndPrint" class="btn btn-success">Contact and Print</button>
+    </div>
+  </div>
+</template>
+
+<template name="contactAndPrintModal">
+  <div class="modal fade" id="contactAndPrintModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Information</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{getSession 'modalText'}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>

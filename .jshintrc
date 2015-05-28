@@ -85,6 +85,7 @@
         "Tracker": false,
         "Spacebars": false,
         "check": false,
+        "Email": false,
         // Atmosphere packages
         "SimpleSchema": false,
         "AccountsEntry": false,
@@ -96,6 +97,7 @@
         "Toast": false,
         "ReactiveArray": false,
         "Uploader": false,
+        "saveAs": false,
         // Jasmine testing
         "Jasmine": false,
         "describe": false,
