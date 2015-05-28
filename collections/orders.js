@@ -205,11 +205,11 @@ Orders.helpers({
     }
   },
   justOrderedResources: function () {
-    ids = _.compact(_.map(
+    var ids = _.compact(_.map(
       this.orderedResources,
       function(orderedResource) {
         if (orderedResource.state === 'ordered') {
-          return orderedResource.resourceId
+          return orderedResource.resourceId;
         }
       })
     );
