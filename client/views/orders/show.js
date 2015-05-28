@@ -109,6 +109,8 @@ Template.orderAction.events({
     event.preventDefault();
     if (event.target.className.contains('Contact')) {
       this.contact();
+    } else if (event.target.className.contains('Print')) {
+      Router.go('/print/order/' + this._id);
     }
   }
 });

@@ -97,6 +97,9 @@ Orders.helpers({
       case 'completed': return 'Contact';
     }
   },
+  print: function() {
+    return (this.action() === 'Print')?true:false;
+  },
   contact: function() {
     Orders.update(this._id, {$set: {state: 'contacted', contactedAt: Date.now()}});
   },
@@ -200,7 +203,19 @@ Orders.helpers({
     if (course) {
       return Resources.find({_id: {$in: course.resources}});
     }
+  },
+  justOrderedResources: function () {
+    ids = _.compact(_.map(
+      this.orderedResources,
+      function(orderedResource) {
+        if (orderedResource.state === 'ordered') {
+          return orderedResource.resourceId
+        }
+      })
+    );
+    return Resources.find({_id: {$in: ids}});
   }
+
 });
 
 Orders.after.insert(function() {

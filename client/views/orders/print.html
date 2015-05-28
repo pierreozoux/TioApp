@@ -1,0 +1,29 @@
+<template name="printOrder">
+<div id="print{{_id}}" class="print">
+  <h1>Encomenda</h1>
+  <h2>Conserve este papel</h2>
+  <p>
+  *Encomenda de Livros Escolares Tio Papel - Barreiro*<br>
+  *Tel: 210 739 830 * mail: barreiro@tiopapel.com*<br>
+  </p>
+  <p>
+  Referencia: {{humanId}}<br>
+  Livros:<br>
+  {{#each justOrderedResources}}
+  - {{title}}<br>
+  {{/each}}
+  </p>
+  <p>
+  *Logo que a sua encomenda estiver completa, vamos entrar em contacto
+  consigo. Não se tem de preocupar.*
+  </p>
+  <p>
+  *Poderá plastificar os seus livros por apenas 1,25euros cada.*
+  </p>
+  <p>
+  *Se comprou os livros escolares no Tio Papel, terá 10% de desconto na
+  compra de material escolar na nossa loja.*
+  </p>
+  <h2>Até breve</h2>
+</div>
+</template>

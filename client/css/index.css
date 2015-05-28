@@ -51,3 +51,15 @@
 .contact-left {
   border-right: 1px dashed #333;
 }
+
+.print h1{
+  font-size: 24px;
+}
+
+.print h2{
+  font-size: 18px;
+}
+
+.print p{
+  font-size: 14px;
+}
