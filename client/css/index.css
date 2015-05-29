@@ -63,3 +63,10 @@
 .print p{
   font-size: 14px;
 }
+
+.admin {
+  background-color: #E9BDBD;
+}
+.navbar-default .navbar-nav > .admin.active > a{
+  background-color: #C09C9C;
+}

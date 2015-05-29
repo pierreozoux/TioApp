@@ -17,7 +17,10 @@
           <li class="{{ activeIfTemplateIs 'Orders' }}"><a href="/orders">Orders</a></li>
           <li class="{{ activeIfTemplateIs 'Grouporders' }}"><a href="/grouporders">Group Orders</a></li>
           <li class="{{ activeIfTemplateIs 'Resources' }}"><a href="/resources">Resources</a></li>
-          <li class="{{ activeIfTemplateIs 'Import' }}"><a href="/import">Integradas</a></li>
+          {{#if getSession 'isAdmin'}}
+            <li class="admin {{ activeIfTemplateIs 'Import' }}"><a href="/import">Integradas</a></li>
+            <li class="admin"><a href="/admin">Admin</a></li>
+          {{/if}}
         </ul>
       {{/if}}
       <ul class="nav navbar-nav navbar-right">

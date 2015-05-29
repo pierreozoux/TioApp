@@ -32,6 +32,9 @@ Meteor.methods({
       subject: subject,
       text: text
     });
+  },
+  isAdmin: function(userId) {
+    return Houston._user_is_admin(userId)?true:false;
   }
 });
 
