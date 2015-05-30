@@ -42,6 +42,12 @@ Meteor.publish('resources', function (courseId) {
   }
 });
 
+Meteor.publish('settings', function () {
+  if (Houston._user_is_admin(this.userId)) {
+    return Settings.find();
+  }
+});
+
 Meteor.publish('schools', function () {
   if (this.userId) {
     return Schools.find();

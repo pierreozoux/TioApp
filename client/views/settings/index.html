@@ -1,0 +1,24 @@
+<template name="Settings">
+{{#if getSession 'isAdmin'}}
+<table class="table table-bordered table-condensed">
+  <thead>
+    <tr>
+      <td style="width: 85px">Keys</td>
+      <td style="width: 250px">Value</td>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each settings}}
+      <tr>
+        <td>{{this.key}}</td>
+        <td>
+        {{#autoForm id=makeUniqueID type='update' collection='Settings' doc=this autosave=true}}
+          {{> afFormGroup name='value' label=false}}
+        {{/autoForm}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{/if}}
+</template>

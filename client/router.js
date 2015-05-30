@@ -14,3 +14,7 @@ Router.route('/grouporders', function() {
   this.render('Grouporders');
 });
 
+Router.route('/settings', function() {
+  this.render('Settings');
+});
+

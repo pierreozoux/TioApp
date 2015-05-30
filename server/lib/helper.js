@@ -38,3 +38,22 @@ Meteor.methods({
   }
 });
 
+Meteor.startup(function() {
+  if (Settings.find().count() === 0) {
+    Settings.insert({
+      key: 'allow-sign-in',
+      value: 'true'
+    });
+
+    Settings.insert({
+      key: 'from-email',
+      value: 'noreply@example.org'
+    });
+
+    Settings.insert({
+      key: 'reply-to-email',
+      value: 'noreply@example.org'
+    });
+  }
+});
+

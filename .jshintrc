@@ -121,6 +121,7 @@
         "Contacts": true,
         "Orders": true,
         "GroupOrders": true,
-        "GroupOrderedResources": true
+        "GroupOrderedResources": true,
+        "Settings": true
     }
 }

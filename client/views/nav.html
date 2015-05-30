@@ -19,6 +19,7 @@
           <li class="{{ activeIfTemplateIs 'Resources' }}"><a href="/resources">Resources</a></li>
           {{#if getSession 'isAdmin'}}
             <li class="admin {{ activeIfTemplateIs 'Import' }}"><a href="/import">Integradas</a></li>
+            <li class="admin {{ activeIfTemplateIs 'Settings' }}"><a href="/settings">Settings</a></li>
             <li class="admin"><a href="/admin">Admin</a></li>
           {{/if}}
         </ul>
