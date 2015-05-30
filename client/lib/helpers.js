@@ -5,6 +5,6 @@ Template.registerHelper('getSession',function(key){
 Tracker.autorun(function () {
   Meteor.call('isAdmin', Meteor.userId(), function(error, result){
     Session.set('isAdmin', result);
-  })
+  });
 });
 
