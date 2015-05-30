@@ -28,7 +28,8 @@ Meteor.methods({
 
     Email.send({
       to: to,
-      from: 'test@example.org',
+      from: Settings.findOne({key: 'from-email'}).value,
+      replyTo: Settings.findOne({key: 'reply-to-email'}).value,
       subject: subject,
       text: text
     });
