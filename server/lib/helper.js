@@ -58,3 +58,9 @@ Meteor.startup(function() {
   }
 });
 
+Accounts.validateNewUser(function () {
+  if (Settings.findOne({key: 'allow-sign-in'}).value === 'true') {
+    return true;
+  }
+  throw new Meteor.Error(403, 'User sign in is not authorized.');
+});
