@@ -121,9 +121,25 @@ Template.confirmGroupOrder.events({
 
 Template.resources.events({
   'click #update': function() {
-    // if valid
-    $('input.form-control').submit();
-    Meteor.call('markCompleted');
+    var inputsIds = [];
+    $('input.form-control').parent().parent().each(function(){
+      var id = $(this).attr('id');
+      if (id) {
+        inputsIds.push(id);
+      }
+    });
+    
+    _.each(inputsIds, function(id, index) {
+      if (inputsIds.length - 1 === index){
+        AutoForm.addHooks(id, {
+          onSuccess: function() {
+            Meteor.call('markCompleted');
+          }
+        });
+      }
+
+      $('#' + id).submit();
+    });
   }
 });
 
