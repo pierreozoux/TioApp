@@ -11,7 +11,13 @@ GroupOrderedResources.attachSchema(new SimpleSchema({
   },
   quantity: {
     type: Number,
-    defaultValue: 10
+    autoValue: function() {
+      if (this.isInsert){
+        console.log
+        var resource = Resources.findOne(this.field('resourceId').value);
+        return resource.orders() - (resource.groupOrders() + resource.quantity);
+      }
+    }
   },
   received: {
     type: Number,
