@@ -42,7 +42,7 @@ Meteor.methods({
 Meteor.startup(function() {
   if (Settings.find().count() === 0) {
     Settings.insert({
-      key: 'allow-sign-in',
+      key: 'allow-sign-up',
       value: 'true'
     });
 
@@ -59,8 +59,8 @@ Meteor.startup(function() {
 });
 
 Accounts.validateNewUser(function () {
-  if (Settings.findOne({key: 'allow-sign-in'}).value === 'true') {
+  if (Settings.findOne({key: 'allow-sign-up'}).value === 'true') {
     return true;
   }
-  throw new Meteor.Error(403, 'User sign in is not authorized.');
+  throw new Meteor.Error(403, 'User sign up is not authorized.');
 });
