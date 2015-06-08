@@ -22,8 +22,10 @@ Template.Grouporders.helpers({
 });
 
 Template.Grouporders.events({
-  'click .reactive-table tr': function () {
-    Router.go('/grouporder/' + this._id);
+  'click .reactive-table tr': function (event) {
+    if (! $(event.target).hasClass('sortable')) {
+      Router.go('/grouporder/' + this._id);
+    }
   }
 });
 

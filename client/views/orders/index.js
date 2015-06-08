@@ -48,8 +48,10 @@ Template.orders.helpers({
 });
 
 Template.orders.events({
-  'click .reactive-table tr': function () {
-    Router.go('/order/' + this._id);
+  'click .reactive-table tr': function (event) {
+    if (! $(event.target).hasClass('sortable')) {
+      Router.go('/order/' + this._id);
+    }
   }
 });
 
