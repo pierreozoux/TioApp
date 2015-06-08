@@ -40,7 +40,8 @@ Template.resources.helpers({
           label: 'Orders',
           fn: function(value, resource) {
             return resource.orders();
-          }
+          },
+          sort: 'descending'
         },
         {
           key: 'order',
