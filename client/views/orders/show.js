@@ -21,8 +21,8 @@ Template.Order.helpers({
         'subject',
         'title',
         {
-          key: 'quantity',
-          label: 'Quantity',
+          key: 'availability',
+          label: 'Availability',
           fn: function(value, resource) {
             return resource.availability() + ' (' + resource.quantity + ' in stock)';
           }
