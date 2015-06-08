@@ -51,6 +51,27 @@ Resources.helpers({
         state: 'ordered'
       }}
     }).count();
+  },
+  orders: function() {
+    var resource = this;
+    return Orders.find({
+      state: {$in: ['created','completed', 'contacted']},
+      orderedResources: {
+        $elemMatch: {
+          state: 'ordered',
+          resourceId: resource._id
+        }
+      }
+    }).count();
+  },
+  groupOrders: function() {
+    var resource = this;
+    return _.reduce(GroupOrderedResources.find({
+      state: 'ordered',
+      resourceId: resource._id
+    }).fetch(), function(memo, groupOrderedResource){
+      return memo + groupOrderedResource.quantity - groupOrderedResource.received;
+    }, 0);
   }
 });
 

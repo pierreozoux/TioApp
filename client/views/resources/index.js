@@ -39,27 +39,14 @@ Template.resources.helpers({
           key: 'order',
           label: 'Orders',
           fn: function(value, resource) {
-            return Orders.find({
-              state: {$in: ['created','completed', 'contacted']},
-              orderedResources: {
-                $elemMatch: {
-                  state: 'ordered',
-                  resourceId: resource._id
-                }
-              }
-            }).count();
+            return resource.orders();
           }
         },
         {
           key: 'order',
           label: 'Group Orders',
           fn: function(value, resource) {
-            return _.reduce(GroupOrderedResources.find({
-              state: 'ordered',
-              resourceId: resource._id
-            }).fetch(), function(memo, groupOrderedResource){
-              return memo + groupOrderedResource.quantity - groupOrderedResource.received;
-            }, 0);
+            return resource.groupOrders();
           }
         },
         'group'
