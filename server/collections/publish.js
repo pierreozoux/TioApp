@@ -12,7 +12,7 @@ Meteor.publish('courses', function () {
 
 Meteor.publish('groupOrders', function () {
   if (this.userId) {
-    return GroupOrders.find();
+    return GroupOrders.find({state: {$ne: 'received'}});
   }
 });
 
@@ -24,7 +24,7 @@ Meteor.publish('groupOrderedResources', function () {
 
 Meteor.publish('orders', function () {
   if (this.userId) {
-    return Orders.find();
+    return Orders.find({state: {$nin: ['canceled', 'sold']}});
   }
 });
 
