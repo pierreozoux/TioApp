@@ -15,7 +15,7 @@ GroupOrderedResources.attachSchema(new SimpleSchema({
       if (this.isInsert){
         console.log
         var resource = Resources.findOne(this.field('resourceId').value);
-        return resource.orders() - (resource.groupOrders() + resource.quantity);
+        return Math.max(resource.orders() - (resource.groupOrders() + resource.quantity), 0);
       }
     }
   },
