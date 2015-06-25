@@ -105,7 +105,6 @@ Template.GroupOrder.events({
             }
         });
       }
-      Meteor.call('markCompleted');
     } else {
       Session.set('errorResult', 'Quantity must be superior or equal to Received.');
     }

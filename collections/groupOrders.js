@@ -29,3 +29,9 @@ GroupOrders.allow({
   }
 });
 
+if (Meteor.isClient) {
+  GroupOrders.after.update(function() {
+    Meteor.call('markCompleted');
+  });
+}
+
