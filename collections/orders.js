@@ -230,6 +230,17 @@ Orders.after.insert(function() {
   }
 });
 
+Orders.after.update(function() {
+  if(this.status === 'contacted' && this.previous.status !== 'contacted') {
+    var contactedAt = new Date;
+    Orders.update(this._id, {
+      $set: {
+        contactedAt: contactedAt
+      }
+    });
+  }
+});
+
 if (Meteor.isServer) {
   Meteor.methods({
     updateOrderedResourceState: function(tempOrder, resource, force) {
