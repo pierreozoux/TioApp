@@ -14,4 +14,3 @@ Template.courseSelection.events({
   }
 });
 
-
