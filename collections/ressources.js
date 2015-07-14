@@ -72,6 +72,13 @@ Resources.helpers({
     }).fetch(), function(memo, groupOrderedResource){
       return memo + groupOrderedResource.quantity - groupOrderedResource.received;
     }, 0);
+  },
+  year: function() {
+    var resource = this;
+    var course = Courses.findOne({resources: resource._id});
+    if(course) {
+      return course.year;
+    }
   }
 });
 

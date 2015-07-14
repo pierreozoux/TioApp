@@ -28,6 +28,12 @@ Template.resources.helpers({
           key: 'reference',
           label: 'Reference',
           sort: true
+        }, {
+          key: 'order',
+          label: 'Year',
+          fn: function(value, resource) {
+            return resource.year();
+          }
         },
         'subject',
         'title', {
@@ -42,8 +48,7 @@ Template.resources.helpers({
             return resource.orders();
           },
           sort: 'descending'
-        },
-        {
+        }, {
           key: 'order',
           label: 'Group Orders',
           fn: function(value, resource) {
