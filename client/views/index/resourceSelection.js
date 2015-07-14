@@ -74,19 +74,19 @@ Template.confirmation.events({
           resourceId: resource._id
         });
       }
-   });
+    });
 
-   if (orderedResources.length) {
-     var orderId = Orders.insert({
-       contactId: contactId,
-       orderedResources: orderedResources,
-       humanId: humanId,
-       courseId: Session.get('courseId')
-     });
-     Session.set('schoolId', '');
-     Router.go('/order/' + orderId);
-   }
-   Session.set('schoolId', '');
+    if (orderedResources.length) {
+      var orderId = Orders.insert({
+        contactId: contactId,
+        orderedResources: orderedResources,
+        humanId: humanId,
+        courseId: Session.get('courseId')
+      });
+      Session.set('schoolId', '');
+      Router.go('/order/' + orderId);
+    }
+    Session.set('schoolId', '');
   }
 });
 
