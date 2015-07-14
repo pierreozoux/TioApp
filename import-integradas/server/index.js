@@ -35,8 +35,14 @@ Meteor.methods({
           });
         }
       });
-
-      lines.forEach(function(line) {
+      lines.forEach(function(line, index) {
+        if (!(line.Title && line.Reference && line.Editor && line.Subject && line.Group)) {
+          var lineNumber = index + 2
+          console.log('error');
+          console.log(line);
+          console.log(lineNumber);
+          throw new Meteor.Error('Collection-Error', 'There is an error on line ' + lineNumber);
+        }
         var title = line.Title.trim();
         var reference = line.Reference.trim();
         var editor = line.Editor.trim();
