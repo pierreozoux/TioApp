@@ -1,7 +1,7 @@
 function resources() {
   var course = Courses.findOne(Session.get('courseId'));
   if (course) {
-    return Resources.find({_id: {$in: course.resources}});
+    return Resources.find({_id: {$in: course.resources}}, {'subject': 1});
   }
 }
 
