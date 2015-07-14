@@ -62,7 +62,12 @@ Template.ordersActionBar.events({
     var emailCount = 0;
     var modalText = '';
     var orders = Orders.find({state: 'completed'});
-    var emailText = Settings.findOne({key: 'email'}).value;
+    var emailText = 'Bom dia\n\n' +
+      'Informamos que a sua encomenda se encontra pronta para ser levantada na Livraria Tio Papel.\n\n' +
+      'Lembramos tambem que podera plastificar os seus livros por apenas 1,25euro ' +
+      'cada e que tem ainda direito a 10% de desconto na compra de material escolar.\n\n' +
+      'Ficamos a aguardar a sua visita.';
+
     if (orders.count() > 0) {
       orders.forEach(function(order) {
         var contact = order.getContact();
