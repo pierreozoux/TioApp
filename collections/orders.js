@@ -218,28 +218,30 @@ Orders.helpers({
 
 });
 
-Orders.after.insert(function() {
-  var orderId = this._id;
-  Meteor.call('markCompleted');
-  if (!Orders.findOne(orderId).containsOrdered()) {
-    Orders.update(orderId, {
-      $set: {
-        state: 'sold'
-      }
-    });
-  }
-});
+if (Meteor.isServer) {
+  Orders.after.insert(function() {
+    var orderId = this._id;
+    Meteor.call('markCompleted');
+    if (!Orders.findOne(orderId).containsOrdered()) {
+      Orders.update(orderId, {
+        $set: {
+          state: 'sold'
+        }
+      });
+    }
+  });
 
-Orders.after.update(function() {
-  if(this.status === 'contacted' && this.previous.status !== 'contacted') {
-    var contactedAt = new Date;
-    Orders.update(this._id, {
-      $set: {
-        contactedAt: contactedAt
-      }
-    });
-  }
-});
+  Orders.after.update(function() {
+    if(this.status === 'contacted' && this.previous.status !== 'contacted') {
+      var contactedAt = new Date;
+      Orders.update(this._id, {
+        $set: {
+          contactedAt: contactedAt
+        }
+      });
+    }
+  });
+}
 
 if (Meteor.isServer) {
   Meteor.methods({

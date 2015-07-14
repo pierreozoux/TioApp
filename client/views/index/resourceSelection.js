@@ -1,9 +1,13 @@
+function resources() {
+  var course = Courses.findOne(Session.get('courseId'));
+  if (course) {
+    return Resources.find({_id: {$in: course.resources}});
+  }
+}
+
 Template.resourcesSelection.helpers({
   resources: function() {
-    var course = Courses.findOne(Session.get('courseId'));
-    if (course) {
-      return Resources.find({_id: {$in: course.resources}});
-    }
+    return resources();
   },
   isSellable: function() {
     Template.resourcesSelection.__helpers.get('setNeedContact')();
@@ -11,7 +15,7 @@ Template.resourcesSelection.helpers({
   },
   setNeedContact: function() {
     var needContact = false;
-    Resources.find().forEach( function(resource) {
+    resources().forEach( function(resource) {
       var inCart = $('#' + resource._id).attr('class') !== 'disabled';
       var sold = $('#' + resource._id).find(':checkbox').prop('checked');
       if (inCart && !sold) { 
@@ -55,7 +59,7 @@ Template.confirmation.events({
       humanId += possible.charAt(Math.floor(Math.random() * possible.length));
     }
 
-    Resources.find().forEach( function(resource) {
+    resources().forEach( function(resource) {
       var inCart = $('#' + resource._id).attr('class') !== 'disabled';
       var sold = $('#' + resource._id).find(':checkbox').prop('checked');
       if (inCart) { 
