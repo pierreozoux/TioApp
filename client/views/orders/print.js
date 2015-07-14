@@ -6,3 +6,9 @@ Router.route('/print/order/:_id', function () {
   });
 });
 
+Template.printOrder.helpers({
+  library: function() {
+    return Settings.findOne({key: 'library'}).value;
+  }
+});
+

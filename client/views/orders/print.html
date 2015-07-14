@@ -1,13 +1,13 @@
 <template name="printOrder">
 <div id="print{{_id}}" class="print">
-  <h1>Encomenda</h1>
+  <h1>Encomenda - {{humanId}}</h1>
   <h2>Conserve este papel</h2>
   <p>
-  *Encomenda de Livros Escolares Tio Papel - Barreiro*<br>
-  *Tel: 210 739 830 * mail: barreiro@tiopapel.com*<br>
+  *Encomenda de Livros Escolares Tio Papel*<br>
+  {{library}}<br>
   </p>
   <p>
-  Referencia: {{humanId}}<br>
+  <br>
   Livros:<br>
   {{#each justOrderedResources}}
   - {{title}}<br>
