@@ -30,15 +30,7 @@ Meteor.publish('orders', function () {
 
 Meteor.publish('resources', function (courseId) {
   if (this.userId) {
-    if (courseId) {
-      check(courseId, String);
-      var course = Courses.findOne(courseId);
-      if (course) {
-        return Resources.find({_id: {$in: course.resources}});
-      }
-    } else {
       return Resources.find();
-    }
   }
 });
 

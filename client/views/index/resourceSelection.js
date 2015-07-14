@@ -1,6 +1,9 @@
 Template.resourcesSelection.helpers({
   resources: function() {
-    return Resources.find();
+    var course = Courses.findOne(Session.get('courseId'));
+    if (course) {
+      return Resources.find({_id: {$in: course.resources}});
+    }
   },
   isSellable: function() {
     Template.resourcesSelection.__helpers.get('setNeedContact')();

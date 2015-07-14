@@ -5,9 +5,5 @@ Meteor.subscribe('contacts');
 Meteor.subscribe('groupOrders');
 Meteor.subscribe('groupOrderedResources');
 Meteor.subscribe('settings');
-
-Tracker.autorun(function () {
-  Meteor.subscribe('resources', Session.get('courseId'));
-});
-
+Meteor.subscribe('resources');
 

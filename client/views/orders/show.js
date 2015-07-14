@@ -10,7 +10,7 @@ Template.Order.helpers({
   settings: function() {
     var order = this;
     return {
-      collection: Resources.find(),
+      collection: order.resources(),
       showFilter: false,
       showNavigation: 'never',
       rowsPerPage: 100,
