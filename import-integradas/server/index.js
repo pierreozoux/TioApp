@@ -64,6 +64,16 @@ Meteor.methods({
             }
           });
         } else {
+          Resources.update({
+            _id: resource._id
+          }, {
+            $set: {
+              title:     title,
+              editor:    editor,
+              subject:   subject,
+              group:     group
+            }
+          })
           resourceId = resource._id;
         }
 
