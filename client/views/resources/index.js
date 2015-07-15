@@ -27,7 +27,6 @@ Template.resources.helpers({
         {
           key: 'reference',
           label: 'Reference',
-          sort: true
         }, {
           key: 'order',
           label: 'Year',
@@ -39,7 +38,6 @@ Template.resources.helpers({
         'title', {
           key: 'quantity',
           label: 'Quantity',
-          sortByValue: true,
           tmpl: Template.resourceQuantity
         }, {
           key: 'order',
@@ -47,7 +45,6 @@ Template.resources.helpers({
           fn: function(value, resource) {
             return resource.orders();
           },
-          sort: 'descending'
         }, {
           key: 'order',
           label: 'Group Orders',
