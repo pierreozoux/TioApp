@@ -5,13 +5,12 @@
   <p>
   *Encomenda de Livros Escolares Tio Papel*<br>
   {{library}}<br>
-  </p>
-  <p>
-  <br>
-  Livros:<br>
-  {{#each justOrderedResources}}
-  - {{title}}<br>
-  {{/each}}
+  <u>Livros:</u><br>
+  <div class="list-resources">
+    {{#each justOrderedResources}}
+    - {{title}}<br>
+    {{/each}}
+  </div>
   </p>
   <p>
   *Logo que a sua encomenda estiver completa, vamos entrar em contacto
@@ -24,6 +23,5 @@
   *Se comprou os livros escolares no Tio Papel, terá 10% de desconto na
   compra de material escolar na nossa loja.*
   </p>
-  <h2>Até breve</h2>
 </div>
 </template>

@@ -70,3 +70,14 @@
 .navbar-default .navbar-nav > .admin.active > a{
   background-color: #C09C9C;
 }
+
+.list-resources {
+  font-size: 10px;
+}
+
+@media print {
+  .jumbotron {
+    padding: 0
+  }
+}
+
