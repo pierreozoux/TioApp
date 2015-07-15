@@ -28,9 +28,35 @@ Meteor.publish('orders', function () {
   }
 });
 
-Meteor.publish('resources', function (courseId) {
+Meteor.publish('resources', function () {
   if (this.userId) {
-      return Resources.find();
+    //Transform function
+    var transform = function(resource) {
+      resource.computedYear = resource.year();
+      resource.computedOrders = resource.orders();
+      resource.computedGroupOrders = resource.groupOrders();
+      return resource;
+    }
+
+    var self = this;
+
+    var handle = Resources.find().observe({
+      added: function (document) {
+        self.added('resources', document._id, transform(document));
+      },
+      changed: function (newDocument, oldDocument) {
+        self.changed('resources', newDocument._id, transform(newDocument));
+      },
+      removed: function (oldDocument) {
+        self.removed('resources', oldDocument._id);
+      }
+    });
+
+    self.onStop(function () {
+      handle.stop();
+    });
+
+    self.ready();
   }
 });
 

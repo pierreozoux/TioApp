@@ -28,11 +28,8 @@ Template.resources.helpers({
           key: 'reference',
           label: 'Reference',
         }, {
-          key: 'order',
-          label: 'Year',
-          fn: function(value, resource) {
-            return resource.year();
-          }
+          key: 'computedYear',
+          label: 'Year'
         },
         'subject',
         'title', {
@@ -40,17 +37,11 @@ Template.resources.helpers({
           label: 'Quantity',
           tmpl: Template.resourceQuantity
         }, {
-          key: 'order',
-          label: 'Orders',
-          fn: function(value, resource) {
-            return resource.orders();
-          },
+          key: 'computedOrders',
+          label: 'Orders'
         }, {
-          key: 'order',
-          label: 'Group Orders',
-          fn: function(value, resource) {
-            return resource.groupOrders();
-          }
+          key: 'computedGroupOrders',
+          label: 'Group Orders'
         },
         'group'
       ]
