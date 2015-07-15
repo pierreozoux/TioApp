@@ -77,7 +77,7 @@ Resources.helpers({
     var resource = this;
     var course = Courses.findOne({resources: resource._id});
     if(course) {
-      return course.year;
+      return parseInt(course.year);
     }
   }
 });
