@@ -90,3 +90,6 @@ Template.confirmation.events({
   }
 });
 
+Template.contactSelection.onRendered(function() {
+  Template.resourcesSelection.__helpers.get('setNeedContact')();
+})
