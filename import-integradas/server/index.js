@@ -22,6 +22,22 @@ Meteor.methods({
         lines.push(line);
       });
 
+      //check uniqueness of reference
+      var duplicates = _.compact(
+        _.map(
+          lines.map(function(line) {
+            return line.Reference;
+          }).sort(), function(value, index, array) {
+          if (value === array[index+1]){
+            return value;
+          }
+        })
+      );
+      console.log('duplicates:' + duplicates);
+      if (duplicates.length) {
+        throw new Meteor.Error('Collection-Error', 'Ref is a duplicate: ' + duplicates);
+      }
+
       schoolNames(lines[0]).forEach(function(schoolDirty) {
         var school = schoolDirty.trim();
         log.info('write school: ' + school);
