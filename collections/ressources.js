@@ -29,8 +29,7 @@ Resources.attachSchema(new SimpleSchema({
   quantity: {
     type: Number,
     label: 'Quantity',
-    defaultValue: 0,
-    optional: true
+    defaultValue: 0
   },
   subject: {
     type: String,
