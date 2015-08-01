@@ -43,7 +43,8 @@ Template.resources.helpers({
           key: 'computedGroupOrders',
           label: 'Group Orders'
         },
-        'editor'
+        'editor',
+        'group'
       ]
     }; 
   },
