@@ -44,6 +44,10 @@ Template.resourcesSelection.events({
   },
   'click input:checkbox': function() {
     Template.resourcesSelection.__helpers.get('setNeedContact')();
+  },
+  'click #unselectAll': function() {
+    $('input:checkbox').removeAttr('checked');
+    Template.resourcesSelection.__helpers.get('setNeedContact')();
   }
 });
 
