@@ -32,6 +32,9 @@ Template.GroupOrder.helpers({
         sortByValue: true,
         tmpl: Template.quantity
       }, {
+        key: 'year',
+        label: 'Year',
+      }, {
         key: 'received',
         label: 'Received',
         sortByValue: true,

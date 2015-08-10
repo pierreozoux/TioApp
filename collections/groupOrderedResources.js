@@ -40,6 +40,9 @@ GroupOrderedResources.attachSchema(new SimpleSchema({
 GroupOrderedResources.helpers({
   isReceived: function() {
     return this.state === 'received' ? true : false;
+  },
+  year: function() {
+    return Resources.findOne(this.resourceId).year();
   }
 });
 
