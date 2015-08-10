@@ -22,6 +22,8 @@ Template.resources.helpers({
           fn: function(value, object) {
             return (_.contains(groupOrders.array(), object._id))?true:false;
           },
+          sortOrder: 0,
+          sortDirection: 'descending',
           tmpl: Template.orderResource
         },
         {
