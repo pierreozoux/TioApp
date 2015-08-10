@@ -112,14 +112,6 @@ Template.resources.events({
     });
     
     _.each(inputsIds, function(id, index) {
-      if (inputsIds.length - 1 === index){
-        AutoForm.addHooks(id, {
-          onSuccess: function() {
-            Meteor.call('markCompleted');
-          }
-        });
-      }
-
       $('#' + id).submit();
     });
   }

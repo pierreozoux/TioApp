@@ -7,3 +7,9 @@ Template.Settings.helpers({
   }
 });
 
+Template.settingsActionBar.events({
+  'click #markCompleted': function () {
+    Meteor.call('markCompleted');
+  }
+});
+ 

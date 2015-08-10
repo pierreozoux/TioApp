@@ -221,7 +221,6 @@ Orders.helpers({
 if (Meteor.isServer) {
   Orders.after.insert(function() {
     var orderId = this._id;
-    Meteor.call('markCompleted');
     if (!Orders.findOne(orderId).containsOrdered()) {
       Orders.update(orderId, {
         $set: {

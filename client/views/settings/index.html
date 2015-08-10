@@ -1,5 +1,6 @@
 <template name="Settings">
 {{#if getSession 'isAdmin'}}
+{{> settingsActionBar}}
 <table class="table table-bordered table-condensed">
   <thead>
     <tr>
@@ -22,3 +23,12 @@
 </table>
 {{/if}}
 </template>
+
+<template name="settingsActionBar">
+  <div class="row action-bar">
+    <div class="col-sm-2">
+      <button id="markCompleted" class="btn btn-success">Mark as Completed.</button>
+    </div>
+  </div>
+</template>
+

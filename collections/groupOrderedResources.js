@@ -62,7 +62,6 @@ if (Meteor.isClient) {
         $inc: {quantity: quantityReceived}
       }
     );
-    Meteor.call('markCompleted');
   });
 }
 
