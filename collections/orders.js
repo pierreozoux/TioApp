@@ -283,7 +283,6 @@ if (Meteor.isServer) {
         if(onlyOrdered.length > 0) {
           var completedOrdered = _.every(onlyOrdered, function(ordered) {
             var resource = Resources.findOne(ordered.resourceId);
-            console.log(resource);
             if (resource) {
               return resource.availability() > 0;
             } else {
@@ -291,6 +290,7 @@ if (Meteor.isServer) {
             }
           });
           if (completedOrdered){
+            console.log('Order completed: ' + order._id)
             completedOrdersIds.push(order._id);
           }
         }
@@ -300,6 +300,10 @@ if (Meteor.isServer) {
         _id: {$in: completedOrdersIds}
       }, {
         $set: {state: 'completed'}
+      } , function(error) {
+        if (error) {
+          throw new Meteor.Error('Collection-Update-Error', 'error updating during a mark as completed');
+        }
       });
     }
   });
