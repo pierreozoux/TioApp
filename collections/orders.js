@@ -273,7 +273,6 @@ if (Meteor.isServer) {
       });
     },
     markCompleted: function() {
-      var completedOrdersIds = [];
       var onlyOrdered;
 
       Orders.find({state: 'created'}).forEach(function(order) {
@@ -291,18 +290,14 @@ if (Meteor.isServer) {
           });
           if (completedOrdered){
             console.log('Order completed: ' + order._id)
-            completedOrdersIds.push(order._id);
+            Orders.update(order._id, {
+              $set: {state: 'completed'}
+            } , function(error) {
+              if (error) {
+                throw new Meteor.Error('Collection-Update-Error', 'error updating during a mark as completed id: ' + order._id);
+              }
+            });
           }
-        }
-      });
-
-      Orders.update({
-        _id: {$in: completedOrdersIds}
-      }, {
-        $set: {state: 'completed'}
-      } , function(error) {
-        if (error) {
-          throw new Meteor.Error('Collection-Update-Error', 'error updating during a mark as completed');
         }
       });
     }
