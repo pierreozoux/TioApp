@@ -32,8 +32,11 @@ Template.GroupOrder.helpers({
         sortByValue: true,
         tmpl: Template.quantity
       }, {
-        key: 'year',
+        key: 'resourceId',
         label: 'Year',
+        fn: function(value) {
+          return Resources.findOne(value).computedYear;
+        }
       }, {
         key: 'received',
         label: 'Received',
