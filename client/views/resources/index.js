@@ -22,8 +22,6 @@ Template.resources.helpers({
           fn: function(value, object) {
             return (_.contains(groupOrders.array(), object._id))?true:false;
           },
-          sortOrder: 0,
-          sortDirection: 'descending',
           tmpl: Template.orderResource
         },
         {
@@ -40,6 +38,8 @@ Template.resources.helpers({
           tmpl: Template.resourceQuantity
         }, {
           key: 'computedOrders',
+          sortOrder: 0,
+          sortDirection: 'descending',
           label: 'Orders'
         }, {
           key: 'computedGroupOrders',
