@@ -1,9 +1,15 @@
 Router.route('/order/:_id', function () {
-  this.render('Order', {
-    data: function () {
-      return Orders.findOne({_id: this.params._id});
-    }
-  });
+  this.subscribe('orders', this.params._id).wait();
+  this.subscribe('courses').wait();
+  if (this.ready()) {
+    this.render('Order', {
+      data: function() {
+        return Orders.findOne();
+      }
+    });
+  } else {
+    this.render('Loading');
+  }
 });
 
 Template.Order.helpers({
@@ -103,12 +109,20 @@ Template.orderResourceSold.helpers({
   }
 });
 
+Template.orderAction.helpers({
+  action: function() {
+    switch (this.state) {
+      case 'created': return 'Print';
+      case 'completed': return 'Contact';
+    }
+  }
+});
 Template.orderAction.events({
   'click .btn': function (event) {
     event.stopPropagation();
     event.preventDefault();
     if (event.target.className.contains('Contact')) {
-      this.contact();
+      Meteor.call('contact',this);
     } else if (event.target.className.contains('Print')) {
       Router.go('/print/order/' + this._id);
     }

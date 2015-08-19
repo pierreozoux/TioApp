@@ -1,9 +1,11 @@
-Meteor.subscribe('orders');
-Meteor.subscribe('schools');
-Meteor.subscribe('courses');
-Meteor.subscribe('contacts');
-Meteor.subscribe('groupOrders');
-Meteor.subscribe('groupOrderedResources');
-Meteor.subscribe('settings');
-Meteor.subscribe('resources');
-
+Tracker.autorun(function () {
+  courseId = Session.get('courseId');
+  groupOrderId = Session.get('groupOrderId');
+  if (courseId) {
+    Meteor.subscribe('resources', courseId, 'course');
+  } else if (groupOrderId) {
+    Meteor.subscribe('resources', groupOrderId, 'groupOrder', function() {
+      Session.set('ready', true);
+    });
+  }
+});

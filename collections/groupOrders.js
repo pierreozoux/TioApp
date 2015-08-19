@@ -20,6 +20,14 @@ GroupOrders.attachSchema(new SimpleSchema({
   }
 }));
 
+GroupOrders.helpers({
+  resources: function() {
+    return GroupOrderedResources.find({groupOrderId: this._id}).map(function(groupOrderedResource){
+      return groupOrderedResource.resourceId
+    })
+  }
+});
+
 GroupOrders.allow({
   insert: function(userId) {
     return userId?true:false;

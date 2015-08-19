@@ -1,5 +1,10 @@
 Router.route('/resources', function() {
-  this.render('resources');
+  this.subscribe('resources').wait();
+  if (this.ready()) {
+    this.render('resources');
+  } else {
+    this.render('Loading');
+  }
 });
 
 var groupOrders = new ReactiveArray();
@@ -14,7 +19,7 @@ Tracker.autorun(function() {
 Template.resources.helpers({
   settings: function() {
     return {
-      collection: Resources.find(),
+      collection: Resources,
       showFilter: true,
       filters: ['group'],
       fields: [
@@ -95,19 +100,14 @@ Template.orderResource.helpers({
 Template.confirmGroupOrder.events({
   'click #confirm': function(event) {
     event.preventDefault();
-    var group = Resources.findOne(groupOrders.array()[0]).group;
-    var groupOrderId = GroupOrders.insert({
-      group: group
+    var group = Filter.get();
+    Meteor.call('insertGroupOrder', group, groupOrders.array(), function(err, res) {
+      if (err) {
+        console.log(err);
+      } else {
+        Router.go('/grouporder/' + res);
+      }
     });
-
-    _.each(groupOrders.array(), function(resourceId) {
-      GroupOrderedResources.insert({
-        groupOrderId: groupOrderId,
-        resourceId: resourceId
-      });
-    });
-    
-    Router.go('/grouporder/' + groupOrderId);
   }
 });
 

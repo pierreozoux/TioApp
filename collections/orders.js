@@ -91,17 +91,11 @@ Orders.helpers({
   getContact: function() {
     return Contacts.findOne(this.contactId);
   },
-  action: function() {
-    switch (this.state) {
-      case 'created': return 'Print';
-      case 'completed': return 'Contact';
-    }
-  },
-  print: function() {
+ print: function() {
     return (this.action() === 'Print')?true:false;
   },
   contact: function() {
-    Orders.update(this._id, {$set: {state: 'contacted', contactedAt: Date.now()}});
+    Meteor.call('contact', this);
   },
   getCourse: function() {
     return Courses.findOne(this.courseId);
@@ -241,7 +235,18 @@ if (Meteor.isServer) {
     }
   });
   
+  ReactiveTable.publish('orders', function() {
+    if (this.userId) {
+      return Orders;
+    }
+  }, {
+    state: {$nin: ['canceled', 'sold']}
+  });
+  
   Meteor.methods({
+    contact: function(order) {
+      Orders.update(order._id, {$set: {state: 'contacted', contactedAt: Date.now()}});
+    },
     updateOrderedResourceState: function(tempOrder, resource, force) {
       var resourceState;
       var quantityDirection;

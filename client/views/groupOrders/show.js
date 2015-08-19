@@ -1,9 +1,16 @@
 Router.route('/grouporder/:_id', function () {
-  this.render('GroupOrder', {
-    data: function () {
-      return GroupOrders.findOne({_id: this.params._id});
-    }
-  });
+  this.subscribe('groupOrders').wait();
+  this.subscribe('groupOrderedResources').wait();
+  this.subscribe('courses').wait();
+  if (this.ready()) {
+    this.render('GroupOrder', {
+      data: function () {
+        return GroupOrders.findOne({_id: this.params._id});
+      }
+    });
+  } else {
+    this.render('Loading');
+  }
 });
 
 Template.GroupOrder.helpers({

@@ -22,13 +22,19 @@ Meteor.publish('groupOrderedResources', function () {
   }
 });
 
-Meteor.publish('orders', function () {
+Meteor.publish('orders', function (id) {
   if (this.userId) {
-    return Orders.find({state: {$nin: ['canceled', 'sold']}});
+    return Orders.find({_id: id});
   }
 });
 
-Meteor.publish('resources', function () {
+Meteor.publish('completed-orders', function () {
+  if (this.userId) {
+    return Orders.find({state: 'completed'});
+  }
+});
+
+Meteor.publish('resources', function (objectId, type) {
   if (this.userId) {
     //Transform function
     var transform = function(resource) {
@@ -40,7 +46,18 @@ Meteor.publish('resources', function () {
 
     var self = this;
 
-    var handle = Resources.find().observe({
+    if (type === 'course') {
+      var resources = Courses.findOne(objectId).resources;
+    } else if (type === 'groupOrder') {
+      var resources = GroupOrders.findOne(objectId).resources()
+    }
+    if (type) {
+      cursor = Resources.find({_id: { $in:  resources}});
+    } else {
+      cursor = Resources.find();
+    }
+    
+    var handle = cursor.observe({
       added: function (document) {
         self.added('resources', document._id, transform(document));
       },

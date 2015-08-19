@@ -55,6 +55,22 @@ GroupOrderedResources.allow({
   }
 });
 
+if (Meteor.isServer) {
+  Meteor.methods({
+    insertGroupOrder: function(group, groupOrders) {
+      var groupOrderId = GroupOrders.insert({
+        group: group
+      });
+      _.each(groupOrders, function(resourceId) {
+        GroupOrderedResources.insert({
+          groupOrderId: groupOrderId,
+          resourceId: resourceId
+        });
+      });
+      return groupOrderId;
+    }
+  });
+}
 if (Meteor.isClient) {
   GroupOrderedResources.after.update(function (userId, doc) {
     var quantityReceived = doc.received - this.previous.received;

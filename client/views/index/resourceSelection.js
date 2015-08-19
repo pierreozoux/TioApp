@@ -1,8 +1,5 @@
 function resources() {
-  var course = Courses.findOne(Session.get('courseId'));
-  if (course) {
-    return Resources.find({_id: {$in: course.resources}}, {'subject': 1});
-  }
+  return Resources.find({}, {sort: {'subject': 1}});
 }
 
 Template.resourcesSelection.helpers({

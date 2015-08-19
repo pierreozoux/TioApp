@@ -15,6 +15,8 @@ Template.nav.events({
     Session.set('groupOrderId', '');
     Session.set('intent', '');
     Session.set('clean', 'true');
+    Session.set('ready', false);
+    Session.set('errorResult', '');
   }
 });
 
