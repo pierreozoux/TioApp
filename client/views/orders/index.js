@@ -29,13 +29,6 @@ Template.orders.helpers({
         },
         'courseName',
         'phone',
-        {
-          key: 'contactId',
-          label: 'note',
-          fn: function(value, object) {
-            return object.getContact() && object.getContact().note;
-          }
-        },
         'name',
         {
           key: '_id',
