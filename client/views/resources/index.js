@@ -15,6 +15,8 @@ Template.resources.helpers({
   settings: function() {
     return {
       collection: Resources.find(),
+      showFilter: true,
+      filters: ['group'],
       fields: [
         {
           key: 'order',
@@ -56,8 +58,12 @@ Template.resources.helpers({
   }
 });
 
+Template.resources.onCreated(function () {
+  Filter = new ReactiveTable.Filter('group', ['group']);
+});
+
 Template.resources.events({
-  'click .reactive-table tr': function(event) {
+  'click .reactive-table tr': function(event, template) {
     if (event.target.className === 'checkbox') {
       var resource = this;
       if (_.contains(groupOrders.array(), resource._id)) {
@@ -68,9 +74,11 @@ Template.resources.events({
       }
 
       if (groupOrders.length > 0) {
-        $('.reactive-table-input').val(resource.group).keyup();
+        if (Filter.get() === '') {
+          Filter.set(resource.group);
+        }
       } else {
-        $('.reactive-table-input').val('').keyup();
+        Filter.set('');
       }
     }
   }
