@@ -240,9 +240,7 @@ if (Meteor.isServer) {
       });
     }
   });
-}
-
-if (Meteor.isServer) {
+  
   Meteor.methods({
     updateOrderedResourceState: function(tempOrder, resource, force) {
       var resourceState;
