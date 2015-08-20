@@ -38,7 +38,6 @@ Meteor.publish('resources', function (objectId, type) {
   if (this.userId) {
     //Transform function
     var transform = function(resource) {
-      resource.computedYear = resource.year();
       resource.computedOrders = resource.orders();
       resource.computedGroupOrders = resource.groupOrders();
       return resource;

@@ -20,6 +20,12 @@ Resources.attachSchema(new SimpleSchema({
     max: 200,
     regEx: /^[a-zA-Z0-9- ]+$/
   },
+  year: {
+    type: String,
+    label: 'Year',
+    max: 200,
+    optional: true
+  },
   editor: {
     type: String,
     label: 'Editor',
@@ -71,13 +77,6 @@ Resources.helpers({
     }).fetch(), function(memo, groupOrderedResource){
       return memo + groupOrderedResource.quantity - groupOrderedResource.received;
     }, 0);
-  },
-  year: function() {
-    var resource = this;
-    var course = Courses.findOne({resources: resource._id});
-    if(course) {
-      return parseInt(course.year);
-    }
   }
 });
 

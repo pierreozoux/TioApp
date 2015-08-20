@@ -35,7 +35,7 @@ Template.resources.helpers({
           key: 'reference',
           label: 'Reference'
         }, {
-          key: 'computedYear',
+          key: 'year',
           label: 'Year'
         },
         'subject',

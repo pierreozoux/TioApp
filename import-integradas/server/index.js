@@ -52,7 +52,7 @@ Meteor.methods({
         }
       });
       lines.forEach(function(line, index) {
-        if (!(line.Title && line.Reference && line.Editor && line.Subject && line.Group)) {
+        if (!(line.Title && line.Reference && line.Editor && line.Subject && line.Group && line.Year)) {
           var lineNumber = index + 2
           console.log('error');
           console.log(line);
@@ -64,6 +64,7 @@ Meteor.methods({
         var editor = line.Editor.trim();
         var subject = line.Subject.trim();
         var group = line.Group.trim();
+        var year = line.Year.trim()
 
         log.info('processing: ' + reference);
         var resource = Resources.findOne({reference: reference});
@@ -73,7 +74,8 @@ Meteor.methods({
             reference: reference,
             editor:    editor,
             subject:   subject,
-            group:     group
+            group:     group,
+            year:      year
           }, function(error) {
             if (error) {
               throw new Meteor.Error('Collection-Error', 'Reference: '  + reference + ' - ' + error.message);
@@ -87,7 +89,8 @@ Meteor.methods({
               title:     title,
               editor:    editor,
               subject:   subject,
-              group:     group
+              group:     group,
+              year:      year
             }
           })
           resourceId = resource._id;
