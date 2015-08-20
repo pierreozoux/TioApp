@@ -70,6 +70,10 @@ if (Meteor.isServer) {
     }
   });
 
+  GroupOrderedResources.after.insert(function(userId, doc) {
+    var resource = Resources.findOne(doc.resourceId);
+    resource.updateGroupOrders();
+  });
   GroupOrderedResources.after.update(function (userId, doc) {
     var quantityReceived = doc.received - this.previous.received;
     Resources.update(
@@ -78,6 +82,7 @@ if (Meteor.isServer) {
         $inc: {quantity: quantityReceived}
       }
     );
+    Resources.findOne(doc.resourceId).updateGroupOrders();
   });
 }
 

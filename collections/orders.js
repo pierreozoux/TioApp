@@ -227,13 +227,17 @@ Orders.helpers({
 if (Meteor.isServer) {
   Orders.after.insert(function() {
     var orderId = this._id;
-    if (!Orders.findOne(orderId).containsOrdered()) {
+    var order = Orders.findOne(orderId);
+    if (!order.containsOrdered()) {
       Orders.update(orderId, {
         $set: {
           state: 'sold'
         }
       });
     }
+    order.resources().forEach(function(resource) {
+      resource.updateOrders();
+    });
   });
 
   Orders.after.update(function() {
@@ -245,6 +249,9 @@ if (Meteor.isServer) {
         }
       });
     }
+    this.transform().resources().forEach(function(resource) {
+      resource.updateOrders();
+    });
   });
   
   ReactiveTable.publish('orders', function() {

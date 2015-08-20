@@ -36,43 +36,16 @@ Meteor.publish('completed-orders', function () {
 
 Meteor.publish('resources', function (objectId, type) {
   if (this.userId) {
-    //Transform function
-    var transform = function(resource) {
-      resource.computedOrders = resource.orders();
-      resource.computedGroupOrders = resource.groupOrders();
-      return resource;
-    }
-
-    var self = this;
-
     if (type === 'course') {
       var resources = Courses.findOne(objectId).resources;
     } else if (type === 'groupOrder') {
       var resources = GroupOrders.findOne(objectId).resources()
     }
     if (type) {
-      cursor = Resources.find({_id: { $in:  resources}});
+      return cursor = Resources.find({_id: { $in:  resources}});
     } else {
-      cursor = Resources.find();
+      return cursor = Resources.find();
     }
-    
-    var handle = cursor.observe({
-      added: function (document) {
-        self.added('resources', document._id, transform(document));
-      },
-      changed: function (newDocument, oldDocument) {
-        self.changed('resources', newDocument._id, transform(newDocument));
-      },
-      removed: function (oldDocument) {
-        self.removed('resources', oldDocument._id);
-      }
-    });
-
-    self.onStop(function () {
-      handle.stop();
-    });
-
-    self.ready();
   }
 });
 

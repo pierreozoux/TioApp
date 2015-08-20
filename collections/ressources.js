@@ -37,6 +37,16 @@ Resources.attachSchema(new SimpleSchema({
     label: 'Quantity',
     defaultValue: 0
   },
+  computedOrders: {
+    type: Number,
+    label: 'Orders',
+    optional: true
+  },
+  computedGroupOrders: {
+    type: Number,
+    label: 'GroupOrders',
+    optional: true
+  },
   subject: {
     type: String,
     label: 'Subject',
@@ -69,6 +79,12 @@ Resources.helpers({
       }
     }).count();
   },
+  updateOrders: function () {
+    var resource = this;
+    Resources.update(resource._id, {
+      $set: {computedOrders: this.orders()}
+    });
+  },
   groupOrders: function() {
     var resource = this;
     return _.reduce(GroupOrderedResources.find({
@@ -77,7 +93,13 @@ Resources.helpers({
     }).fetch(), function(memo, groupOrderedResource){
       return memo + groupOrderedResource.quantity - groupOrderedResource.received;
     }, 0);
-  }
+  },
+  updateGroupOrders: function () {
+    var resource = this;
+    Resources.update(resource._id, {
+      $set: {computedGroupOrders: this.groupOrders()}
+    });
+  },
 });
 
 Resources.allow({
