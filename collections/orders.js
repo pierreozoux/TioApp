@@ -91,7 +91,7 @@ Orders.helpers({
   getContact: function() {
     return Contacts.findOne(this.contactId);
   },
- print: function() {
+  print: function() {
     return (this.action() === 'Print')?true:false;
   },
   contact: function() {
