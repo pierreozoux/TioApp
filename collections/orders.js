@@ -208,8 +208,20 @@ Orders.helpers({
       })
     );
     return Resources.find({_id: {$in: ids}});
+  },
+  sellAll: function (force) {
+    var order = this;
+    if (force) {
+      console.log(order)
+      console.log(order.justOrderedResources())
+      order.justOrderedResources().forEach(function (resource){
+        Meteor.call('updateOrderedResourceState', order, resource, force);
+      })
+    } else {
+      Session.set('intent', 'sellAll');
+      $('#confirmAction').modal();
+    }
   }
-
 });
 
 if (Meteor.isServer) {

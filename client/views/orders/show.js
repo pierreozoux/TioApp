@@ -136,6 +136,13 @@ Template.orderActionBar.events({
   }
 });
 
+Template.sellOrder.events({
+  'click #sell': function () {
+    var order = this;
+    order.sellAll();
+  }
+});
+
 Template.confirmAction.events({
   'click #confirm': function () {
     var intent = Session.get('intent');
@@ -148,6 +155,8 @@ Template.confirmAction.events({
       });
     } else if (intent === 'sellLastResource') {
       order.sell(Resources.findOne(Session.get('lastResourceId')), true);
+    } else if (intent === 'sellAll') {
+      order.sellAll(true);
     } else {
       order.remove(Resources.findOne(Session.get('lastResourceId')), true);
     }
