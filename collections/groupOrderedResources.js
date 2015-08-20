@@ -69,11 +69,9 @@ if (Meteor.isServer) {
       return groupOrderId;
     }
   });
-}
-if (Meteor.isClient) {
+
   GroupOrderedResources.after.update(function (userId, doc) {
     var quantityReceived = doc.received - this.previous.received;
-    console.log('quantityReceived: ' + quantityReceived);
     Resources.update(
       doc.resourceId,
       {
