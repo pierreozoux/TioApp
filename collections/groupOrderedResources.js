@@ -13,7 +13,6 @@ GroupOrderedResources.attachSchema(new SimpleSchema({
     type: Number,
     autoValue: function() {
       if (this.isInsert){
-        console.log
         var resource = Resources.findOne(this.field('resourceId').value);
         return Math.max(resource.orders() - (resource.groupOrders() + resource.quantity), 0);
       }
