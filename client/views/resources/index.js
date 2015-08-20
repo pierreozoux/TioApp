@@ -19,7 +19,7 @@ Tracker.autorun(function() {
 Template.resources.helpers({
   settings: function() {
     return {
-      collection: Resources,
+      collection: 'resources',
       showFilter: true,
       filters: ['group'],
       fields: [

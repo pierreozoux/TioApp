@@ -108,3 +108,11 @@ Resources.allow({
   }
 });
 
+if (Meteor.isServer) {
+  ReactiveTable.publish('resources', function() {
+    if (this.userId) {
+      return Resources;
+    }
+  });
+}
+
