@@ -47,6 +47,11 @@ Resources.attachSchema(new SimpleSchema({
     label: 'GroupOrders',
     optional: true
   },
+  computedAvailability: {
+    type: Number,
+    label: 'Availability',
+    optional: true
+  },
   subject: {
     type: String,
     label: 'Subject',
@@ -66,6 +71,12 @@ Resources.helpers({
         state: 'ordered'
       }}
     }).count();
+  },
+  updateAvailability: function () {
+    var resource = this;
+    Resources.update(resource._id, {
+      $set: {computedAvailability: this.availability()}
+    });
   },
   orders: function() {
     var resource = this;
@@ -117,8 +128,11 @@ if (Meteor.isServer) {
   
   Meteor.methods({
     updateResources: function() {
-      Resources.find().forEach(function(resource){resource.updateOrders()})
-      Resources.find().forEach(function(resource){resource.updateGroupOrders()})
+      Resources.find().forEach(function(resource){
+        resource.updateGroupOrders();
+        resource.updateAvailability();
+        resource.updateOrders();
+      })
     }
   });
 }

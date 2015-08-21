@@ -322,6 +322,9 @@ if (Meteor.isServer) {
           }
         }
       });
+      Resources.find().forEach(function(resource){
+        resource.updateAvailability();
+      })
     }
   });
 }

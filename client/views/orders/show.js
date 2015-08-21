@@ -30,7 +30,7 @@ Template.Order.helpers({
           key: 'availability',
           label: 'Availability',
           fn: function(value, resource) {
-            return resource.availability() + ' (' + resource.quantity + ' in stock)';
+            return resource.computedAvailability + ' (' + resource.quantity + ' in stock)';
           }
         },
         {
