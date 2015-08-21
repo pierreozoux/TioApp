@@ -114,5 +114,12 @@ if (Meteor.isServer) {
       return Resources;
     }
   });
+  
+  Meteor.methods({
+    updateResources: function() {
+      Resources.find().forEach(function(resource){resource.updateOrders()})
+      Resources.find().forEach(function(resource){resource.updateGroupOrders()})
+    }
+  });
 }
 
