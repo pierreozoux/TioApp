@@ -1,6 +1,7 @@
 Router.route('/order/:_id', function () {
   this.subscribe('orders', this.params._id).wait();
   this.subscribe('courses').wait();
+  this.subscribe('contacts').wait();
   if (this.ready()) {
     this.render('Order', {
       data: function() {
