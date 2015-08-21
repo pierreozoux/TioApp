@@ -12,7 +12,7 @@ var groupOrders = new ReactiveArray();
 Tracker.autorun(function() {
   if (Session.get('clean') === 'true') {
     groupOrders.clear();
-    if (Filter) {
+    if (typeof Filter !== 'undefined') {
       Filter.set('');
     }
     Session.set('clean', '');
