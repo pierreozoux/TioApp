@@ -12,7 +12,9 @@ var groupOrders = new ReactiveArray();
 Tracker.autorun(function() {
   if (Session.get('clean') === 'true') {
     groupOrders.clear();
-    Filter.set('');
+    if (Filter) {
+      Filter.set('');
+    }
     Session.set('clean', '');
   }
 });
