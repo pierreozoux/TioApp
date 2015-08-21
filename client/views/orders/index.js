@@ -49,8 +49,8 @@ Template.orders.events({
 });
 
 Template.ordersActionBar.events({
-  'click #contactAndPrint': function () {
-    Meteor.subscribe('completed-orders', function() {
+  'click #contactAndPrint': function (event, template) {
+    template.subscribe('completed-orders', function() {
       console.log('CSV export beginning...');
       var data = [];
       var emailCount = 0;
