@@ -68,8 +68,13 @@ Template.GroupOrder.onRendered(function(){
 });
 
 Template.GroupOrder.events({
-  'click #update': function() {
+  'click #update': function(event) {
+    $(event.target)
+      .data('working-text', 'Working...')
+      .button('working')
+      .prop('disabled', true);
     Session.set('errorResult', '');
+    
     var groupOrder = this;
     var valid = true;
     // valid?
@@ -121,6 +126,7 @@ Template.GroupOrder.events({
     } else {
       Session.set('errorResult', 'Quantity must be superior or equal to Received.');
     }
+    $(event.target).button('reset').prop('disabled', false);;
   }
 });
 

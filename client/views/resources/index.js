@@ -100,22 +100,24 @@ Template.orderResource.helpers({
   }
 });
 
-Template.confirmGroupOrder.events({
-  'click #confirm': function(event) {
-    event.preventDefault();
-    var group = Filter.get();
-    Meteor.call('insertGroupOrder', group, groupOrders.array(), function(err, res) {
-      if (err) {
-        console.log(err);
-      } else {
-        Router.go('/grouporder/' + res);
-      }
-    });
+Template.confirmGroupOrder.helpers({
+  methodArgs: function() {
+    return [Filter.get(), groupOrders.array()]
+  },
+  onSuccess: function() {
+    return function(result) {
+      Router.go('/grouporder/' + result);
+    }
   }
 });
 
 Template.resources.events({
-  'click #update': function() {
+  'click #update': function(event) {
+    $(event.target)
+      .data('working-text', 'Working...')
+      .button('working')
+      .prop('disabled', true);
+     
     var inputsIds = [];
     $('input.form-control').parent().parent().each(function(){
       var id = $(this).attr('id');
@@ -127,6 +129,7 @@ Template.resources.events({
     _.each(inputsIds, function(id, index) {
       $('#' + id).submit();
     });
+    $(event.target).button('reset').prop('disabled', false);;
   }
 });
 

@@ -50,6 +50,10 @@ Template.orders.events({
 
 Template.ordersActionBar.events({
   'click #contactAndPrint': function (event, template) {
+    $(event.target)
+      .data('working-text', 'Working...')
+      .button('working')
+      .prop('disabled', true);
     template.subscribe('completed-orders', function() {
       console.log('CSV export beginning...');
       var data = [];
@@ -101,5 +105,6 @@ Template.ordersActionBar.events({
       Session.set('modalText', modalText);
       $('#contactAndPrintModal').modal();
     });
+    $(event.target).button('reset').prop('disabled', false);;
   }
 });

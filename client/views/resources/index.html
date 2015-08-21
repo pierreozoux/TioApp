@@ -17,7 +17,9 @@
 <template name="confirmGroupOrder">
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-2">
-      <button id="confirm" class="btn btn-primary">Confirm Group Order</button>
+      {{#callButton buttonMethod="insertGroupOrder" buttonMethodArgs=methodArgs buttonOnSuccess=onSuccess }}
+        Confirm Group Order
+      {{/callButton}}
     </div>
   </div>
 </template>
