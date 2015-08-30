@@ -42,7 +42,7 @@ Template.GroupOrder.helpers({
         key: 'resourceId',
         label: 'Year',
         fn: function(value) {
-          return Resources.findOne(value).year;
+          return parseInt(Resources.findOne(value).year);
         }
       }, {
         key: 'received',
