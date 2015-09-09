@@ -82,7 +82,9 @@ if (Meteor.isServer) {
         $inc: {quantity: quantityReceived}
       }
     );
-    Resources.findOne(doc.resourceId).updateGroupOrders();
+    var resource = Resources.findOne(doc.resourceId);
+    resource.updateGroupOrders();
+    resource.updateOrders();
   });
 }
 

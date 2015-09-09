@@ -72,12 +72,6 @@ Resources.helpers({
       }}
     }).count();
   },
-  updateAvailability: function () {
-    var resource = this;
-    Resources.update(resource._id, {
-      $set: {computedAvailability: this.availability()}
-    });
-  },
   orders: function() {
     var resource = this;
     return Orders.find({
@@ -93,7 +87,10 @@ Resources.helpers({
   updateOrders: function () {
     var resource = this;
     Resources.update(resource._id, {
-      $set: {computedOrders: this.orders()}
+      $set: {
+        computedOrders: this.orders(),
+        computedAvailability: this.availability()
+      }
     });
   },
   groupOrders: function() {
@@ -130,7 +127,6 @@ if (Meteor.isServer) {
     updateResources: function() {
       Resources.find().forEach(function(resource){
         resource.updateGroupOrders();
-        resource.updateAvailability();
         resource.updateOrders();
       })
     }
