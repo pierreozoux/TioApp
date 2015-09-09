@@ -87,7 +87,7 @@ Template.ordersActionBar.events({
               phone: contact.phone
             });
           }
-          Orders.update(order._id, {$set: {state: 'contacted'}});
+          Meteor.call('contact', order);
         });
 
         if (emailCount > 0) {
