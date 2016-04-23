@@ -15,8 +15,7 @@ Template.orders.helpers({
               return 'Never';
             }
           }
-        },
-        {
+        }, {
           key:'contactedAt',
           label: 'Contacted',
           fn: function(value) {

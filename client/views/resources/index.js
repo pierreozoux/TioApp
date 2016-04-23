@@ -33,8 +33,7 @@ Template.resources.helpers({
             return (_.contains(groupOrders.array(), object._id))?true:false;
           },
           tmpl: Template.orderResource
-        },
-        {
+        }, {
           key: 'reference',
           label: 'Reference'
         }, {
@@ -139,4 +138,3 @@ Template.resourceQuantity.helpers({
     return (groupOrders.length > 0)?true:false;
   }
 });
-
