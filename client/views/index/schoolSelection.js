@@ -18,4 +18,3 @@ Template.schoolSelection.onRendered(function() {
   Meteor.typeahead.inject();
   $('#school-selector').focus();
 });
-

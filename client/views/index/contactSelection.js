@@ -34,4 +34,3 @@ AutoForm.hooks({
     }
   }
 });
-

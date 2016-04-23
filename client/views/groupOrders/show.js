@@ -129,4 +129,3 @@ Template.GroupOrder.events({
     $(event.target).button('reset').prop('disabled', false);;
   }
 });
-
