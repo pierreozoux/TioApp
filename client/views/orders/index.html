@@ -7,7 +7,7 @@
 <template name="ordersActionBar">
   <div class="row action-bar">
     <div class="col-sm-offset-10 col-sm-2">
-      <button id="contactAndPrint" class="btn btn-success">Contact and Print</button>
+      <button id="contactAndPrint" class="btn btn-success">{{_ "Contact and print"}}</button>
     </div>
   </div>
 </template>
@@ -18,13 +18,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Information</h4>
+          <h4 class="modal-title" id="myModalLabel">{{_ "Information"}}</h4>
         </div>
         <div class="modal-body">
           <p>{{getSession 'modalText'}}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{_ "Ok"}}</button>
         </div>
       </div>
     </div>

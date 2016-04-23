@@ -6,12 +6,12 @@ Template.Grouporders.helpers({
         'group',
         {
           key:'createdAt',
-          label: 'Created',
+          label: TAPi18n.__('Created'),
           fn: function(value) {
             if (value instanceof Date) {
               return moment(value).calendar();
             } else {
-              return 'Never';
+              return TAPi18n.__('Never');
             }
           }
         },

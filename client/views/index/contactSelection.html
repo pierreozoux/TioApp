@@ -1,12 +1,12 @@
 <template name="contactSelection">
   <div class="form-group">
-    <label for="contact-selector" class="col-sm-2 control-label">Contact</label>
+    <label for="contact-selector" class="col-sm-2 control-label">{{_ "Contact"}}</label>
     <div class="col-sm-5 contact-left">
       <input id="contact-selector" class="form-control typeahead" name="contact" type="text" placeholder="Search Phone/Email" autocomplete="off" spellcheck="off" data-source="contacts" data-selected="selected"/>
     </div>
     <div class="col-sm-5">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newContact">
-        Create new Contact
+        {{_ "Create new contact"}}
       </button>
     </div>
   </div>
@@ -27,7 +27,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Create a new contact</h4>
+          <h4 class="modal-title" id="myModalLabel">{{_ "Create new contact"}}</h4>
         </div>
         <div class="modal-body">
           {{> quickForm template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10" collection="Contacts" id="insertContactForm" type="insert" buttonClasses="btn btn-success"}}

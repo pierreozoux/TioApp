@@ -13,14 +13,14 @@
     <div class="navbar-collapse collapse">
       {{#if currentUser}}
         <ul class="nav navbar-nav">
-          <li class="{{ activeIfTemplateIs '' }}"><a href="/">Home</a></li>
-          <li class="{{ activeIfTemplateIs 'Orders' }}"><a href="/orders">Orders</a></li>
-          <li class="{{ activeIfTemplateIs 'Grouporders' }}"><a href="/grouporders">Group Orders</a></li>
-          <li class="{{ activeIfTemplateIs 'Resources' }}"><a href="/resources">Resources</a></li>
+          <li class="{{ activeIfTemplateIs '' }}"><a href="/">{{_ "Home"}}</a></li>
+          <li class="{{ activeIfTemplateIs 'Orders' }}"><a href="/orders">{{_ "Orders"}}</a></li>
+          <li class="{{ activeIfTemplateIs 'Grouporders' }}"><a href="/grouporders">{{_ "Group orders"}}</a></li>
+          <li class="{{ activeIfTemplateIs 'Resources' }}"><a href="/resources">{{_ "Resources"}}</a></li>
           {{#if getSession 'isAdmin'}}
-            <li class="admin {{ activeIfTemplateIs 'Import' }}"><a href="/import">Integradas</a></li>
-            <li class="admin {{ activeIfTemplateIs 'Settings' }}"><a href="/settings">Settings</a></li>
-            <li class="admin"><a href="/admin">Admin</a></li>
+          <li class="admin {{ activeIfTemplateIs 'Import' }}"><a href="/import">{{_ "Integradas"}}</a></li>
+          <li class="admin {{ activeIfTemplateIs 'Settings' }}"><a href="/settings">{{_ "Settings"}}</a></li>
+          <li class="admin"><a href="/admin">{{_ "Admin"}}</a></li>
           {{/if}}
         </ul>
       {{/if}}

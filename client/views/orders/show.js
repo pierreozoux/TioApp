@@ -25,23 +25,29 @@ Template.Order.helpers({
         return order.cssClass(resource);
       },
       fields: [
-        'subject',
-        'title',
+        {
+          key: 'subject',
+          label: TAPi18n.__('Subject')
+        },
+        {
+          key: 'title',
+          label: TAPi18n.__('Title')
+        },
         {
           key: 'availability',
-          label: 'Availability',
+          label: TAPi18n.__('Availability'),
           fn: function(value, resource) {
-            return resource.computedAvailability + ' (' + resource.quantity + ' in stock)';
+            return resource.computedAvailability + ' (' + resource.quantity + ' ' + TAPi18n.__('in stock') + ')';
           }
         },
         {
           key: 'action',
-          label: 'Action',
+          label: TAPi18n.__('Action'),
           tmpl: Template.orderResourceAction
         },
         {
           key: 'sold',
-          label: 'Sold',
+          label: TAPi18n.__('Sold'),
           tmpl: Template.orderResourceSold
         }
       ]
@@ -113,8 +119,8 @@ Template.orderResourceSold.helpers({
 Template.orderAction.helpers({
   action: function() {
     switch (this.state) {
-      case 'created': return 'Print';
-      case 'completed': return 'Contact';
+      case 'created': return TAPi18n.__('Print');
+      case 'completed': return TAPi18n.__('Contact');
     }
   }
 });
@@ -169,9 +175,9 @@ Template.confirmAction.helpers({
   content: function() {
     var intent = Session.get('intent');
     if (intent === 'cancel') {
-      return 'You are about to cancel this order.';
+      return TAPi18n.__('You are about to cancel this order.');
     } else {
-      return 'You are about to finalize this order.';
+      return TAPi18n.__('You are about to finalize this order.');
     }
   }
 });

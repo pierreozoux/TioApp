@@ -1,5 +1,5 @@
 <template name="GroupOrder">
-  <h2>Group Order</h2>
+  <h2>{{_ "Group order"}}</h2>
   <div class="row">
   {{#autoForm class="form-horizontal" collection="GroupOrders" doc=this id="updateGroupOrderForm" type="readonly"}}
     {{> afQuickField template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10" name='group'}}
@@ -12,7 +12,7 @@
   {{#unless received}}
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-2">
-      <button id="update" class="btn btn-success">Update</button>
+      <button id="update" class="btn btn-success">{{_ "Update"}}</button>
     </div>
     <div class="col-sm-6">
       <p class="bg-danger">{{ getSession 'errorResult' }}</p>

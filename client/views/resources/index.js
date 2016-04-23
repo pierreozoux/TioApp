@@ -28,34 +28,42 @@ Template.resources.helpers({
       fields: [
         {
           key: 'order',
-          label: 'Order',
+          label: TAPi18n.__('Order'),
           fn: function(value, object) {
             return (_.contains(groupOrders.array(), object._id))?true:false;
           },
           tmpl: Template.orderResource
         }, {
           key: 'reference',
-          label: 'Reference'
+          label:TAPi18n.__('Reference')
         }, {
           key: 'year',
-          label: 'Year'
-        },
-        'subject',
-        'title', {
+          label:TAPi18n.__('Year')
+        }, {
+          key: 'subject',
+          label:TAPi18n.__('Subject')
+        }, {
+          key: 'title',
+          label:TAPi18n.__('Title')
+        }, {
           key: 'quantity',
-          label: 'Quantity',
+          label: TAPi18n.__('Quantity'),
           tmpl: Template.resourceQuantity
         }, {
           key: 'computedOrders',
           sortOrder: 0,
           sortDirection: 'descending',
-          label: 'Orders'
+          label:TAPi18n.__('Orders')
         }, {
           key: 'computedGroupOrders',
-          label: 'Group Orders'
-        },
-        'editor',
-        'group'
+          label:TAPi18n.__('Group orders')
+        }, {
+          key: 'editor',
+          label:TAPi18n.__('Editor')
+        }, {
+          key: 'group',
+          label:TAPi18n.__('Group')
+        }
       ]
     }; 
   },
@@ -113,7 +121,7 @@ Template.confirmGroupOrder.helpers({
 Template.resources.events({
   'click #update': function(event) {
     $(event.target)
-      .data('working-text', 'Working...')
+      .data('working-text', TAPi18n.__('Working...'))
       .button('working')
       .prop('disabled', true);
      

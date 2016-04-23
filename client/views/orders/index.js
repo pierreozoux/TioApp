@@ -3,35 +3,44 @@ Template.orders.helpers({
     return {
       collection: 'orders',
       fields: [
-        {key: 'humanId', label: 'Number'},
-        'state',
         {
+          key: 'humanId',
+          label: TAPi18n.__('Number')
+        }, {
+          key: 'state',
+          label: TAPi18n.__('State')
+        }, {
           key:'createdAt',
-          label: 'Created',
+          label: TAPi18n.__('Created'),
           fn: function(value) {
             if (value instanceof Date) {
               return moment(value).calendar();
             } else {
-              return 'Never';
+              return TAPi18n.__('Never');
             }
           }
         }, {
           key:'contactedAt',
-          label: 'Contacted',
+          label: TAPi18n.__('Contacted'),
           fn: function(value) {
             if (value instanceof Date) {
               return moment(value).calendar();
             } else {
-              return 'Never';
+              return TAPi18n.__('Never');
             }
           }
-        },
-        'courseName',
-        'phone',
-        'name',
-        {
+        }, {
+          key: 'courseName',
+          label: TAPi18n.__('courseName')
+        }, {
+          key: 'phone',
+          label: TAPi18n.__('Phone')
+        }, {
+          key: 'name',
+          label: TAPi18n.__('Name')
+        }, {
           key: '_id',
-          label: 'action',
+          label: TAPi18n.__('Action'),
           tmpl: Template.orderAction
         }
       ]
@@ -50,11 +59,11 @@ Template.orders.events({
 Template.ordersActionBar.events({
   'click #contactAndPrint': function (event, template) {
     $(event.target)
-      .data('working-text', 'Working...')
+      .data('working-text', TAPi18n.__('Working...'))
       .button('working')
       .prop('disabled', true);
     template.subscribe('completed-orders', function() {
-      console.log('CSV export beginning...');
+      console.log(TAPi18n.__('csv export beginning...'));
       var data = [];
       var emailCount = 0;
       var modalText = '';
@@ -90,15 +99,15 @@ Template.ordersActionBar.events({
         });
 
         if (emailCount > 0) {
-          modalText += emailCount + ' emails sent.';
+          modalText += emailCount + ' ' + TAPi18n.__('emails sent.');
         } else {
-          modalText += 'No emails sent.';
+          modalText += TAPi18n.__('No emails sent.');
         }
 
         var blob = new Blob([CSV.unparse(data)], {type: 'text/csv;charset=utf-8'});
         saveAs(blob, 'orders_to_contact.csv');
       } else {
-        modalText = 'Nobody to contact! ';
+        modalText = TAPi18n.__('Nobody to contact!');
       }
 
       Session.set('modalText', modalText);

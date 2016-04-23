@@ -23,30 +23,30 @@ Template.GroupOrder.helpers({
       rowsPerPage: 100,
       fields: [{
         key: 'resourceId',
-        label: 'Title',
+        label: TAPi18n.__('Title'),
         fn: function(value) {
           return Resources.findOne(value).title;
         }
       }, {
         key: 'resourceId',
-        label: 'Reference',
+        label: TAPi18n.__('Reference'),
         fn: function(value) {
           return Resources.findOne(value).reference;
         }
       }, {
         key: 'quantity',
-        label: 'Quantity',
+        label: TAPi18n.__('Quantity'),
         sortByValue: true,
         tmpl: Template.quantity
       }, {
         key: 'resourceId',
-        label: 'Year',
+        label: TAPi18n.__('Year'),
         fn: function(value) {
           return parseInt(Resources.findOne(value).year);
         }
       }, {
         key: 'received',
-        label: 'Received',
+        label: TAPi18n.__('Received'),
         sortByValue: true,
         tmpl: Template.received
       }]
@@ -70,7 +70,7 @@ Template.GroupOrder.onRendered(function(){
 Template.GroupOrder.events({
   'click #update': function(event) {
     $(event.target)
-      .data('working-text', 'Working...')
+      .data('working-text', TAPi18n.__('Working...'))
       .button('working')
       .prop('disabled', true);
     Session.set('errorResult', '');
@@ -124,7 +124,7 @@ Template.GroupOrder.events({
         });
       }
     } else {
-      Session.set('errorResult', 'Quantity must be superior or equal to Received.');
+      Session.set('errorResult', TAPi18n.__('Quantity must be superior or equal to received.'));
     }
     $(event.target).button('reset').prop('disabled', false);;
   }

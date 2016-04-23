@@ -1,0 +1,8 @@
+#!/bin/bash -eux
+
+rm ./i18n/pt.i18n.yml
+grep -Roh 'TAPi18n.__(.*)' ./* --exclude-dir=./scripts | cut -f2 -d\' | sed -e 's/$/:/' | sort | uniq > /tmp/1.yml
+grep -Roh '{{_ ".*"}}' ./* --exclude-dir=./scripts | cut -f2 -d\" | sed -e 's/$/:/' | sort | uniq > /tmp/2.yml
+cat /tmp/1.yml /tmp/2.yml| sort | uniq > ./i18n/pt.i18n.yml
+
+rm /tmp/1.yml /tmp/2.yml

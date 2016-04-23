@@ -107,6 +107,7 @@ srp@1.0.8
 standard-minifier-css@1.0.6
 standard-minifier-js@1.0.6
 stylus@2.511.5
+tap:i18n@1.8.0
 templating@1.1.9
 templating-tools@1.0.4
 tmeasday:paginated-subscription@0.2.4

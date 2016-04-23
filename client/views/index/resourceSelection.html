@@ -1,17 +1,17 @@
 <template name="resourcesSelection">
 {{#if printResources}}
   {{> unselectAll}}
-  <label class="col-sm-2 control-label">Resource selection</label>
+  <label class="col-sm-2 control-label">{{_ "Resource selection"}}</label>
   <div class="col-sm-10">
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Subject</th>
-          <th>Title</th>
-          <th>Editor</th>
-          <th>Availability</th>
-          <th>Action</th>
-          <th>Sell</th>
+          <th>{{_ "Subject"}}</th>
+          <th>{{_ "Title"}}</th>
+          <th>{{_ "Editor"}}</th>
+          <th>{{_ "Availability"}}</th>
+          <th>{{_ "Action"}}</th>
+          <th>{{_ "Sell"}}</th>
         </tr>
       </thead>
       <tbody>
@@ -27,7 +27,7 @@
             {{ editor }}
           </td>
           <td>
-            {{ computedAvailability }} ({{ quantity }} in stock)
+            {{ computedAvailability }} ({{ quantity }} {{_ "in stock"}})
           </td>
           <td>
             <i class="fa fa-trash"></i>
@@ -54,10 +54,10 @@
 <template name="confirmation">
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-2">
-      <button id="confirm" class="btn btn-success">Confirm!</button>
+      <button id="confirm" class="btn btn-success">{{_ "Confirm"}}!</button>
     </div>
     <div class="col-sm-2">
-      <button id="cancel" class="btn btn-default">Cancel</button>
+      <button id="cancel" class="btn btn-default">{{_ "Cancel"}}</button>
     </div>
   </div>
 </template>
@@ -65,7 +65,7 @@
 <template name="unselectAll">
   <div class="row action-bar">
     <div class="col-sm-offset-10 col-sm-2">
-      <button id="unselectAll" class="btn btn-success">unselect all</button>
+      <button id="unselectAll" class="btn btn-success">{{_ "Unselect all"}}</button>
     </div>
   </div>
 </template>
