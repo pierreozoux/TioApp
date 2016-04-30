@@ -53,6 +53,9 @@ Template.resources.helpers({
           key: 'computedOrders',
           sortOrder: 0,
           sortDirection: 'descending',
+          fn: function(value, object) {
+            return new Spacebars.SafeString("<a href=/orders?resourceId="+object._id+"&reference="+object.reference+">"+value+"</a>");
+          },
           label:TAPi18n.__('Orders')
         }, {
           key: 'computedGroupOrders',

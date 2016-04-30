@@ -1,6 +1,7 @@
 Template.orders.helpers({
   settings: function () {
     return {
+      showFilter: true,
       collection: 'orders',
       fields: [
         {
@@ -43,8 +44,17 @@ Template.orders.helpers({
           label: TAPi18n.__('Action'),
           tmpl: Template.orderAction
         }
-      ]
+      ],
+      filters: ['resource']
     };
+  }
+});
+
+Template.orders.onCreated(function() {
+  var resourceId = this.data.resourceId;
+  if (resourceId) {
+    this.filter = new ReactiveTable.Filter('resource', ['orderedResources']);
+    this.filter.set({ $elemMatch: { resourceId: resourceId } });
   }
 });
 

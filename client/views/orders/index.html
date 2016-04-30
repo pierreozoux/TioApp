@@ -1,4 +1,7 @@
 <template name="orders">
+  {{#if resourceId}}
+  {{_ "Showing orders that contain reference:"}} {{reference}}
+  {{/if}}
   {{> ordersActionBar}}
   {{> reactiveTable class="index-table table table-striped table-bordered table-hover" settings=settings }}
   {{> contactAndPrintModal}}

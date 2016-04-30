@@ -17,7 +17,9 @@ Router.route('/', function () {
 Router.route('/orders', function() {
   this.subscribe('contacts').wait();
   if (this.ready()) {
-    this.render('orders');
+    this.render('orders', {
+      data: this.params.query
+    });
   } else {
     this.render('Loading');
   }
