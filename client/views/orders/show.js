@@ -28,24 +28,20 @@ Template.Order.helpers({
         {
           key: 'subject',
           label: TAPi18n.__('Subject')
-        },
-        {
+        }, {
           key: 'title',
           label: TAPi18n.__('Title')
-        },
-        {
+        }, {
           key: 'availability',
           label: TAPi18n.__('Availability'),
           fn: function(value, resource) {
             return resource.computedAvailability + ' (' + resource.quantity + ' ' + TAPi18n.__('in stock') + ')';
           }
-        },
-        {
+        }, {
           key: 'action',
           label: TAPi18n.__('Action'),
           tmpl: Template.orderResourceAction
-        },
-        {
+        }, {
           key: 'sold',
           label: TAPi18n.__('Sold'),
           tmpl: Template.orderResourceSold
