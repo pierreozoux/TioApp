@@ -41,4 +41,3 @@ Router.route('/settings', function() {
     this.render('Loading');
   }
 });
-
