@@ -32,6 +32,9 @@ Template.Order.helpers({
           key: 'title',
           label: TAPi18n.__('Title')
         }, {
+          key: 'editor',
+          label: TAPi18n.__('Editor')
+        }, {
           key: 'availability',
           label: TAPi18n.__('Availability'),
           fn: function(value, resource) {
