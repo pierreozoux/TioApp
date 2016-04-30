@@ -20,3 +20,15 @@ Settings.allow({
   }
 });
 
+if (Meteor.isServer) {
+  Meteor.methods({
+    backgroundColor: function() {
+      var color = Settings.findOne({key: 'background-color'})
+      if (color) {
+        return color.value;
+      } else {
+        return '#fff';
+      }
+    }
+  });
+}
