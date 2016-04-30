@@ -19,4 +19,3 @@ Template.nav.events({
     Session.set('errorResult', '');
   }
 });
-
