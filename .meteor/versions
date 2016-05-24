@@ -23,6 +23,7 @@ caching-html-compiler@1.0.6
 callback-hook@1.0.8
 cfs:http-methods@0.0.32
 check@1.2.1
+chuangbo:cookie@1.1.0
 coffeescript@1.0.17
 dburles:collection-helpers@1.0.4
 dburles:mongo-collection-instances@0.3.5
@@ -70,6 +71,10 @@ matb33:collection-hooks@0.8.1
 mdg:validation-error@0.5.1
 meteor@1.1.14
 meteor-base@1.0.4
+meteorhacks:fast-render@2.14.0
+meteorhacks:inject-data@2.0.0
+meteorhacks:meteorx@1.4.1
+meteorhacks:picker@1.0.3
 meteorspark:util@0.2.0
 minifier-css@1.1.11
 minifier-js@1.1.11
