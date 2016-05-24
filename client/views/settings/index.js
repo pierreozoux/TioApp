@@ -6,4 +6,3 @@ Template.Settings.helpers({
     return 'update-' + this._id;
   }
 });
-
