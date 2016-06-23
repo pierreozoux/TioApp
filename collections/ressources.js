@@ -132,4 +132,3 @@ if (Meteor.isServer) {
     }
   });
 }
-
