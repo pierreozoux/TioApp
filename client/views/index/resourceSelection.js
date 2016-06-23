@@ -8,7 +8,11 @@ Template.resourcesSelection.helpers({
   },
   isSellable: function() {
     Template.resourcesSelection.__helpers.get('setNeedContact')();
-    return this.availability()>0?true:false;
+    if (this.computedAvailability > 0 || this.quantity > 2) {
+      return true
+    } else {
+      return false
+    }
   },
   setNeedContact: function() {
     var needContact = false;
