@@ -4,7 +4,13 @@ Template.callButton.events({
       .data('working-text', 'Working...')
       .button('working')
       .prop('disabled', true);
-    Meteor.apply(template.data.buttonMethod, template.data.buttonMethodArgs, function(error, result) {
+    if(template.data.buttonMethodArgs.match(/\(\)$/)) {
+      args = [eval(template.data.buttonMethodArgs)];
+    } else {
+      args = template.data.buttonMethodArgs;
+    }
+
+    Meteor.apply(template.data.buttonMethod, args, function(error, result) {
       $(event.target).button('reset').prop('disabled', false);;
       if (error) {
         $('#error-modal').modal();
@@ -24,4 +30,3 @@ Template.callButton.helpers({
     return this.buttonStyle?this.buttonStyle:'success'
   }
 });
-
