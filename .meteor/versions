@@ -86,6 +86,7 @@ modules-runtime@0.6.4_1
 momentjs:moment@2.13.1
 mongo@1.1.9_1
 mongo-id@1.0.5
+mrt:later@1.6.1
 npm-bcrypt@0.8.7
 npm-mongo@1.4.44_1
 observe-sequence@1.0.12
@@ -123,5 +124,6 @@ twbs:bootstrap@3.3.6
 ui@1.0.11
 underscore@1.0.9
 url@1.0.10
+vsivsi:job-collection@1.4.0
 webapp@1.2.9_1
 webapp-hashing@1.0.9

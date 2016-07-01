@@ -21,6 +21,7 @@
     {{/each}}
   </tbody>
 </table>
+{{> sendSMS}}
 {{/if}}
 </template>
 
@@ -36,5 +37,22 @@
     <div class="col-sm-2">
       <a href="/contacts/download" target="_blank"><button id="PrintContacts" class="btn btn-success">{{_ "Print contacts."}}</button></a>
     </div>
+  </div>
+</template>
+
+<template name="sendSMS">
+  <h2> SMS </h2>
+  <h5> {{_ "Estimated price would be:"}} {{getSession 'price'}}$</h5>
+  <div class="row action-bar">
+    <div class="col-sm-6">
+      <textarea id="sms" class="form-control"></textarea>
+    </div>
+    {{#if getSession 'smstext'}}
+    <div class="col-sm-6">
+      {{#callButton buttonMethod="sendSMSAll" buttonMethodArgs="$('#sms').val()" buttonStyle="success"}}
+      {{_ "Send SMS to all."}}
+      {{/callButton}}
+    </div>
+    {{/if}}
   </div>
 </template>
