@@ -2,4 +2,4 @@
 .uploads
 .dump
 .tmp
-
+/node_modules/

@@ -45,5 +45,3 @@ Contacts.allow({
     return userId?true:false;
   }
 });
-
-

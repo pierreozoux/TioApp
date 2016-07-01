@@ -22,4 +22,3 @@ Courses.attachSchema(new SimpleSchema({
     label: 'resources'
   }
 }));
-
