@@ -50,12 +50,12 @@ Meteor.startup(function () {
             console.log('err: ' + pretty_error);
             job.fail(pretty_error);
           }
-          callback()
         }));
       } else {
         job.done('not a mobile!');
         job.remove();
       }
+      callback()
     });
 });
 
