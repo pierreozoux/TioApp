@@ -3,14 +3,12 @@ FROM node:0.10
 RUN groupadd -r app \
 &&  useradd -r -g app app
 
-ENV VERSION 1.0.0
+COPY . /source
+WORKDIR /source
 
-WORKDIR /app
-
-RUN curl -fSL "https://github.com/pierreozoux/TioApp/releases/download/v${VERSION}/TioApp.tar.gz" -o TioApp.tar.gz \
- && tar zxvf TioApp.tar.gz \
- && rm TioApp.tar.gz \
- && cd bundle/programs/server \
+RUN curl -sL https://install.meteor.com | sed s/--progress-bar/-sL/g | /bin/sh \
+ && meteor build --directory /app \
+ && cd /app/bundle/programs/server \
  && npm install \
  && chown -R app:app /app
 
