@@ -26,8 +26,7 @@ Meteor.startup(function () {
   smsJobs.processJobs(
     'sms',
     {
-      concurrency: 4,
-      pollInterval: 1000
+      pollInterval: 60000
     },
     function (job, callback) {
       if (job.data.phone.substring(0,1) != '2') {
