@@ -7,6 +7,7 @@ COPY . /source
 WORKDIR /source
 
 RUN curl -sL https://install.meteor.com | sed s/--progress-bar/-sL/g | /bin/sh \
+ && meteor npm install \
  && meteor build --directory /app \
  && cd /app/bundle/programs/server \
  && npm install \
