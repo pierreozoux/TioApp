@@ -45,12 +45,12 @@ Meteor.startup(function () {
           console.log('myTwilio.RestClient resp body: ' + res.body); // outputs "word to your mother."
           job.done('sms sent!');
           job.remove();
-          callback()
         } else {
           pretty_error = JSON.stringify(err, null, 2)
           console.log('err: ' + pretty_error);
           job.fail(pretty_error);
         }
+        callback()
       }));
     }
   );
