@@ -56,8 +56,7 @@ Meteor.startup(function () {
         job.done('not a mobile!');
         job.remove();
       }
-    }
-  );
+    });
 });
 
 Meteor.methods({
