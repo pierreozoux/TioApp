@@ -36,7 +36,12 @@ Router.route('/orders/download', function() {
   if(this.request.cookies.meteor_login_token)
       user = Meteor.users.findOne({"services.resume.loginTokens.hashedToken": Accounts._hashLoginToken(this.request.cookies.meteor_login_token)});
   if (user && Houston._user_is_admin(user._id)) {
-    var pipeline = [ {$group: { _id: "$courseName", count:{$sum:1}}}];
+    var startYear = moment().startOf('year').toDate();
+    var startLastYear = moment().subtract(1, 'year').startOf('year').toDate();
+    var pipeline = [
+      { $createdAt: { $lt: startYear, $gt: startLastYear } },
+      { $group: { _id: "$courseName", count:{ $sum:1 } } }
+    ];
     var data = Orders.aggregate(pipeline);
     this.response.writeHead(200, {
       'Content-type': 'text/csv',
