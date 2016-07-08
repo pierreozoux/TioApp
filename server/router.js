@@ -29,3 +29,19 @@ Router.route('/contacts/download', function() {
     this.response.end(CSV.unparse(data));
   }
 }, {where: 'server'});
+
+Router.route('/orders/download', function() {
+  var user = '';
+  log.info(this.request.cookies.meteor_login_token);
+  if(this.request.cookies.meteor_login_token)
+      user = Meteor.users.findOne({"services.resume.loginTokens.hashedToken": Accounts._hashLoginToken(this.request.cookies.meteor_login_token)});
+  if (user && Houston._user_is_admin(user._id)) {
+    var pipeline = [ {$group: { _id: "$courseName", count:{$sum:1}}}];
+    var data = Orders.aggregate(pipeline);
+    this.response.writeHead(200, {
+      'Content-type': 'text/csv',
+      'Content-Disposition': "attachment; filename=orders.csv"
+    });
+    this.response.end(CSV.unparse(data));
+  }
+}, {where: 'server'});
