@@ -74,7 +74,7 @@ Meteor.methods({
         job.priority('normal')
         .retry({
           retries: 5,
-          wait: 60
+          wait: 60000
         }).save();
       }
     });
