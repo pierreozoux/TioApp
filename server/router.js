@@ -6,7 +6,6 @@ Router.route('/contacts/download', function() {
   if (user && Houston._user_is_admin(user._id)) {
     log.info(user);
     var data = [];
-    var fileData = "";
     var stateSupport;
     var contact;
     Orders.find().forEach(function(order) {
@@ -16,8 +15,7 @@ Router.route('/contacts/download', function() {
       } else {
         stateSupport = '';
       }
-      stateSupport = 
-        data.push({
+      data.push({
         name: order.name,
         phone: order.phone,
         course: order.courseName,
