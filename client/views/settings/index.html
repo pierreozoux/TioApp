@@ -48,6 +48,7 @@
 <template name="sendSMS">
   <h2> SMS </h2>
   <h5> {{_ "Estimated price would be:"}} {{getSession 'price'}}$</h5>
+  <div id="char_count">160 {{_ "chars remaining"}}</div>
   <div class="row action-bar">
     <div class="col-sm-6">
       <textarea id="sms" class="form-control"></textarea>
