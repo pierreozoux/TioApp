@@ -55,7 +55,7 @@ Meteor.startup(function () {
         job.done('not a mobile!');
         job.remove();
       }
-      callback()
+      Meteor.setTimeout(callback,30000);
     });
 });
 
