@@ -4,8 +4,12 @@ Template.callButton.events({
       .data('working-text', 'Working...')
       .button('working')
       .prop('disabled', true);
-    if(template.data.buttonMethodArgs.match(/\(\)$/)) {
-      args = [eval(template.data.buttonMethodArgs)];
+    if (typeof template.data.buttonMethodArgs === 'string' || template.data.buttonMethodArgs instanceof String) {
+      if(template.data.buttonMethodArgs.match(/\(\)$/)) {
+        args = [eval(template.data.buttonMethodArgs)];
+      } else {
+        args = template.data.buttonMethodArgs;
+      }
     } else {
       args = template.data.buttonMethodArgs;
     }
