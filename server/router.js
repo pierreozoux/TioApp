@@ -39,7 +39,7 @@ Router.route('/orders/download', function() {
     var startYear = moment().startOf('year').toDate();
     var startLastYear = moment().subtract(1, 'year').startOf('year').toDate();
     var pipeline = [
-      { $createdAt: { $lt: startYear, $gt: startLastYear } },
+      { $match: { createdAt: { $lt: startYear, $gt: startLastYear } } },
       { $group: { _id: "$courseName", count:{ $sum:1 } } }
     ];
     var data = Orders.aggregate(pipeline);
