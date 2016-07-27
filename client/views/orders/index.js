@@ -79,7 +79,7 @@ Template.ordersActionBar.events({
       var modalText = '';
       var orders = Orders.find();
       var emailText = 'Bom dia\n\n' +
-        'Informamos que a sua encomenda se encontra pronta para ser levantada na Livraria Tio Papel.\n\n' +
+        'Informamos que a sua encomenda se encontra pronta para ser levantada na nossa Livraria.\n\n' +
         'Lembramos tambem que podera plastificar os seus livros por apenas 1,25euro ' +
         'cada e que tem ainda direito a 10% de desconto na compra de material escolar.\n\n' +
         'Ficamos a aguardar a sua visita.';
@@ -91,7 +91,7 @@ Template.ordersActionBar.events({
             console.log('Email send to: ' + contact.email);
             Meteor.call('sendEmail',
               contact.email,
-              'TioPapel encomenda',
+              'Encomenda Escolar Completa!',
               emailText
             );
             emailCount += 1;
