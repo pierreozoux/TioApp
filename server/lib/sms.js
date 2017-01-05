@@ -62,8 +62,8 @@ Meteor.startup(function () {
 Meteor.methods({
   sendSMSAll: function (text) {
     check([text], [String]);
-    _.each(phonesToContact(), function(phone) {
-      if (phone.substring(0,1) != '2') {
+    _.each(Meteor.call('phonesToContact'), function(phone) {
+      if (phone && phone.substring(0,1) != '2') {
         var job = new Job(smsJobs, 'sms', {
           phone: phone,
           text: text
