@@ -66,6 +66,10 @@ Template.resources.helpers({
         }, {
           key: 'group',
           label:TAPi18n.__('Group')
+        }, {
+          key: 'toRemove',
+          label:TAPi18n.__('toRemove'),
+          tmpl: Template.resourceToRemove
         }
       ]
     }; 

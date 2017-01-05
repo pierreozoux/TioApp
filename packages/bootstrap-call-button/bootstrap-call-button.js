@@ -15,7 +15,7 @@ Template.callButton.events({
     }
 
     Meteor.apply(template.data.buttonMethod, args, function(error, result) {
-      $(event.target).button('reset').prop('disabled', false);;
+      $(event.target).button('reset').prop('disabled', false);
       if (error) {
         $('#error-modal').modal();
         console.log(error)
