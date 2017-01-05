@@ -41,7 +41,7 @@ Meteor.startup(function () {
           body: job.data.text // body of the SMS message
         }, Meteor.bindEnvironment((err,res) => {
           if (!err) {
-            console.log('myTwilio.RestClient resp from : ' + res.from); // outputs "+14506667788"
+            console.log('myTwilio.RestClient resp to ' + res.to + ' from : ' + res.from); // outputs "+14506667788"
             console.log('myTwilio.RestClient resp body: ' + res.body); // outputs "word to your mother."
             job.done('sms sent!');
             job.remove();
