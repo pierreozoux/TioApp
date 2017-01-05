@@ -50,3 +50,22 @@ Router.route('/orders/download', function() {
     this.response.end(CSV.unparse(data));
   }
 }, {where: 'server'});
+
+// Download name and phone from order list
+Router.route('/phoneList/download', function() {
+  var user = '';
+  log.info(this.request.cookies.meteor_login_token);
+  if(this.request.cookies.meteor_login_token)
+    user = Meteor.users.findOne({"services.resume.loginTokens.hashedToken": Accounts._hashLoginToken(this.request.cookies.meteor_login_token)});
+  if (user && Houston._user_is_admin(user._id)) {
+    var data = [];
+    _.each(Meteor.call('phonesNameToContact'), function(m) {
+      data.push({phone: m.phone, name: m.name});
+    });
+    this.response.writeHead(200, {
+      'Content-type': 'text/csv',
+      'Content-Disposition': "attachment; filename=phoneList.csv"
+    });
+    this.response.end(CSV.unparse(data));
+  }
+}, {where: 'server'});

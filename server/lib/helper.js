@@ -36,7 +36,25 @@ Meteor.methods({
   },
   isAdmin: function(userId) {
     return Houston._user_is_admin(userId)?true:false;
-  }
+  },
+  phonesNameToContact: function() {
+	  var startYear = moment().startOf('year').toDate();
+	  var distinctPhone = [];
+	  var distinctOrders = [];
+	  var lastYearOrderList = Orders.find({
+	    courseName: {$regex: /^((?!-12).)*$/m},
+	  }, {
+	    fields: {phone: 1, name: 1},
+	    sort: {'name': 1}
+	  });
+	  lastYearOrderList.forEach (function(order){
+		  if (distinctPhone.indexOf(order.phone) == -1 && order.phone && order.phone.substring(0,1) != '2') {
+			  distinctPhone.push(order.phone);
+			  distinctOrders.push(order);
+		  }
+	  });
+	  return distinctOrders;
+  },
 });
 
 Meteor.startup(function() {
