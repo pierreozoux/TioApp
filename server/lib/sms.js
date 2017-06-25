@@ -1,43 +1,5 @@
 import twilio from 'twilio';
 
-var phonesToContact = function(isStateSupport) {
-  var startYear = moment().startOf('year').toDate();
-  if(isStateSupport) {
-    $criteria = {
-      courseName: {$regex: /^((?!-12).)*$/m},
-      createdAt: {$lt: startYear},
-      stateSupport:isStateSupport,
-    };
-  } else {
-    $criteria = {
-      courseName: {$regex: /^((?!-12).)*$/m},
-      createdAt: {$lt: startYear},
-    };
-  }
-  var previousYearsPhones = _.uniq(Orders.find($criteria, {
-    fields: {phone: 1}
-  }).map(function(e){return e.phone}));
-
-  if(isStateSupport) {
-    $criteria = {
-      courseName: {$regex: /^((?!-12).)*$/m},
-      createdAt: {$gt: startYear},
-      stateSupport:isStateSupport,
-    };
-  } else {
-    $criteria = {
-      courseName: {$regex: /^((?!-12).)*$/m},
-      createdAt: {$gt: startYear},
-    };
-  }
-
-  var thisYearPhones = _.uniq(Orders.find($criteria, {
-    fields: {phone: 1}
-  }).map(function(e){return e.phone}));
-
-  return _.compact(_.difference(previousYearsPhones, thisYearPhones));
-};
-
 var smsJobs = JobCollection('smsJobQueue');
 
 Meteor.startup(function () {
@@ -79,19 +41,39 @@ Meteor.startup(function () {
 });
 
 Meteor.methods({
-  phonesToContact: function() {
+  phonesToContact: function(params) {
+    var isStateSupport = params.isStateSupport;
     var startYear = moment().startOf('year').toDate();
-    var previousYearsPhones = _.uniq(Orders.find({
-      courseName: {$regex: /^((?!-12).)*$/m},
-      createdAt: {$lt: startYear}
-    }, {
+    if(isStateSupport) {
+      $criteria = {
+        courseName: {$regex: /^((?!-12).)*$/m},
+        createdAt: {$lt: startYear},
+        stateSupport:isStateSupport,
+      };
+    } else {
+      $criteria = {
+        courseName: {$regex: /^((?!-12).)*$/m},
+        createdAt: {$lt: startYear},
+      };
+    }
+    var previousYearsPhones = _.uniq(Orders.find($criteria, {
       fields: {phone: 1}
     }).map(function(e){return e.phone}));
 
-    var thisYearPhones = _.uniq(Orders.find({
-      courseName: {$regex: /^((?!-12).)*$/m},
-      createdAt: {$gt: startYear}
-    }, {
+    if(isStateSupport) {
+      $criteria = {
+        courseName: {$regex: /^((?!-12).)*$/m},
+        createdAt: {$gt: startYear},
+        stateSupport:isStateSupport,
+      };
+    } else {
+      $criteria = {
+        courseName: {$regex: /^((?!-12).)*$/m},
+        createdAt: {$gt: startYear},
+      };
+    }
+
+    var thisYearPhones = _.uniq(Orders.find($criteria, {
       fields: {phone: 1}
     }).map(function(e){return e.phone}));
 
@@ -102,8 +84,8 @@ Meteor.methods({
     var text = params.txtSms;
     var isStateSupport = params.stateSupport;
     check([text], [String]);
-    _.each(Meteor.call('phonesToContact'), {isStateSupport}, function(phone) {
-      if (phone.substring(0,1) != '2') {
+    _.each(Meteor.call('phonesToContact', {isStateSupport: isStateSupport}), function(phone) {
+      if (phone && phone.substring(0,1) != '2') {
         var job = new Job(smsJobs, 'sms', {
           phone: phone,
           text: text
@@ -117,14 +99,12 @@ Meteor.methods({
       }
     });
   },
-  priceSMSs: function() {
-    return Meteor.call('phonesToContact').length * 0.05;
 
   targetPeopleSms: function(params) {
     if (params.isStateSupport) {
-      return phonesToContact(true).length;
+      return Meteor.call('phonesToContact', {isStateSupport: true}).length;
     } else {
-      return phonesToContact(false).length;
+      return Meteor.call('phonesToContact', {isStateSupport: false}).length;
     }
   }
 });
