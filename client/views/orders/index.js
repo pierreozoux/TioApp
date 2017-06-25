@@ -40,6 +40,21 @@ Template.orders.helpers({
           key: 'name',
           label: TAPi18n.__('Name')
         }, {
+          key: 'orderedResources',
+          label: TAPi18n.__('Price'),
+          fn: function(value) {
+            var totalAmount = 0;
+            value.forEach(function (res) {
+              var currResource = Resources.findOne(res.resourceId);
+              if (currResource) {
+                if (!isNaN(currResource.price)) {
+                  totalAmount = totalAmount + Number(currResource.price);
+                }
+              }
+            })
+            return Math.round(totalAmount * 100) / 100;
+          }
+        }, {
           key: '_id',
           label: TAPi18n.__('Action'),
           tmpl: Template.orderAction
@@ -51,6 +66,7 @@ Template.orders.helpers({
 });
 
 Template.orders.onCreated(function() {
+  Meteor.subscribe('resources');
   var resourceId = this.data.resourceId;
   if (resourceId) {
     this.filter = new ReactiveTable.Filter('resource', ['orderedResources']);

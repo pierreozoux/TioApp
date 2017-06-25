@@ -1,18 +1,37 @@
 import twilio from 'twilio';
 
-var phonesToContact = function() {
+var phonesToContact = function(isStateSupport) {
   var startYear = moment().startOf('year').toDate();
-  var previousYearsPhones = _.uniq(Orders.find({
-    courseName: {$regex: /^((?!-12).)*$/m},
-    createdAt: {$lt: startYear}
-  }, {
+  if(isStateSupport) {
+    $criteria = {
+      courseName: {$regex: /^((?!-12).)*$/m},
+      createdAt: {$lt: startYear},
+      stateSupport:isStateSupport,
+    };
+  } else {
+    $criteria = {
+      courseName: {$regex: /^((?!-12).)*$/m},
+      createdAt: {$lt: startYear},
+    };
+  }
+  var previousYearsPhones = _.uniq(Orders.find($criteria, {
     fields: {phone: 1}
   }).map(function(e){return e.phone}));
 
-  var thisYearPhones = _.uniq(Orders.find({
-    courseName: {$regex: /^((?!-12).)*$/m},
-    createdAt: {$gt: startYear}
-  }, {
+  if(isStateSupport) {
+    $criteria = {
+      courseName: {$regex: /^((?!-12).)*$/m},
+      createdAt: {$gt: startYear},
+      stateSupport:isStateSupport,
+    };
+  } else {
+    $criteria = {
+      courseName: {$regex: /^((?!-12).)*$/m},
+      createdAt: {$gt: startYear},
+    };
+  }
+
+  var thisYearPhones = _.uniq(Orders.find($criteria, {
     fields: {phone: 1}
   }).map(function(e){return e.phone}));
 
@@ -60,9 +79,11 @@ Meteor.startup(function () {
 });
 
 Meteor.methods({
-  sendSMSAll: function (text) {
+  sendSMSAll: function (params) {
+    var text = params.txtSms;
+    var isStateSupport = params.stateSupport;
     check([text], [String]);
-    _.each(phonesToContact(), function(phone) {
+    _.each(phonesToContact(isStateSupport), function(phone) {
       if (phone.substring(0,1) != '2') {
         var job = new Job(smsJobs, 'sms', {
           phone: phone,
@@ -77,7 +98,12 @@ Meteor.methods({
       }
     });
   },
-  priceSMSs: function() {
-    return phonesToContact().length * 0.05;
+
+  targetPeopleSms: function(params) {
+    if (params.isStateSupport) {
+      return phonesToContact(true).length;
+    } else {
+      return phonesToContact(false).length;
+    }
   }
 });

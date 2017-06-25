@@ -26,6 +26,12 @@ Resources.attachSchema(new SimpleSchema({
     max: 200,
     optional: true
   },
+  price: {
+    type: Number,
+    label: 'Price',
+    decimal: true,
+    optional: true
+  },
   editor: {
     type: String,
     label: 'Editor',

@@ -75,7 +75,17 @@ Orders.attachSchema(new SimpleSchema({
         return course.name;
       }
     }
-  }
+  },
+  stateSupport: {
+    type: Boolean,
+    label: 'State Support',
+    autoValue: function() {
+      if (this.isInsert) {
+        var contact = Contacts.findOne(this.field('contactId').value);
+        return contact && contact.stateSupport;
+      }
+    }
+  },
 }));
 
 Orders.allow({

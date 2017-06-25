@@ -78,6 +78,9 @@ body, html {
 .list-resources {
   font-size: 10px;
 }
+input[type="checkbox"].checkbox-inline {
+  margin-right: 5px;
+}
 
 @media print {
   .jumbotron {

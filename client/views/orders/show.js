@@ -13,6 +13,11 @@ Router.route('/order/:_id', function () {
   }
 });
 
+Template.Order.onCreated(function() {
+  Meteor.subscribe('groupOrderedResources');
+});
+
+
 Template.Order.helpers({
   settings: function() {
     var order = this;
@@ -35,10 +40,37 @@ Template.Order.helpers({
           key: 'editor',
           label: TAPi18n.__('Editor')
         }, {
+          key: 'price',
+          label: TAPi18n.__('Price')
+        },{
           key: 'availability',
           label: TAPi18n.__('Availability'),
           fn: function(value, resource) {
             return resource.computedAvailability + ' (' + resource.quantity + ' ' + TAPi18n.__('in stock') + ')';
+          }
+        },{
+          key: 'subject',
+          label: TAPi18n.__('Received (total)'),
+          fn: function(value, resource) {
+            var totalReceived = 0;
+            var orderGroupResources = GroupOrderedResources.find({resourceId: resource._id});
+            orderGroupResources.forEach(function (el) {
+              totalReceived = totalReceived + el.received;
+            });
+            console.log('number of Group orders: ' + orderGroupResources.count() + ' for resourceID '+ resource._id);
+            return totalReceived;
+          }
+        }, {
+          key: 'subject',
+          label: TAPi18n.__('Ordered (total)'),
+          fn: function(value, resource) {
+            var totalReceived = 0;
+            var orderGroupResources = GroupOrderedResources.find({resourceId: resource._id});
+            orderGroupResources.forEach(function (el) {
+              totalReceived = totalReceived + el.quantity;
+            });
+            console.log('number of Group orders: ' + orderGroupResources.count() + ' for resourceID '+ resource._id);
+            return totalReceived;
           }
         }, {
           key: 'action',

@@ -47,7 +47,7 @@
 
 <template name="sendSMS">
   <h2> SMS </h2>
-  <h5> {{_ "Estimated price would be:"}} {{getSession 'price'}}$</h5>
+  <h5> {{_ "Estimated price would be:"}} {{priceTotal}} $</h5>
   <div id="char_count">160 {{_ "chars remaining"}}</div>
   <div class="row action-bar">
     <div class="col-sm-6">
@@ -55,10 +55,15 @@
     </div>
     {{#if getSession 'smstext'}}
     <div class="col-sm-6">
-      {{#callButton buttonMethod="sendSMSAll" buttonMethodArgs="$('#sms').val()" buttonStyle="success"}}
+      <button id="sendSMSAll" class="sendSms btn btn-success">
       {{_ "Send SMS to all."}}
-      {{/callButton}}
+      </button>
     </div>
     {{/if}}
   </div>
+  <p class="result-msg"></p>
+  <input checked={{isStateSupport}} class="checkbox-inline" id="smsStateSupport" type="checkbox" /><label for="smsStateSupport">Send only to people that get state support</label>
+  <div id="char_count">{{targetedPeople}} {{_ "targeted people"}}</div>
+
 </template>
+

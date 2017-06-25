@@ -57,6 +57,9 @@ GroupOrderedResources.allow({
 if (Meteor.isServer) {
   Meteor.methods({
     insertGroupOrder: function(group, groupOrders) {
+      // TODO #60 if it already exists a groupOrder for this group, we update quantity on it.
+      // var currentGroupOrder = GroupOrders.find({group: group, state: 'created'})
+
       var groupOrderId = GroupOrders.insert({
         group: group
       });

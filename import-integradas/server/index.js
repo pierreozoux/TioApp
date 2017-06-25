@@ -1,4 +1,4 @@
-var uploadDir = process.env.PWD + '/.uploads/';
+var uploadDir = 'C:/meteor/TioApp2/.uploads/';
 
 Meteor.startup(function () {
   log.info('logging is ready');
@@ -52,7 +52,7 @@ Meteor.methods({
         }
       });
       lines.forEach(function(line, index) {
-        if (!(line.Title && line.Reference && line.Editor && line.Subject && line.Group && line.Year)) {
+        if (!(line.Title && line.Reference && line.Editor && line.Subject && line.Group && line.Year && line.Price)) {
           var lineNumber = index + 2
           console.log('error');
           console.log(line);
@@ -64,7 +64,8 @@ Meteor.methods({
         var editor = line.Editor.trim();
         var subject = line.Subject.trim();
         var group = line.Group.trim();
-        var year = line.Year.trim()
+        var year = line.Year.trim();
+        var price = line.Price.trim();
 
         log.info('processing: ' + reference);
         var resource = Resources.findOne({reference: reference});
@@ -75,7 +76,8 @@ Meteor.methods({
             editor:    editor,
             subject:   subject,
             group:     group,
-            year:      year
+            year:      year,
+            price:     price
           }, function(error) {
             if (error) {
               throw new Meteor.Error('Collection-Error', 'Reference: '  + reference + ' - ' + error.message);
@@ -90,7 +92,8 @@ Meteor.methods({
               editor:    editor,
               subject:   subject,
               group:     group,
-              year:      year
+              year:      year,
+              price:     price
             }
           })
           resourceId = resource._id;
