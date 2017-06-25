@@ -41,3 +41,9 @@
   {{/autoForm}}
 {{/if}}
 </template>
+
+<template name="resourceToRemove">
+  {{#autoForm collection="Resources" doc=this id=this._id type="update" autosave="true"}}
+    {{> afQuickField label='' name='toRemove'}}
+  {{/autoForm}}
+</template>

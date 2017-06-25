@@ -63,6 +63,10 @@ Resources.attachSchema(new SimpleSchema({
     label: 'Subject',
     max: 200,
     regEx: /^[a-zA-Z0-9- ]+$/
+  },
+  toRemove: {
+    type: Boolean,
+    label: 'To Remove'
   }
 }));
 
