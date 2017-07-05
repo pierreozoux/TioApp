@@ -48,7 +48,7 @@ Meteor.methods({
       $criteria = {
         courseName: {$regex: /^((?!-12).)*$/m},
         createdAt: {$lt: startYear},
-        stateSupport:isStateSupport,
+        stateSupport:false,
       };
     } else {
       $criteria = {
@@ -64,7 +64,7 @@ Meteor.methods({
       $criteria = {
         courseName: {$regex: /^((?!-12).)*$/m},
         createdAt: {$gt: startYear},
-        stateSupport:isStateSupport,
+        stateSupport:false,
       };
     } else {
       $criteria = {

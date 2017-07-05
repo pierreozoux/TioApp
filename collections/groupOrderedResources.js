@@ -57,19 +57,40 @@ GroupOrderedResources.allow({
 if (Meteor.isServer) {
   Meteor.methods({
     insertGroupOrder: function(group, groupOrders) {
-      // TODO #60 if it already exists a groupOrder for this group, we update quantity on it.
-      // var currentGroupOrder = GroupOrders.find({group: group, state: 'created'})
+      var currentGroupOrder = GroupOrders.findOne({group: group, state: 'created'})
+      var currentGroupOrderId;
 
-      var groupOrderId = GroupOrders.insert({
-        group: group
-      });
-      _.each(groupOrders, function(resourceId) {
-        GroupOrderedResources.insert({
-          groupOrderId: groupOrderId,
-          resourceId: resourceId
+      // If GroupOrder doesn t exist, we create it
+      if (currentGroupOrder == null) {
+        currentGroupOrderId = GroupOrders.insert({
+          group: group
         });
-      });
-      return groupOrderId;
+        // console.log('New GroupOrder ID : ' + currentGroupOrderId);
+        _.each(groupOrders, function(resourceId) {
+          GroupOrderedResources.insert({
+            groupOrderId: currentGroupOrderId,
+            resourceId: resourceId
+          });
+        });
+      } else {
+        // Else, we update the existing one with resources that doesn t exist
+        currentGroupOrderId = currentGroupOrder._id;
+        // onsole.log('Existing GroupOrder ID : ' + currentGroupOrderId);
+        _.each(groupOrders, function(resourceId) {
+          var groupOrderResource = GroupOrderedResources.findOne({groupOrderId: currentGroupOrder._id, resourceId: resourceId});
+          // If orderResource doesn t exist, we create it
+          if (groupOrderResource == null) {
+            // console.log('Inserting groupOrderResource ID ');
+            GroupOrderedResources.insert({
+              groupOrderId: currentGroupOrderId,
+              resourceId: resourceId
+            });
+          } else {
+            // console.log('Existing groupOrderResource ID : ' + groupOrderResource._id);
+          }
+        });
+      }
+      return currentGroupOrderId;
     }
   });
 
