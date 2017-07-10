@@ -1,4 +1,6 @@
 var uploadDir = process.env.PWD + '/.uploads/';
+// var uploadDir = 'C:/meteor/TioApp2/.uploads/';
+
 
 Meteor.startup(function () {
   log.info('logging is ready');

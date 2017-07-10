@@ -43,12 +43,22 @@ Meteor.startup(function () {
 Meteor.methods({
   phonesToContact: function(params) {
     var isStateSupport = params.isStateSupport;
+    // Get contacts that don't have state support
+    var contactWithoutStateSupp;
+    if (isStateSupport) {
+      contactWithoutStateSupp = _.uniq(Contacts.find({stateSupport: false}, {
+        fields: {_id: 1}
+      }).map(function (e) {
+        return e._id
+      }));
+    }
+
     var startYear = moment().startOf('year').toDate();
     if(isStateSupport) {
       $criteria = {
         courseName: {$regex: /^((?!-12).)*$/m},
         createdAt: {$lt: startYear},
-        stateSupport:false,
+        contactId: { "$in": contactWithoutStateSupp }
       };
     } else {
       $criteria = {
@@ -64,7 +74,7 @@ Meteor.methods({
       $criteria = {
         courseName: {$regex: /^((?!-12).)*$/m},
         createdAt: {$gt: startYear},
-        stateSupport:false,
+        contactId: { "$in": contactWithoutStateSupp }
       };
     } else {
       $criteria = {
