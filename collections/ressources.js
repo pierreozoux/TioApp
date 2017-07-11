@@ -66,7 +66,8 @@ Resources.attachSchema(new SimpleSchema({
   },
   toRemove: {
     type: Boolean,
-    label: 'To Remove'
+    label: 'To Remove',
+    defaultValue: false
   }
 }));
 

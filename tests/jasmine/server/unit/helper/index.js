@@ -6,6 +6,7 @@ describe('Helpers', function() {
       Editor: 'editor',
       Subject: 'Math',
       Year: '2',
+      Price: '2.12',
       School1: '',
       School2: 'x',
       School3: 'x'

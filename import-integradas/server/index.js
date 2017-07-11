@@ -39,6 +39,7 @@ Meteor.methods({
       if (duplicates.length) {
         throw new Meteor.Error('Collection-Error', 'Ref is a duplicate: ' + duplicates);
       }
+      console.log('line[0]:' + lines[0]);
 
       schoolNames(lines[0]).forEach(function(schoolDirty) {
         var school = schoolDirty.trim();
@@ -54,6 +55,7 @@ Meteor.methods({
         }
       });
       lines.forEach(function(line, index) {
+        console.log('Line: '+ line);
         if (!(line.Title && line.Reference && line.Editor && line.Subject && line.Group && line.Year && line.Price)) {
           var lineNumber = index + 2
           console.log('error');
@@ -69,7 +71,7 @@ Meteor.methods({
         var year = line.Year.trim();
         var price = line.Price.trim();
 
-        log.info('processing: ' + reference);
+        log.info('processing: ' + reference + 'data=' + title + ',' + reference + ',' + editor + ',' + subject + ',' + group + ',' + year + ',' + price );
         var resource = Resources.findOne({reference: reference});
         if (!resource) {
           resourceId = Resources.insert({
