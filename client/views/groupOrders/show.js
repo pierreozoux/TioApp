@@ -20,7 +20,7 @@ Template.GroupOrder.helpers({
       collection: GroupOrderedResources.find({groupOrderId: groupOrder._id}),
       showFilter: false,
       showNavigation: 'never',
-      rowsPerPage: 100,
+      rowsPerPage: 1000,
       fields: [{
         key: 'resourceId',
         label: TAPi18n.__('Title'),
