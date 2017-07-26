@@ -77,7 +77,7 @@ if (Meteor.isServer) {
         currentGroupOrderId = currentGroupOrder._id;
         // onsole.log('Existing GroupOrder ID : ' + currentGroupOrderId);
         _.each(groupOrders, function(resourceId) {
-          var groupOrderResource = GroupOrderedResources.findOne({groupOrderId: currentGroupOrder._id, resourceId: resourceId});
+          var groupOrderResource = GroupOrderedResources.findOne({groupOrderId: currentGroupOrder._id, resourceId: resourceId, state: 'ordered'});
           // If orderResource doesn t exist, we create it
           if (groupOrderResource == null) {
             // console.log('Inserting groupOrderResource ID ');

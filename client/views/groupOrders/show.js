@@ -17,7 +17,7 @@ Template.GroupOrder.helpers({
   settings: function () {
     var groupOrder = this;
     return {
-      collection: GroupOrderedResources.find({groupOrderId: groupOrder._id}),
+      collection: GroupOrderedResources.find({groupOrderId: groupOrder._id, state: 'ordered'}),
       showFilter: false,
       showNavigation: 'never',
       rowsPerPage: 1000,
