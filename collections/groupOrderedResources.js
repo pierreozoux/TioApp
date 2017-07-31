@@ -77,17 +77,17 @@ if (Meteor.isServer) {
         currentGroupOrderId = currentGroupOrder._id;
         // onsole.log('Existing GroupOrder ID : ' + currentGroupOrderId);
         _.each(groupOrders, function(resourceId) {
-          var groupOrderResource = GroupOrderedResources.findOne({groupOrderId: currentGroupOrder._id, resourceId: resourceId, state: 'ordered'});
+          // var groupOrderResource = GroupOrderedResources.findOne({groupOrderId: currentGroupOrder._id, resourceId: resourceId, state: 'ordered'});
           // If orderResource doesn t exist, we create it
-          if (groupOrderResource == null) {
+          // if (groupOrderResource == null) {
             // console.log('Inserting groupOrderResource ID ');
             GroupOrderedResources.insert({
               groupOrderId: currentGroupOrderId,
               resourceId: resourceId
             });
-          } else {
+          // } else {
             // console.log('Existing groupOrderResource ID : ' + groupOrderResource._id);
-          }
+          // }
         });
       }
       return currentGroupOrderId;
