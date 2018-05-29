@@ -1,5 +1,5 @@
-// var uploadDir = process.env.PWD + '/.uploads/';
-var uploadDir = 'C:/meteor/TioApp/.uploads/';
+var uploadDir = process.env.PWD + '/.uploads/';
+// var uploadDir = 'C:/meteor/TioApp/.uploads/';
 
 
 Meteor.startup(function () {
