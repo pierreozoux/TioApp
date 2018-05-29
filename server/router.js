@@ -8,7 +8,14 @@ Router.route('/contacts/download', function() {
     var data = [];
     var stateSupport;
     var contact;
-    Orders.find().forEach(function(order) {
+    // Prepare date criteria
+    var toDate = new Date();
+    var fromDate = new Date();
+    log.info(toDate);
+    fromDate.setFullYear(toDate.getFullYear() - 2);
+    log.info(fromDate);
+    var orderLastYEar = Orders.find({ 'createdAt' : { $lte : fromDate , $lt: toDate}});
+    orderLastYEar.forEach(function(order) {
       contact = order.getContact();
       if (contact) {
         stateSupport = contact.stateSupport.toString();
@@ -19,7 +26,8 @@ Router.route('/contacts/download', function() {
         name: order.name,
         phone: order.phone,
         course: order.courseName,
-        stateSupport: stateSupport
+        stateSupport: stateSupport,
+        createdAt: order.createdAt.toISOString()
       });
     });
     this.response.writeHead(200, {

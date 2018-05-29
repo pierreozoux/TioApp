@@ -1,5 +1,5 @@
-var uploadDir = process.env.PWD + '/.uploads/';
-// var uploadDir = 'C:/meteor/TioApp2/.uploads/';
+// var uploadDir = process.env.PWD + '/.uploads/';
+var uploadDir = 'C:/meteor/TioApp/.uploads/';
 
 
 Meteor.startup(function () {
@@ -18,6 +18,7 @@ Meteor.methods({
       var resourceId;
       var lines = [];
 
+      // Read file
       CSV.readCsvFileLineByLine(uploadDir + path, {
         headers: true
       }, function(line) {
@@ -41,6 +42,7 @@ Meteor.methods({
       }
       console.log('line[0]:' + lines[0]);
 
+      // Create schools
       schoolNames(lines[0]).forEach(function(schoolDirty) {
         var school = schoolDirty.trim();
         log.info('write school: ' + school);
@@ -54,6 +56,7 @@ Meteor.methods({
           });
         }
       });
+
       lines.forEach(function(line, index) {
         console.log('Line: '+ line);
         if (!(line.Title && line.Reference && line.Editor && line.Subject && line.Group && line.Year && line.Price)) {
@@ -73,6 +76,7 @@ Meteor.methods({
 
         log.info('processing: ' + reference + 'data=' + title + ',' + reference + ',' + editor + ',' + subject + ',' + group + ',' + year + ',' + price );
         var resource = Resources.findOne({reference: reference});
+        // Insert resource
         if (!resource) {
           resourceId = Resources.insert({
             title:     title,
@@ -84,10 +88,11 @@ Meteor.methods({
             price:     price
           }, function(error) {
             if (error) {
-              throw new Meteor.Error('Collection-Error', 'Reference: '  + reference + ' - ' + error.message);
+              throw new Meteor.Error('Collection-Error', 'Resource insert Reference: '  + reference + ' - ' + error.message);
             }
           });
         } else {
+          // update resource
           Resources.update({
             _id: resource._id
           }, {
@@ -103,6 +108,7 @@ Meteor.methods({
           resourceId = resource._id;
         }
 
+        // Searching for school using the resource and insert Course
         schoolNames(lines[0]).forEach(function(schoolNameDirty) {
           var schoolName = schoolNameDirty.trim();
           var year = line.Year.trim();
@@ -120,14 +126,14 @@ Meteor.methods({
                   name: courseName,
                   year: year,
                   schoolId: school._id,
-                  resources: [resourceId]
+                  // resources: [resourceId] // error with last version of Meteor..
                 }, 
                 $addToSet: {
                   resources: resourceId
                 }
               }, function(error) {
                 if (error) {
-                  throw new Meteor.Error('Collection-Error', 'Reference: '  + reference + ' - ' + error.message);
+                  throw new Meteor.Error('Collection-Error', 'Course insert Error - Reference: '  + reference + ' - ' + error.message);
                 }
               });
             } else {
@@ -139,7 +145,7 @@ Meteor.methods({
                 }
               }, function(error) {
                 if (error) {
-                  throw new Meteor.Error('Collection-Error', 'Reference: '  + reference + ' - ' + error.message);
+                  throw new Meteor.Error('Collection-Error', 'Course update Reference: '  + reference + ' - ' + error.message);
                 }
               });
             }

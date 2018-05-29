@@ -1,9 +1,11 @@
 <template name="GroupOrder">
   <h2>{{_ "Group order"}}</h2>
-  <div class="row">
-  {{#autoForm class="form-horizontal" collection="GroupOrders" doc=this id="updateGroupOrderForm" type="readonly"}}
-    {{> afQuickField template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10" name='group'}}
-    {{> afQuickField template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10" name='state'}}
+  <div class="row name-container">
+  {{#autoForm class="form-horizontal" collection="GroupOrders" doc=this id="updateGroupOrderForm" type="update"}}
+    {{> afQuickField template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10" name='name' }}
+    {{> afQuickField template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10" name='group' readonly=true}}
+    {{> afQuickField template="bootstrap3-horizontal" label-class="col-sm-2" input-col-class="col-sm-10" name='state' readonly=true}}
+    <button type="submit" class="btn btn-success">Update Name</button>
   {{/autoForm}}
   </div>
   {{#if getSession 'ready'}}
@@ -11,11 +13,11 @@
   {{/if}}
   {{#unless received}}
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-2">
-      <button id="update" class="btn btn-success">{{_ "Update"}}</button>
-    </div>
     <div class="col-sm-6">
       <p class="bg-danger">{{ getSession 'errorResult' }}</p>
+    </div>
+    <div class="col-sm-6 groupOrderBut col-without-pad">
+      <button id="update" class="btn btn-success">{{_ "Update quantities"}}</button>
     </div>
   </div>
   {{/unless}}

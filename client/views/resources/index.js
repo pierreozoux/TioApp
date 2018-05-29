@@ -50,6 +50,9 @@ Template.resources.helpers({
           label: TAPi18n.__('Quantity'),
           tmpl: Template.resourceQuantity
         }, {
+          key: 'price',
+          label: TAPi18n.__('Price')
+        }, {
           key: 'computedOrders',
           sortOrder: 0,
           sortDirection: 'descending',
@@ -66,10 +69,6 @@ Template.resources.helpers({
         }, {
           key: 'group',
           label:TAPi18n.__('Group')
-        }, {
-          key: 'toRemove',
-          label:TAPi18n.__('toRemove'),
-          tmpl: Template.resourceToRemove
         }
       ]
     }; 
@@ -77,6 +76,14 @@ Template.resources.helpers({
   isConfirm: function() {
     groupOrders.depend();
     return (groupOrders.length > 0)?true:false;
+  },
+  totalLivros: function() {
+    // Calcul value of products in stock
+    var total = 0;
+    Resources.find({quantity:{$gte:0}}).map(function(doc) {
+      total += doc.quantity * doc.price;
+    });
+    return total.toFixed(2);
   }
 });
 

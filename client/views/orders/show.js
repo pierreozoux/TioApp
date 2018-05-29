@@ -48,31 +48,33 @@ Template.Order.helpers({
           fn: function(value, resource) {
             return resource.computedAvailability + ' (' + resource.quantity + ' ' + TAPi18n.__('in stock') + ')';
           }
-        },{
-          key: 'subject',
-          label: TAPi18n.__('Received (total)'),
-          fn: function(value, resource) {
-            var totalReceived = 0;
-            var orderGroupResources = GroupOrderedResources.find({resourceId: resource._id});
-            orderGroupResources.forEach(function (el) {
-              totalReceived = totalReceived + el.received;
-            });
-            console.log('number of Group orders: ' + orderGroupResources.count() + ' for resourceID '+ resource._id);
-            return totalReceived;
-          }
-        }, {
-          key: 'subject',
-          label: TAPi18n.__('Ordered (total)'),
-          fn: function(value, resource) {
-            var totalReceived = 0;
-            var orderGroupResources = GroupOrderedResources.find({resourceId: resource._id});
-            orderGroupResources.forEach(function (el) {
-              totalReceived = totalReceived + el.quantity;
-            });
-            console.log('number of Group orders: ' + orderGroupResources.count() + ' for resourceID '+ resource._id);
-            return totalReceived;
-          }
-        }, {
+        },
+        //   {
+        //   key: 'subject',
+        //   label: TAPi18n.__('Received (total)'),
+        //   fn: function(value, resource) {
+        //     var totalReceived = 0;
+        //     var orderGroupResources = GroupOrderedResources.find({resourceId: resource._id});
+        //     orderGroupResources.forEach(function (el) {
+        //       totalReceived = totalReceived + el.received;
+        //     });
+        //     console.log('number of Group orders: ' + orderGroupResources.count() + ' for resourceID '+ resource._id);
+        //     return totalReceived;
+        //   }
+        // }, {
+        //   key: 'subject',
+        //   label: TAPi18n.__('Ordered (total)'),
+        //   fn: function(value, resource) {
+        //     var totalReceived = 0;
+        //     var orderGroupResources = GroupOrderedResources.find({resourceId: resource._id});
+        //     orderGroupResources.forEach(function (el) {
+        //       totalReceived = totalReceived + el.quantity;
+        //     });
+        //     console.log('number of Group orders: ' + orderGroupResources.count() + ' for resourceID '+ resource._id);
+        //     return totalReceived;
+        //   }
+        // },
+          {
           key: 'action',
           label: TAPi18n.__('Action'),
           tmpl: Template.orderResourceAction
@@ -152,6 +154,7 @@ Template.orderAction.helpers({
     switch (this.state) {
       case 'created': return TAPi18n.__('Print');
       case 'completed': return TAPi18n.__('Contact');
+      // case 'contacted': return TAPi18n.__('Print');
     }
   }
 });

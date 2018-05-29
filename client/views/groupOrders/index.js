@@ -3,6 +3,7 @@ Template.Grouporders.helpers({
     return {
       collection: GroupOrders.find(),
       fields: [
+        'name',
         'group',
         {
           key:'createdAt',
@@ -15,7 +16,8 @@ Template.Grouporders.helpers({
             }
           }
         },
-        'state'
+        'state',
+
       ]
     };
   }

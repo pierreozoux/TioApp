@@ -237,6 +237,7 @@ Orders.helpers({
 if (Meteor.isServer) {
   Orders.after.insert(function() {
     var orderId = this._id;
+      console.log(orderId);
     var order = Orders.findOne(orderId);
     if (!order.containsOrdered()) {
       Orders.update(orderId, {

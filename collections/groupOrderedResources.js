@@ -57,13 +57,15 @@ GroupOrderedResources.allow({
 if (Meteor.isServer) {
   Meteor.methods({
     insertGroupOrder: function(group, groupOrders) {
-      var currentGroupOrder = GroupOrders.findOne({group: group, state: 'created'})
+      // var currentGroupOrder = GroupOrders.findOne({group: group, state: 'created'})
       var currentGroupOrderId;
 
       // If GroupOrder doesn t exist, we create it
-      if (currentGroupOrder == null) {
+      // if (currentGroupOrder == null) {
+        var currentDate = new Date();
         currentGroupOrderId = GroupOrders.insert({
-          group: group
+          group: group,
+          name: group + ' - ' + currentDate.toDateString()
         });
         // console.log('New GroupOrder ID : ' + currentGroupOrderId);
         _.each(groupOrders, function(resourceId) {
@@ -72,24 +74,24 @@ if (Meteor.isServer) {
             resourceId: resourceId
           });
         });
-      } else {
-        // Else, we update the existing one with resources that doesn t exist
-        currentGroupOrderId = currentGroupOrder._id;
-        // onsole.log('Existing GroupOrder ID : ' + currentGroupOrderId);
-        _.each(groupOrders, function(resourceId) {
-          // var groupOrderResource = GroupOrderedResources.findOne({groupOrderId: currentGroupOrder._id, resourceId: resourceId, state: 'ordered'});
-          // If orderResource doesn t exist, we create it
-          // if (groupOrderResource == null) {
-            // console.log('Inserting groupOrderResource ID ');
-            GroupOrderedResources.insert({
-              groupOrderId: currentGroupOrderId,
-              resourceId: resourceId
-            });
-          // } else {
-            // console.log('Existing groupOrderResource ID : ' + groupOrderResource._id);
-          // }
-        });
-      }
+      // } else {
+      //   // Else, we update the existing one with resources that doesn t exist
+      //   currentGroupOrderId = currentGroupOrder._id;
+      //   // onsole.log('Existing GroupOrder ID : ' + currentGroupOrderId);
+      //   _.each(groupOrders, function(resourceId) {
+      //     // var groupOrderResource = GroupOrderedResources.findOne({groupOrderId: currentGroupOrder._id, resourceId: resourceId, state: 'ordered'});
+      //     // If orderResource doesn t exist, we create it
+      //     // if (groupOrderResource == null) {
+      //       // console.log('Inserting groupOrderResource ID ');
+      //       GroupOrderedResources.insert({
+      //         groupOrderId: currentGroupOrderId,
+      //         resourceId: resourceId
+      //       });
+      //     // } else {
+      //       // console.log('Existing groupOrderResource ID : ' + groupOrderResource._id);
+      //     // }
+      //   });
+      // }
       return currentGroupOrderId;
     }
   });

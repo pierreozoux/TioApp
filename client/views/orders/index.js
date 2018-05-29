@@ -47,7 +47,7 @@ Template.orders.helpers({
             value.forEach(function (res) {
               var currResource = Resources.findOne(res.resourceId);
               if (currResource) {
-                if (!isNaN(currResource.price)) {
+                if (!isNaN(currResource.price) && res.state !== 'sold') {
                   totalAmount = totalAmount + Number(currResource.price);
                 }
               }

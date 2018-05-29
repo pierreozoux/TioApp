@@ -19,6 +19,7 @@ Courses.attachSchema(new SimpleSchema({
   },
   resources: {
     type: [String],
-    label: 'resources'
-  }
+    label: 'resources',
+    optional: true
+  },
 }));

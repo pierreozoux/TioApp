@@ -17,7 +17,12 @@ GroupOrders.attachSchema(new SimpleSchema({
   },
   group: {
     type: String
-  }
+  },
+  name: {
+      type: String,
+      label: 'Name',
+      optional: true
+  },
 }));
 
 GroupOrders.helpers({

@@ -78,6 +78,22 @@ body, html {
 .list-resources {
   font-size: 10px;
 }
+#updateGroupOrderForm button {
+  float:right;
+}
+.name-container {
+  margin-bottom: 40px;
+  margin-right:0;
+}
+.col-without-pad {
+  padding-right:0;
+  padding-left:0;
+}
+
+.groupOrderBut button {
+  float: right;
+}
+
 input[type="checkbox"].checkbox-inline {
   margin-right: 5px;
 }
