@@ -67,7 +67,12 @@ Template.orders.helpers({
 
 Template.orders.onCreated(function() {
   Meteor.subscribe('resources');
+});
+
+Template.orders.onRendered(function() {
   var resourceId = this.data.resourceId;
+  console.log(this.data);
+  ReactiveTable.clearFilters(['resource']);
   if (resourceId) {
     this.filter = new ReactiveTable.Filter('resource', ['orderedResources']);
     this.filter.set({ $elemMatch: { resourceId: resourceId } });

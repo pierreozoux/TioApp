@@ -52,16 +52,17 @@ Meteor.publish('resources-grouporder', function (objectId) {
 
 Meteor.publish('resources', function (objectId, type) {
   if (this.userId) {
-    if (type === 'course') {
-      var resources = Courses.findOne(objectId).resources;
-    } else if (type === 'groupOrder') {
-      var resources = GroupOrders.findOne(objectId).resources()
-    }
-    if (type) {
-      return cursor = Resources.find({_id: { $in:  resources}});
-    } else {
-      return cursor = Resources.find();
-    }
+    // if (type === 'course') {
+    //   var resources = Courses.findOne(objectId).resources;
+    // } else if (type === 'groupOrder') {
+    //   var resources = GroupOrders.findOne(objectId).resources()
+    // }
+    // if (type) {
+    //   return cursor = Resources.find({_id: { $in:  resources}});
+    // } else {
+    //   return cursor = Resources.find();
+    // }
+    return cursor = Resources.find();
   }
   return this.ready();
 });
