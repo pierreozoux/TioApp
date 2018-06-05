@@ -13,6 +13,12 @@ Router.route('/grouporder/:_id', function () {
   }
 });
 
+Template.GroupOrder.onCreated(function() {
+  this.autorun(() => {
+    this.subscribe('resources-grouporder', Session.get('groupOrderId'));
+  });
+});
+
 Template.GroupOrder.helpers({
   settings: function () {
     var groupOrder = this;

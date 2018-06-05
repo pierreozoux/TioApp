@@ -2,6 +2,8 @@ Tracker.autorun(function () {
   if (Session.get('schoolId') === '') {
     $('#school-selector').val('');
     $('#course-selector').val('');
+    Session.set('courseId', undefined)
+    delete Session.keys.courseId
   }
 });
 

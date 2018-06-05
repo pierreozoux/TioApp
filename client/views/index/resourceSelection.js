@@ -2,6 +2,12 @@ function resources() {
   return Resources.find({}, {sort: {'subject': 1}});
 }
 
+Template.resourcesSelection.onCreated(function() {
+  this.autorun(() => {
+    this.subscribe('resources-home', Session.get('courseId'));
+  });
+});
+
 Template.resourcesSelection.helpers({
   resources: function() {
     return resources();

@@ -10,6 +10,7 @@ Template.courseSelection.helpers({
 Template.courseSelection.events({
   'change #course-selector': function(event) {
     var value = $(event.target).val();
+    console.log('courseId selected: ' + value);
     Session.set('courseId', value);
   }
 });

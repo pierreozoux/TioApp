@@ -34,6 +34,22 @@ Meteor.publish('completed-orders', function () {
   }
 });
 
+Meteor.publish('resources-home', function (objectId) {
+  if (this.userId) {
+    var resources = Courses.findOne(objectId).resources;
+    return cursor = Resources.find({_id: { $in:  resources}});
+  }
+  return this.ready();
+});
+
+Meteor.publish('resources-grouporder', function (objectId) {
+  if (this.userId && objectId) {
+    var resources = GroupOrders.findOne(objectId).resources()
+    return cursor = Resources.find({_id: { $in:  resources}});
+  }
+  return this.ready();
+});
+
 Meteor.publish('resources', function (objectId, type) {
   if (this.userId) {
     if (type === 'course') {
@@ -47,6 +63,7 @@ Meteor.publish('resources', function (objectId, type) {
       return cursor = Resources.find();
     }
   }
+  return this.ready();
 });
 
 Meteor.publish('settings', function () {
