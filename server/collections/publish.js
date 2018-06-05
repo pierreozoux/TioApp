@@ -35,7 +35,7 @@ Meteor.publish('completed-orders', function () {
 });
 
 Meteor.publish('resources-home', function (objectId) {
-  if (this.userId) {
+  if (this.userId && objectId) {
     var resources = Courses.findOne(objectId).resources;
     return cursor = Resources.find({_id: { $in:  resources}});
   }
