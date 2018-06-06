@@ -34,12 +34,22 @@ Meteor.publish('completed-orders', function () {
   }
 });
 
-Meteor.publish('resources-home', function (objectId) {
-  if (this.userId && objectId) {
-    var resources = Courses.findOne(objectId).resources;
-    if (resources !== 'undefined' && resources !== null) {
-      console.log('resources-home - resources : ' + resources);
-      return cursor = Resources.find({_id: { $in:  resources}});
+Meteor.publish('resources', function (objectId, type) {
+  if (this.userId) {
+    var resources = null;
+    if (type === 'home' && objectId) {
+      resources = Courses.findOne(objectId).resources;
+      if (resources !== 'undefined' && resources !== null) {
+        console.log('resources-home - resources : ' + resources);
+        return cursor = Resources.find({_id: { $in:  resources}});
+      } else {
+        return this.ready();
+      }
+    } else if (type === 'groupOrder' && objectId) {
+        resources = GroupOrders.findOne(objectId).resources()
+        return cursor = Resources.find({_id: { $in:  resources}});
+    } else if (type == 'orders') {
+      return cursor = Resources.find();
     } else {
       return this.ready();
     }

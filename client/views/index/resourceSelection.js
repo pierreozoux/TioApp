@@ -6,7 +6,7 @@ function resources() {
 Template.resourcesSelection.onCreated(function() {
   console.log('onCreated');
   this.autorun(() => {
-    this.subscribe('resources-home', Session.get('courseId'));
+    this.subscribe('resources', Session.get('courseId'), 'home');
   });
 });
 
