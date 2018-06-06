@@ -1,4 +1,5 @@
 <template name="resourcesSelection">
+{{#if Template.subscriptionsReady}}
 {{#if printResources}}
   {{> unselectAll}}
   <label class="col-sm-2 control-label">{{_ "Resource selection"}}</label>
@@ -52,6 +53,7 @@
   {{else}}
     {{> confirmation}}
   {{/if}}
+{{/if}}
 {{/if}}
 </template>
 

@@ -1,5 +1,6 @@
 Template.courseSelection.helpers({
   courses: function() {
+    console.log('schoolId: ' + Session.get('schoolId'));
     var school = Schools.findOne(Session.get('schoolId'));
     if (school) {
       return Courses.find({schoolId: school._id});
