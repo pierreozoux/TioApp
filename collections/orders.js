@@ -239,16 +239,18 @@ if (Meteor.isServer) {
     var orderId = this._id;
       console.log(orderId);
     var order = Orders.findOne(orderId);
-    if (!order.containsOrdered()) {
-      Orders.update(orderId, {
-        $set: {
-          state: 'sold'
-        }
+    if(order !== undefined) {
+      if (!order.containsOrdered()) {
+        Orders.update(orderId, {
+          $set: {
+            state: 'sold'
+          }
+        });
+      }
+      order.resources().forEach(function(resource) {
+        resource.updateOrders();
       });
     }
-    order.resources().forEach(function(resource) {
-      resource.updateOrders();
-    });
   });
 
   Orders.after.update(function() {

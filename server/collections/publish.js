@@ -56,31 +56,31 @@ Meteor.publish('resources', function (objectId, type) {
   }
   return this.ready();
 });
+//
+// Meteor.publish('resources-grouporder', function (objectId) {
+//   if (this.userId && objectId) {
+//     var resources = GroupOrders.findOne(objectId).resources()
+//     return cursor = Resources.find({_id: { $in:  resources}});
+//   }
+//   return this.ready();
+// });
 
-Meteor.publish('resources-grouporder', function (objectId) {
-  if (this.userId && objectId) {
-    var resources = GroupOrders.findOne(objectId).resources()
-    return cursor = Resources.find({_id: { $in:  resources}});
-  }
-  return this.ready();
-});
-
-Meteor.publish('resources', function (objectId, type) {
-  if (this.userId) {
-    // if (type === 'course') {
-    //   var resources = Courses.findOne(objectId).resources;
-    // } else if (type === 'groupOrder') {
-    //   var resources = GroupOrders.findOne(objectId).resources()
-    // }
-    // if (type) {
-    //   return cursor = Resources.find({_id: { $in:  resources}});
-    // } else {
-    //   return cursor = Resources.find();
-    // }
-    return cursor = Resources.find();
-  }
-  return this.ready();
-});
+// Meteor.publish('resources', function (objectId, type) {
+//   if (this.userId) {
+//     // if (type === 'course') {
+//     //   var resources = Courses.findOne(objectId).resources;
+//     // } else if (type === 'groupOrder') {
+//     //   var resources = GroupOrders.findOne(objectId).resources()
+//     // }
+//     // if (type) {
+//     //   return cursor = Resources.find({_id: { $in:  resources}});
+//     // } else {
+//     //   return cursor = Resources.find();
+//     // }
+//     return cursor = Resources.find();
+//   }
+//   return this.ready();
+// });
 
 Meteor.publish('settings', function () {
   if (Houston._user_is_admin(this.userId)) {
