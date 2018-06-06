@@ -37,7 +37,12 @@ Meteor.publish('completed-orders', function () {
 Meteor.publish('resources-home', function (objectId) {
   if (this.userId && objectId) {
     var resources = Courses.findOne(objectId).resources;
-    return cursor = Resources.find({_id: { $in:  resources}});
+    if (resources !== 'undefined' && resources !== null) {
+      console.log('resources-home - resources : ' + resources);
+      return cursor = Resources.find({_id: { $in:  resources}});
+    } else {
+      return this.ready();
+    }
   }
   return this.ready();
 });

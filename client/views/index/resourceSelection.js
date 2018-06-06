@@ -1,8 +1,10 @@
 function resources() {
+  console.log('function resources() {');
   return Resources.find({}, {sort: {'subject': 1}});
 }
 
 Template.resourcesSelection.onCreated(function() {
+  console.log('onCreated');
   this.autorun(() => {
     this.subscribe('resources-home', Session.get('courseId'));
   });
@@ -10,9 +12,11 @@ Template.resourcesSelection.onCreated(function() {
 
 Template.resourcesSelection.helpers({
   resources: function() {
+    console.log('helpers.resources');
     return resources();
   },
   isSellable: function() {
+    console.log('helpers.isSellable');
     Template.resourcesSelection.__helpers.get('setNeedContact')();
     if (this.computedAvailability > 0 || this.quantity > 2) {
       return true
@@ -21,6 +25,7 @@ Template.resourcesSelection.helpers({
     }
   },
   setNeedContact: function() {
+    console.log('helpers.setNeedContact');
     var needContact = false;
     resources().forEach( function(resource) {
       var inCart = $('#' + resource._id).attr('class') !== 'disabled';
@@ -97,6 +102,9 @@ Template.confirmation.events({
       Session.set('schoolId', '');
       Router.go('/order/' + orderId);
     }
+
+    // Update Ressources Orders
+
     Session.set('schoolId', '');
   }
 });
