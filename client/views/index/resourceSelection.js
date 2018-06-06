@@ -1,5 +1,5 @@
 function resources() {
-  console.log('function resources() {');
+  console.log('function resources() - courseId = ' + Session.get('courseId') + 'Nb ressources = ' + Resources.find().count());
   return Resources.find({}, {sort: {'subject': 1}});
 }
 
