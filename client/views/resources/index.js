@@ -19,6 +19,12 @@ Tracker.autorun(function() {
   }
 });
 
+Template.resources.onCreated(function() {
+  this.autorun(() => {
+    this.subscribe('resources', null, 'orders');
+  });
+});
+
 Template.resources.helpers({
   settings: function() {
     return {
