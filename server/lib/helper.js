@@ -76,6 +76,7 @@ Meteor.startup(function() {
       value: 'noreply@example.org'
     });
   }
+  process.env.MAIL_URL = 'smtp://tioapp%40lino-design.com:wrYtPAIjNHs8tqmntd9y@smtp.phpnet.org:587';
 });
 
 Accounts.validateNewUser(function () {
