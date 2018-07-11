@@ -86,9 +86,9 @@ Template.resources.helpers({
   totalLivros: function() {
     // Calcul value of products in stock
     var total = 0;
-    Resources.find({quantity:{$gte:0}}).map(function(doc) {
-      total += doc.quantity * doc.price;
-    });
+    // Resources.find({quantity:{$gte:0}}).map(function(doc) {
+    //   total += doc.quantity * doc.price;
+    // });
     return total.toFixed(2);
   }
 });
