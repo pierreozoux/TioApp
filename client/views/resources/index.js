@@ -1,10 +1,11 @@
 Router.route('/resources', function() {
-  this.subscribe('resources').wait();
-  if (this.ready()) {
-    this.render('resources');
-  } else {
-    this.render('Loading');
-  }
+  this.render('resources');
+  // this.subscribe('resources').wait();
+  // if (this.ready()) {
+  //   this.render('resources');
+  // } else {
+  //   this.render('Loading');
+  // }
 });
 
 var groupOrders = new ReactiveArray();
