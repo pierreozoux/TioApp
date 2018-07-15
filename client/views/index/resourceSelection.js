@@ -3,12 +3,6 @@ function resources() {
   return Resources.find({}, {sort: {'subject': 1}});
 }
 
-Template.resourcesSelection.onCreated(function() {
-  console.log('onCreated');
-  this.autorun(() => {
-    this.subscribe('resources', Session.get('courseId'), 'home');
-  });
-});
 
 Template.resourcesSelection.helpers({
   resources: function() {
