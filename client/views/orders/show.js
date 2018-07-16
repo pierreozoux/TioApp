@@ -3,6 +3,19 @@ Router.route('/order/:_id', function () {
   this.subscribe('courses').wait();
   this.subscribe('contacts').wait();
   if (this.ready()) {
+    // Update order resources
+    var order = Orders.findOne();
+    if (!order.containsOrdered()) {
+      Orders.update(order._id, {
+        $set: {
+          state: 'sold'
+        }
+      });
+    }
+    order.resources().forEach(function(resource) {
+      // resource.updateOrders();
+    });
+
     this.render('Order', {
       data: function() {
         return Orders.findOne();
@@ -15,9 +28,9 @@ Router.route('/order/:_id', function () {
 
 Template.Order.onCreated(function() {
   Meteor.subscribe('groupOrderedResources');
-  // this.autorun(() => {
-  //   this.subscribe('resources', Session.get('courseId'), 'home');
-  // });
+  this.autorun(() => {
+    this.subscribe('resources', Session.get('courseId'), 'home');
+  });
 });
 
 

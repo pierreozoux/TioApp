@@ -48,6 +48,13 @@
       <a href="/phoneList/download" target="_blank"><button id="PrintPhoneList" class="btn btn-success">{{_ "Print contact awaiting for order."}}</button></a>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-2">
+      {{#callButton buttonMethod="cleanOrders" buttonStyle="success"}}
+        {{_ "Remove old orders."}}
+      {{/callButton}}
+    </div>
+  </div>
 </template>
 
 <template name="sendSMS">

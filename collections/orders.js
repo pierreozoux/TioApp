@@ -338,6 +338,29 @@ if (Meteor.isServer) {
       Resources.find().forEach(function(resource){
         resource.updateOrders();
       })
+    },
+
+    cleanOrders: function() {
+
+      // Clear orders
+      var oldOrders = Orders.find({ 'createdAt' : { $lte: new Date("Jan 10, 2018")}, $or: [{state: 'sold'},{city: 'canceled'}]});
+      oldOrders.forEach(function(order) {
+        log.info('Order to delete: ' + order.createdAt + ', state: ' + order.state);
+      });
+      // Really remove
+      Orders.remove({ 'createdAt' : { $lte: new Date("Jan 10, 2018")}, $or: [{state: 'sold'},{city: 'canceled'}]});
+
+      // Clear GroupOrder
+      var grouOrder = GroupOrders.find({ 'createdAt' : { $lte: new Date("Jan 10, 2018")}});
+      grouOrder.forEach(function(go) {
+        log.info('GroupOrder to delete: ' + go.createdAt + ', state: ' + go._id);
+        GroupOrderedResources.remove({ 'groupOrderId' : go._id});
+        //var groupOrdRes = GroupOrderedResources.find({ 'groupOrderId' : go._id});
+        // groupOrdRes.forEach(function(gor) {
+        //   log.info('GroupOrderRes to delete: ' + gor.received + ', state: ' + gor.state);
+        // });
+      });
+      GroupOrders.remove({ 'createdAt' : { $lte: new Date("Jan 10, 2018")}});
     }
   });
 }

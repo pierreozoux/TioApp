@@ -67,10 +67,9 @@ Template.orders.helpers({
 
 Template.orders.onCreated(function() {
   console.log('onCreated');
-  Meteor.subscribe('resources');
-  // this.autorun(() => {
-  //   this.subscribe('resources', '', 'orders');
-  // });
+  this.autorun(() => {
+    this.subscribe('resources', '', 'orders');
+  });
 });
 
 Template.orders.onRendered(function() {

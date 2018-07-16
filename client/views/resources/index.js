@@ -1,10 +1,12 @@
 Router.route('/resources', function() {
-  this.subscribe('resources').wait();
-  if (this.ready()) {
-    this.render('resources');
-  } else {
-    this.render('Loading');
-  }
+  console.log('before this.render(\'resources\');');
+  this.render('resources');
+  // this.subscribe('resources').wait();
+  // if (this.ready()) {
+  //   this.render('resources');
+  // } else {
+  //   this.render('Loading');
+  // }
 });
 
 var groupOrders = new ReactiveArray();
@@ -20,9 +22,9 @@ Tracker.autorun(function() {
 });
 
 Template.resources.onCreated(function() {
-  // this.autorun(() => {
-  //   this.subscribe('resources', null, 'orders');
-  // });
+  this.autorun(() => {
+    this.subscribe('resources', null, 'orders');
+  });
 });
 
 Template.resources.helpers({
