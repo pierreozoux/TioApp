@@ -80,16 +80,26 @@ Resources.helpers({
   },
   orders: function() {
     var resource = this;
+
     return Orders.find({
-      state: {$in: ['created','completed', 'contacted']},
-      orderedResources: {
-        $elemMatch: {
-          state: 'ordered',
-          resourceId: resource._id
-        }
-      }
+      state: {$in: ['created', 'completed', 'contacted']},
+      "orderedResources.state": 'ordered',
+      "orderedResources.resourceId": resource._id
     }).count();
+
+    // return Orders.find({
+    //   state: {$in: ['created','completed', 'contacted']},
+    //   orderedResources: {
+    //     $elemMatch: {
+    //       state: 'ordered',
+    //       resourceId: resource._id
+    //     }
+    //   }
+    // }).count();
+
+
   },
+
   updateOrders: function () {
     var resource = this;
     Resources.update(resource._id, {

@@ -13,7 +13,7 @@ Router.route('/order/:_id', function () {
       });
     }
     order.resources().forEach(function(resource) {
-      // resource.updateOrders();
+      resource.updateOrders();
     });
 
     this.render('Order', {
