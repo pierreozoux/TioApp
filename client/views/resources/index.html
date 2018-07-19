@@ -9,6 +9,7 @@
   {{else}}
     {{> updateResources}}
   {{/if}}
+  {{> updateAllResources}}
 </template>
 
 <template name="orderResource">
@@ -29,6 +30,14 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-2">
       <button id="update" class="btn btn-success">{{_ "Update"}}</button>
+    </div>
+  </div>
+</template>
+
+<template name="updateAllResources">
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-2">
+      <button id="updateAllResources" class="btn btn-success">{{_ "Update all Resources"}}</button>
     </div>
   </div>
 </template>

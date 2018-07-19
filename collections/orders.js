@@ -235,21 +235,37 @@ Orders.helpers({
 });
 
 if (Meteor.isServer) {
-  Orders.after.insert(function() {
-    var orderId = this._id;
-      console.log(orderId);
-    var order = Orders.findOne(orderId);
+  Orders.after.insert(function(orderId, order) {
+    console.log('Order after insert :' + orderId);
+    // var order = Orders.findOne(orderId);
     if(order !== undefined) {
-      if (!order.containsOrdered()) {
+      // see containsOrdered: We have to redefine this method because Order object do not have method helper declared
+      if (! _.reduce(
+        order.orderedResources,
+        function(memo, orderedResource) {
+          if (orderedResource.state === 'ordered') {
+            return memo + 1;
+          } else {
+            return memo;
+          }
+        },
+        0
+      )) {
         Orders.update(orderId, {
           $set: {
             state: 'sold'
           }
         });
       }
-      order.resources().forEach(function(resource) {
-        resource.updateOrders();
-      });
+      // Update orders quantity
+      var course = Courses.findOne(order.courseId);
+      if (course) {
+        Resources.find({_id: {$in: course.resources}}).forEach(function(resource) {
+          console.log('Order after insert - resources:' + resource._id);
+          console.log(orderId);
+          resource.updateOrders();
+        });
+      }
     }
   });
 
