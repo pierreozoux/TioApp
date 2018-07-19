@@ -159,7 +159,12 @@ Template.resources.events({
       $('#' + id).submit();
     });
     $(event.target).button('reset').prop('disabled', false);;
-  }
+  },
+
+  'click #updateAllResources': function(event) {
+    Meteor.call('updateResources');
+  },
+
 });
 
 Template.resourceQuantity.helpers({
