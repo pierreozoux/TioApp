@@ -1,5 +1,5 @@
 Router.route('/resources', function() {
-  console.log('before this.render(\'resources\');');
+  // console.log('before this.render(\'resources\');');
   this.render('resources');
   // this.subscribe('resources').wait();
   // if (this.ready()) {
@@ -22,15 +22,15 @@ Tracker.autorun(function() {
 });
 
 Template.resources.onCreated(function() {
-  this.autorun(() => {
+/*  this.autorun(() => {
     this.subscribe('resources', null, 'orders');
-  });
+  });*/
 });
 
 Template.resources.helpers({
   settings: function() {
     return {
-      collection: 'resources',
+      collection: 'resourcestable',
       showFilter: true,
       filters: ['group'],
       fields: [

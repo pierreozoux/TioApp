@@ -1,6 +1,6 @@
 Template.courseSelection.helpers({
   courses: function() {
-    console.log('schoolId: ' + Session.get('schoolId'));
+    // console.log('schoolId: ' + Session.get('schoolId'));
     var school = Schools.findOne(Session.get('schoolId'));
     if (school) {
       return Courses.find({schoolId: school._id});
@@ -11,7 +11,7 @@ Template.courseSelection.helpers({
 Template.courseSelection.events({
   'change #course-selector': function(event) {
     var value = $(event.target).val();
-    console.log('courseId selected: ' + value);
+    // console.log('courseId selected: ' + value);
     Session.set('courseId', value);
   }
 });

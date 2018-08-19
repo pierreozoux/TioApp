@@ -222,8 +222,8 @@ Orders.helpers({
   sellAll: function (force) {
     var order = this;
     if (force) {
-      console.log(order)
-      console.log(order.justOrderedResources())
+      // console.log(order)
+      // console.log(order.justOrderedResources())
       order.justOrderedResources().forEach(function (resource){
         Meteor.call('updateOrderedResourceState', order, resource, force);
       })
@@ -236,7 +236,7 @@ Orders.helpers({
 
 if (Meteor.isServer) {
   Orders.after.insert(function(orderId, order) {
-    console.log('Order after insert :' + orderId);
+    // console.log('Order after insert :' + orderId);
     // var order = Orders.findOne(orderId);
     if(order !== undefined) {
       // see containsOrdered: We have to redefine this method because Order object do not have method helper declared
@@ -261,8 +261,8 @@ if (Meteor.isServer) {
       var course = Courses.findOne(order.courseId);
       if (course) {
         Resources.find({_id: {$in: course.resources}}).forEach(function(resource) {
-          console.log('Order after insert - resources:' + resource._id);
-          console.log(orderId);
+          // console.log('Order after insert - resources:' + resource._id);
+          // console.log(orderId);
           resource.updateOrders();
         });
       }
@@ -283,7 +283,7 @@ if (Meteor.isServer) {
     });
   });
   
-  ReactiveTable.publish('orders', function() {
+  ReactiveTable.publish('ordersTable', function() {
     if (this.userId) {
       return Orders;
     }
@@ -340,7 +340,7 @@ if (Meteor.isServer) {
             }
           });
           if (completedOrdered){
-            console.log('Order completed: ' + order._id)
+            // console.log('Order completed: ' + order._id)
             Orders.update(order._id, {
               $set: {state: 'completed'}
             } , function(error) {
@@ -361,7 +361,7 @@ if (Meteor.isServer) {
       // Clear orders
       var oldOrders = Orders.find({ 'createdAt' : { $lte: new Date("Jan 10, 2018")}, $or: [{state: 'sold'},{city: 'canceled'}]});
       oldOrders.forEach(function(order) {
-        log.info('Order to delete: ' + order.createdAt + ', state: ' + order.state);
+        // log.info('Order to delete: ' + order.createdAt + ', state: ' + order.state);
       });
       // Really remove
       Orders.remove({ 'createdAt' : { $lte: new Date("Jan 10, 2018")}, $or: [{state: 'sold'},{city: 'canceled'}]});
@@ -369,7 +369,7 @@ if (Meteor.isServer) {
       // Clear GroupOrder
       var grouOrder = GroupOrders.find({ 'createdAt' : { $lte: new Date("Jan 10, 2018")}});
       grouOrder.forEach(function(go) {
-        log.info('GroupOrder to delete: ' + go.createdAt + ', state: ' + go._id);
+        // log.info('GroupOrder to delete: ' + go.createdAt + ', state: ' + go._id);
         GroupOrderedResources.remove({ 'groupOrderId' : go._id});
         //var groupOrdRes = GroupOrderedResources.find({ 'groupOrderId' : go._id});
         // groupOrdRes.forEach(function(gor) {
