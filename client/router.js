@@ -26,15 +26,13 @@ Router.route('/orders', function() {
 });
 
 Router.route('/grouporders', function() {
-  // this.subscribe('groupOrders').wait();
-/*  this.subscribe('groupOrderedResources').wait();
+  this.subscribe('groupOrders').wait();
+  this.subscribe('groupOrderedResources').wait();
   if (this.ready()) {
     this.render('Grouporders');
   } else {
     this.render('Loading');
-  }*/
-  // Manage in ReactiveTable now
-  this.render('Grouporders');
+  }
 });
 
 Router.route('/settings', function() {

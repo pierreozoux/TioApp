@@ -1,10 +1,10 @@
 function resources() {
-  // console.log('function resources() - courseId = ' + Session.get('courseId') + 'Nb ressources = ' + Resources.find().count());
+  console.log('function resources() - courseId = ' + Session.get('courseId') + 'Nb ressources = ' + Resources.find().count());
   return Resources.find({}, {sort: {'subject': 1}});
 }
 
 Template.resourcesSelection.onCreated(function() {
-  // console.log('onCreated');
+  console.log('onCreated');
   this.autorun(() => {
     this.subscribe('resources', Session.get('courseId'), 'home');
   });
@@ -12,11 +12,11 @@ Template.resourcesSelection.onCreated(function() {
 
 Template.resourcesSelection.helpers({
   resources: function() {
-    // console.log('helpers.resources');
+    console.log('helpers.resources');
     return resources();
   },
   isSellable: function() {
-    // console.log('helpers.isSellable');
+    console.log('helpers.isSellable');
     Template.resourcesSelection.__helpers.get('setNeedContact')();
     if (this.computedAvailability > 0 || this.quantity > 2) {
       return true
@@ -25,7 +25,7 @@ Template.resourcesSelection.helpers({
     }
   },
   setNeedContact: function() {
-    // console.log('helpers.setNeedContact');
+    console.log('helpers.setNeedContact');
     var needContact = false;
     resources().forEach( function(resource) {
       var inCart = $('#' + resource._id).attr('class') !== 'disabled';

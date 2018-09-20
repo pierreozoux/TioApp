@@ -40,7 +40,7 @@ Meteor.publish('resources', function (objectId, type) {
     if (type === 'home' && objectId) {
       resources = Courses.findOne(objectId).resources;
       if (resources !== 'undefined' && resources !== null) {
-        // console.log('resources-home - resources : ' + resources);
+        console.log('resources-home - resources : ' + resources);
         return cursor = Resources.find({_id: { $in:  resources}});
       } else {
         return this.ready();

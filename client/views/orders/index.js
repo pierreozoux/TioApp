@@ -2,7 +2,7 @@ Template.orders.helpers({
   settings: function () {
     return {
       showFilter: true,
-      collection: 'ordersTable',
+      collection: 'orders',
       fields: [
         {
           key: 'humanId',
@@ -54,11 +54,7 @@ Template.orders.helpers({
             })
             return Math.round(totalAmount * 100) / 100;
           }
-        },
-        /*{
-          key: 'totalAmountt',
-          label: TAPi18n.__('Price')
-        }, */{
+        }, {
           key: '_id',
           label: TAPi18n.__('Action'),
           tmpl: Template.orderAction
@@ -70,14 +66,15 @@ Template.orders.helpers({
 });
 
 Template.orders.onCreated(function() {
-  // console.log('onCreated');
-  this.subscribe('resources', '', 'orders');
-  // console.log('onCreated after');
+  console.log('onCreated');
+  this.autorun(() => {
+    this.subscribe('resources', '', 'orders');
+  });
 });
 
 Template.orders.onRendered(function() {
   var resourceId = this.data.resourceId;
-  // console.log(this.data);
+  console.log(this.data);
   ReactiveTable.clearFilters(['resource']);
   if (resourceId) {
     this.filter = new ReactiveTable.Filter('resource', ['orderedResources']);
@@ -100,7 +97,7 @@ Template.ordersActionBar.events({
       .button('working')
       .prop('disabled', true);
     template.subscribe('completed-orders', function() {
-      // console.log(TAPi18n.__('csv export beginning...'));
+      console.log(TAPi18n.__('csv export beginning...'));
       var data = [];
       var emailCount = 0;
       var modalText = '';
@@ -115,7 +112,7 @@ Template.ordersActionBar.events({
         orders.forEach(function(order) {
           var contact = order.getContact();
           if (contact.email) {
-            // console.log('Email send to: ' + contact.email);
+            console.log('Email send to: ' + contact.email);
             Meteor.call('sendEmail',
               contact.email,
               'Encomenda Escolar Completa!',

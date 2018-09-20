@@ -28,7 +28,9 @@ Router.route('/order/:_id', function () {
 
 Template.Order.onCreated(function() {
   Meteor.subscribe('groupOrderedResources');
-  this.subscribe('resources', '', 'orders');
+  this.autorun(() => {
+    this.subscribe('resources', Session.get('courseId'), 'home');
+  });
 });
 
 

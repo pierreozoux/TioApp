@@ -42,15 +42,3 @@ GroupOrders.allow({
   }
 });
 
-
-if (Meteor.isServer) {
-  ReactiveTable.publish('groupOrdersTable', function() {
-    if (this.userId) {
-      return GroupOrders;
-    }
-  }, {
-    state: {$ne: 'received'}
-  });
-
-}
-

@@ -1,7 +1,7 @@
 Template.Grouporders.helpers({
   settings: function () {
     return {
-      collection: 'groupOrdersTable', //GroupOrders.find(),
+      collection: GroupOrders.find(),
       fields: [
         'name',
         'group',
