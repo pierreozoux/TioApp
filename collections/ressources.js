@@ -93,9 +93,9 @@ Resources.helpers({
   },
 
   updateOrders: function () {
-    log.info('update Orders called');
+    // log.info('update Orders called');
     var resource = this;
-    console.log(resource._id);
+    // console.log(resource._id);
     Resources.update(resource._id, {
       $set: {
         computedOrders: this.orders(),
@@ -127,7 +127,7 @@ Resources.allow({
 });
 
 if (Meteor.isServer) {
-  ReactiveTable.publish('resources', function() {
+  ReactiveTable.publish('resourcestable', function() {
     if (this.userId) {
       return Resources;
     }

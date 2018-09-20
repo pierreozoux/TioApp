@@ -15,6 +15,10 @@ Router.route('/grouporder/:_id', function () {
 
 Template.GroupOrder.onCreated(function() {
   this.autorun(() => {
+    var data = Template.currentData(self.view);
+    if (data) {
+      Session.set('groupOrderId', data._id);
+    }
     this.subscribe('resources', Session.get('groupOrderId'), 'groupOrder');
   });
 });
