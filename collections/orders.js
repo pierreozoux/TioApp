@@ -359,24 +359,22 @@ if (Meteor.isServer) {
     cleanOrders: function() {
 
       // Clear orders
-      var oldOrders = Orders.find({ 'createdAt' : { $lte: new Date("Jan 10, 2018")}, $or: [{state: 'sold'},{city: 'canceled'}]});
+      // var oldOrders = Orders.find({ 'createdAt' : { $lte: new Date("Jan 10, 2018")}, $or: [{state: 'sold'},{state: 'canceled'}]});
+      var oldOrders = Orders.find({ $or: [{state: 'sold'},{state: 'canceled'}]});
       oldOrders.forEach(function(order) {
         log.info('Order to delete: ' + order.createdAt + ', state: ' + order.state);
       });
       // Really remove
-      Orders.remove({ 'createdAt' : { $lte: new Date("Jan 10, 2018")}, $or: [{state: 'sold'},{city: 'canceled'}]});
+      Orders.remove({ $or: [{state: 'sold'},{state: 'canceled'}]});
 
       // Clear GroupOrder
-      var grouOrder = GroupOrders.find({ 'createdAt' : { $lte: new Date("Jan 10, 2018")}});
+      var grouOrder = GroupOrders.find({ 'state' : 'received'});
       grouOrder.forEach(function(go) {
-        log.info('GroupOrder to delete: ' + go.createdAt + ', state: ' + go._id);
+        log.info('GroupOrder to delete: ' + go.createdAt + ', state: ' + go.state);
         GroupOrderedResources.remove({ 'groupOrderId' : go._id});
-        //var groupOrdRes = GroupOrderedResources.find({ 'groupOrderId' : go._id});
-        // groupOrdRes.forEach(function(gor) {
-        //   log.info('GroupOrderRes to delete: ' + gor.received + ', state: ' + gor.state);
-        // });
       });
-      GroupOrders.remove({ 'createdAt' : { $lte: new Date("Jan 10, 2018")}});
+
+      GroupOrders.remove({ 'state' : 'received'});
     }
   });
 }
