@@ -14,7 +14,8 @@ Router.route('/contacts/download', function() {
     log.info(toDate);
     fromDate.setFullYear(toDate.getFullYear() - 2);
     log.info(fromDate);
-    var orderLastYEar = Orders.find({ 'createdAt' : { $lte : fromDate , $lt: toDate}});
+    // var orderLastYEar = Orders.find({ 'createdAt' : { $lte : fromDate , $lt: toDate}});
+    var orderLastYEar = Orders.find();
     orderLastYEar.forEach(function(order) {
       contact = order.getContact();
       if (contact) {
